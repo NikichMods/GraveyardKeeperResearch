@@ -83,7 +83,7 @@ The Witch Hill boundary remains useful as a short reproduction route, but curren
 
 ### Day Wheel Quest Markers: first-weekday-NPC synchronous structural build
 
-Owner: `666drjekyll666-cloud/DayWheelQuestMarkers`.
+Owner: `NikichMods/DayWheelQuestMarkers`.
 
 Fresh-game testing of 1.0.25 measured a **302.22 ms** runtime structural rebuild at the first Bishop/weekday-NPC introduction. Source review found the loading prewarm gate using the wrong `game_starting` polarity. 1.0.26 moved static structural discovery behind loading into a persistent manifest and eliminated that hitch.
 
@@ -91,7 +91,7 @@ Status: root cause confirmed for this specific hitch class.
 
 ### Day Wheel Quest Markers: recurring steady-state allocation pressure
 
-Owner: `666drjekyll666-cloud/DayWheelQuestMarkers`.
+Owner: `NikichMods/DayWheelQuestMarkers`.
 
 1.0.27 retained recurring avoidable allocations in once-per-second / 30-second validation paths. 1.0.28 replaced them with allocation-free checks. Player A/B testing confirmed the rhythmic roughly-30-second freezes disappeared while a separate sporadic baseline remained.
 

@@ -1,6 +1,6 @@
 # Graveyard Keeper Performance Diagnostics — Working Contract
 
-This repository follows the canonical global development rules in `666drjekyll666-cloud/DevRules`.
+This repository follows the canonical global development rules in `NikichMods/DevRules`.
 
 Before substantive technical work, read:
 
@@ -14,7 +14,7 @@ This local `AGENTS.md` contains only project-specific additions, constraints, an
 ## Project identity
 
 - Project: **Graveyard Keeper Performance Diagnostics**
-- Repository: `666drjekyll666-cloud/GraveyardKeeperResearch`
+- Repository: `NikichMods/GraveyardKeeperResearch`
 - Game: **Graveyard Keeper 1.407**
 - Environment: modded PC installation using BepInEx and multiple independently maintained mods
 - Purpose: identify, prove, and eliminate intermittent freezes, microfreezes, stalls, excessive loading work, and performance regressions affecting the user's current Graveyard Keeper setup.

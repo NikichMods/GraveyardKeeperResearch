@@ -6,7 +6,7 @@ This repository stores diagnosis and evidence. Production fixes belong in the re
 
 ## Four-layer working model
 
-1. **Global engineering baseline** — `666drjekyll666-cloud/DevRules` (`ENGINEERING_RULES.md`, `CI_POLICY.md`, `GIT_WORKFLOW.md`, `PROJECT_BOOTSTRAP.md`).
+1. **Global engineering baseline** — `NikichMods/DevRules` (`ENGINEERING_RULES.md`, `CI_POLICY.md`, `GIT_WORKFLOW.md`, `PROJECT_BOOTSTRAP.md`).
 2. **Repository-local contract** — `AGENTS.md` in this repository.
 3. **ChatGPT Project rules** — `docs/CHATGPT_PROJECT_INSTRUCTIONS.md`; copy this into the ChatGPT Project instructions field.
 4. **Fresh-chat bootstrap** — `docs/CHAT_START_PROMPT.md`; use this as the first message when starting a new diagnostic chat.

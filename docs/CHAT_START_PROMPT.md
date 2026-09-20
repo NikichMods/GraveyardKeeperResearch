@@ -3,7 +3,7 @@
 Продолжаем отдельный проект диагностики производительности **Graveyard Keeper 1.407**.
 
 Диагностический репозиторий:
-`666drjekyll666-cloud/GraveyardKeeperResearch`
+`NikichMods/GraveyardKeeperResearch`
 
 Цель проекта — найти и доказать причину недавно появившихся фризов/микрофризов в моей текущей modded-установке Graveyard Keeper, затем исправить доказанного виновника в его собственном репозитории и повторно проверить исходный сценарий.
 
@@ -11,9 +11,9 @@
 
 Перед любым существенным анализом или изменением обязательно:
 
-1. открой текущий `666drjekyll666-cloud/GraveyardKeeperResearch`;
+1. открой текущий `NikichMods/GraveyardKeeperResearch`;
 2. прочитай его `AGENTS.md`;
-3. прочитай глобальные правила в `666drjekyll666-cloud/DevRules`: `ENGINEERING_RULES.md`, `CI_POLICY.md`, `GIT_WORKFLOW.md`, `PROJECT_BOOTSTRAP.md`;
+3. прочитай глобальные правила в `NikichMods/DevRules`: `ENGINEERING_RULES.md`, `CI_POLICY.md`, `GIT_WORKFLOW.md`, `PROJECT_BOOTSTRAP.md`;
 4. прочитай `docs/PERFORMANCE_EVIDENCE.md`, `docs/TEST_LOG.md` и релевантную историю репозитория;
 5. если в ходе анализа появляется конкретный подозреваемый мод, открой его актуальный репозиторий и сначала прочитай его локальный `AGENTS.md`, docs/history/source;
 6. не начинай с памяти этого сообщения, если репозиторий или новые runtime-данные уже уточнили ситуацию.

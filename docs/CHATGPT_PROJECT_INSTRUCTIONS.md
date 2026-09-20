@@ -2,7 +2,7 @@
 
 Мы диагностируем фризы и микрофризы в **Graveyard Keeper 1.407** с текущим набором BepInEx-модов.
 
-GitHub: `666drjekyll666-cloud/GraveyardKeeperResearch`.
+GitHub: `NikichMods/GraveyardKeeperResearch`.
 
 Цель проекта — не «оптимизировать игру вообще», а доказательно найти источник недавно появившихся подвисаний, определить точный trigger/owner/root cause, исправить его в правильном репозитории и проверить исходный проблемный сценарий повторно.
 
@@ -12,8 +12,8 @@ GitHub: `666drjekyll666-cloud/GraveyardKeeperResearch`.
 
 Перед существенной технической работой:
 
-1. открой текущий `666drjekyll666-cloud/GraveyardKeeperResearch` и прочитай его `AGENTS.md`;
-2. прочитай глобальный контракт `666drjekyll666-cloud/DevRules`: `ENGINEERING_RULES.md`, `CI_POLICY.md`, `GIT_WORKFLOW.md`, `PROJECT_BOOTSTRAP.md`;
+1. открой текущий `NikichMods/GraveyardKeeperResearch` и прочитай его `AGENTS.md`;
+2. прочитай глобальный контракт `NikichMods/DevRules`: `ENGINEERING_RULES.md`, `CI_POLICY.md`, `GIT_WORKFLOW.md`, `PROJECT_BOOTSTRAP.md`;
 3. проверь `docs/PERFORMANCE_EVIDENCE.md`, `docs/TEST_LOG.md`, историю и уже принятые результаты;
 4. если появляется конкретный подозреваемый мод, до вывода или изменения открой его актуальный репозиторий, прочитай его `AGENTS.md`, релевантные docs/history/source;
 5. не начинай из памяти чата, если репозитории или логи могут дать актуальный ответ.
