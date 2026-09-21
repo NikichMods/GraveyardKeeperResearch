@@ -213,3 +213,18 @@ Do not record routine repository inspection as an in-game test. Do not rewrite a
 - Interpretation: the remaining source-consistent explanation is that the player's beet-slice stack is assigned to a toolbar/quick slot and is therefore intentionally excluded by Quick Stack. This is not yet promoted to root cause until a one-variable runtime A/B confirms it.
 - Status: `supports hypothesis`.
 - Next step: remove the beet-slice stack from every toolbar/quick slot without changing the inventory/chest contents, then press Quick Stack Y once at the same ordinary chest. If it transfers, the cause is confirmed. If it still fails, extend the probe to log `toolbar_index` and the direct `ShouldSkipPlayerItem` result from the `CountPotentialMove=0` path.
+
+
+### 2026-09-22 — Bishop-walk stutter on current 35-plugin baseline
+
+- Question: does the newly observed repeated stutter while the tutorial Bishop walks implicate Crafting Planner 0.1.0, or does it reopen the previously isolated residual freeze investigation?
+- Scenario: fresh-game/tutorial sequence on the current 35-plugin baseline. User observed repeated visible stutters while Bishop walked into the graveyard.
+- Evidence: supplied `LogOutput(2).log`, SHA-256 `5aad3ec6875f08a0c4a923e3ebc5b2ccacb9dbf4200a0da3271f6d64ed79cb5b`.
+- Current relevant versions: The Merchant's Promise **1.0.1**; Crafting Planner **0.1.0**; Day Wheel Quest Markers **1.1.6**.
+- Crafting Planner finding: startup throws while attempting to patch a non-declared `CraftGUI.Update`. Therefore that intended per-frame keyboard patch is not installed. Later Planner logs show event-driven project-context/RT/LT activity, but there are **no Crafting Planner log events during the Bishop GoTo/walking segment**.
+- Separate Planner defect: its HUD clone produces an NGUI layer/parent warning later in the run. This requires a Planner fix but is not temporally correlated with the Bishop walking segment.
+- Bishop segment: vanilla spawns Bishop, starts `GoTo`, performs camera/FlowScript activity, and Day Wheel performs one known-NPC binding refresh from its persistent manifest. No runtime structural graph parse is reported.
+- Prior evidence: the characteristic residual ~0.68–0.75 s GC-mediated freeze class was previously isolated to The Merchant's Promise **1.0.0** and disappeared in the near-clean control. The current baseline now uses Merchant **1.0.1**.
+- Interpretation: this log does **not** support Crafting Planner as the owner of the Bishop-walk stutter. The strongest existing owner hypothesis is a regression/persistence of the previously confirmed Merchant freeze class, but version 1.0.1 is **not yet confirmed** because no controlled 1.0.1 A/B has been run and the user's phrase "every half-second" describes recurrence frequency rather than a measured stall duration.
+- Status: `supports hypothesis` for Merchant 1.0.1 as first suspect; `does not support` Crafting Planner ownership for this captured segment; exact current owner remains unconfirmed.
+- Next step: one-variable A/B on the same current baseline — disable/remove The Merchant's Promise 1.0.1 only, keep the rest unchanged (using a corrected Crafting Planner build), then reproduce the shortest convenient walking/cinematic scenario. If the characteristic stutter disappears, promote Merchant 1.0.1 ownership; if it remains, reopen grouped isolation from the current baseline.
