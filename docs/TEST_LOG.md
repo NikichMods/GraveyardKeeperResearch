@@ -200,3 +200,16 @@ Do not record routine repository inspection as an in-game test. Do not rewrite a
 - Note: the immediately preceding run `35548207517` produced no artifact because compilation rejected an obsolete positional HarmonyX overload; the source was corrected to the supported named-argument patch call before this handoff build.
 - Status: `inconclusive` until runtime capture.
 - Requested test: keep the current mod set unchanged, place beet slices in both the player inventory and the same ordinary chest that reproduces the issue, stand at that chest, press the Quick Stack Y action once, then return the resulting BepInEx `LogOutput.log`. The useful lines are prefixed `[QS BEET PROBE]` or `[QS BEET PROBE #...]`.
+
+
+### 2026-09-21 — Quick Stack beet probe runtime capture
+
+- Question: why does Quick Stack refuse `meal:beet_slice` at the ordinary house chest?
+- Evidence: user-supplied `LogOutput.log` from `GK Quick Stack Beet Slice Probe (Diagnostic) 0.1.0`, plus direct IL inspection of the original `GYKQuickStack.dll` and the localized `GYKQuickStack_RU_final.dll`.
+- Observed runtime state: `CountPotentialMove=0` and `CanQuickStack=false` while player and chest each contain `meal:beet_slice`. Player stack is 1; chest stack is 8; the shared `ItemDefinition.stack_count` is 20; both items have exactly the same ID and the exact same `ItemDefinition` object reference. Chest has 5 inventory entries and reported capacity 20.
+- Source finding: `CountPotentialMove` first calls `ShouldSkipPlayerItem`; only non-skipped items proceed to `HasMatchingItemInChest`, existing-stack capacity, and empty-slot capacity. `ShouldSkipPlayerItem` returns true for null/empty items, equipped items, items whose `toolbar_index != -1`, bags, or items with a null definition.
+- Elimination: the runtime capture rules out null/empty, equipped, bag, missing definition, ID mismatch, definition mismatch, full existing stack, and chest-capacity exhaustion for the beet slice. The one skip predicate not recorded by probe 0.1.0 is `toolbar_index != -1`.
+- Localization check: IL bodies for `TryQuickStack`, `CountPotentialMove`, `ShouldSkipPlayerItem`, `HasMatchingItemInChest`, `CountHowMuchCouldBeStacked`, and `CountHowMuchCouldFitIntoEmptySlotsAfterStacking` are byte-identical between the original and localized Quick Stack DLLs.
+- Interpretation: the remaining source-consistent explanation is that the player's beet-slice stack is assigned to a toolbar/quick slot and is therefore intentionally excluded by Quick Stack. This is not yet promoted to root cause until a one-variable runtime A/B confirms it.
+- Status: `supports hypothesis`.
+- Next step: remove the beet-slice stack from every toolbar/quick slot without changing the inventory/chest contents, then press Quick Stack Y once at the same ordinary chest. If it transfers, the cause is confirmed. If it still fails, extend the probe to log `toolbar_index` and the direct `ShouldSkipPlayerItem` result from the `CountPotentialMove=0` path.
