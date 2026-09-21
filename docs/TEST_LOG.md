@@ -184,3 +184,19 @@ Do not record routine repository inspection as an in-game test. Do not rewrite a
 - Scope: this does **not** identify the upstream allocation/retention owner and therefore does not close the overall project root cause. The owner may be the base game/current save-state heap, one mod, several mods, or an interaction.
 - Status: `accepted after retest` for GC as the immediate causal mechanism; upstream owner/root cause remains open.
 - Next step: run a near-clean control with the same save/location and probe, keeping only BepInEx plus the diagnostic probe active and avoiding sleep/save. If the same GC-mediated ~0.7 s class remains, investigate base-game/save-state heap behavior; if it disappears, begin grouped/binary mod isolation.
+
+
+### 2026-09-21 — GK Quick Stack Beet Slice Probe 0.1.0 handoff
+
+- Question: why does GYK Quick Stack 1.0.0 report no valid move for `meal:beet_slice` when beet slices are present both in the player inventory and in the nearby chest?
+- Scope: cross-mod diagnostic only. The probe does not change inventory contents, stack limits, item definitions, recipes, or Quick Stack decisions.
+- Diagnostic behavior: patches Quick Stack's discovered `TryQuickStack`, `CanQuickStack`, and `CountPotentialMove` methods. Logging is restricted to states involving `meal:beet_slice`. On an attempted Quick Stack it records player/chest beet IDs, values, ItemDefinition reference identity, stack count, chest inventory/capacity, and the results/signatures of Quick Stack's relevant helper methods when they can be invoked safely.
+- Development branch: `research/quick-stack-beet-slice`.
+- Frozen diagnostic source: `diagnostic/quick-stack-beet-probe-0.1.0` at `e79186d6fd659416ec758ddf5b4da746048b093c`.
+- Build evidence: GitHub Actions run `35548251932` on `ubuntu-latest`; restore and Release build succeeded with **0 warnings / 0 errors**, hash step succeeded, and artifact upload succeeded.
+- Artifact ID: `10617032498`.
+- Artifact: `GKQuickStackBeetProbe-0.1.0.dll`, 22,528 bytes.
+- DLL SHA-256: `70f35a6234aebebc415123e1dd5dd86e5afad86277d8c3ee47dffd9af801e0ee`.
+- Note: the immediately preceding run `35548207517` produced no artifact because compilation rejected an obsolete positional HarmonyX overload; the source was corrected to the supported named-argument patch call before this handoff build.
+- Status: `inconclusive` until runtime capture.
+- Requested test: keep the current mod set unchanged, place beet slices in both the player inventory and the same ordinary chest that reproduces the issue, stand at that chest, press the Quick Stack Y action once, then return the resulting BepInEx `LogOutput.log`. The useful lines are prefixed `[QS BEET PROBE]` or `[QS BEET PROBE #...]`.
