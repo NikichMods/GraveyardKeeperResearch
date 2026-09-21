@@ -106,7 +106,7 @@ namespace GKQuickStackBeetProbe
             foreach (MethodInfo method in QuickStackMethods)
             {
                 if (method.Name != "TryQuickStack" || method.GetParameters().Length != 1) continue;
-                HarmonyInstance.Patch(method, new HarmonyMethod(prefix), new HarmonyMethod(postfix), null, new HarmonyMethod(finalizer));
+                HarmonyInstance.Patch(method, prefix: new HarmonyMethod(prefix), postfix: new HarmonyMethod(postfix), finalizer: new HarmonyMethod(finalizer));
                 patched++;
             }
 
