@@ -1,0 +1,56 @@
+name: Build Quick Stack Beet Probe
+
+on:
+  push:
+    branches:
+      - research/quick-stack-beet-slice
+    paths:
+      - 'QuickStackBeetProbe.csproj'
+      - 'diagnostics/QuickStackBeetProbe.cs'
+      - 'nuget.config'
+      - '.github/workflows/build-quick-stack-beet-probe.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quick-stack-beet-probe-\${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore
+        run: dotnet restore QuickStackBeetProbe.csproj --configfile nuget.config
+
+      - name: Build Release DLL
+        run: dotnet build QuickStackBeetProbe.csproj -c Release --no-restore --nologo
+
+      - name: Hash diagnostic DLL
+        id: hash
+        shell: bash
+        run: |
+          set -euo pipefail
+          dll='bin/Release/GKQuickStackBeetProbe.dll'
+          test -f "$dll"
+          sha="$(sha256sum "$dll" | awk '{print $1}')"
+          echo "sha256=$sha" >> "$GITHUB_OUTPUT"
+          echo "SHA-256: $sha"
+
+      - name: Upload diagnostic DLL
+        uses: actions/upload-artifact@v4
+        with:
+          name: GKQuickStackBeetProbe-0.1.0
+          path: bin/Release/GKQuickStackBeetProbe.dll
+          if-no-files-found: error
+          retention-days: 7
