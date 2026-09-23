@@ -28,8 +28,10 @@ Performance investigation remains an explicit supported workflow:
 
 The existing `docs/CHATGPT_PROJECT_INSTRUCTIONS.md` and `docs/CHAT_START_PROMPT.md` remain the performance-diagnostics project/bootstrap texts.
 
-## Ownership boundary
+## Ownership and research-material boundary
 
 Cross-project host/runtime facts belong here when they are reusable beyond one mod. Project-specific mechanics, UX decisions, balance values, release state, build identity, and acceptance evidence stay in the owning project.
 
-Do not commit copied game assemblies, full decompiled game source, or extracted proprietary assets. Preserve only the minimum derived facts, identifiers, signatures, hashes, and evidence needed for reproducibility.
+This repository remains **public by design** and serves as the canonical shared knowledge layer. That does not limit local research: assemblies, decompiled code, resources, runtime dumps, and similar host material may be inspected temporarily when the working environment permits it. The persistence rule is narrower: do not commit copied game assemblies, full/bulk decompiled game source, extracted proprietary assets, or other third-party payloads. Preserve derived facts, identifiers, signatures, formulas, hashes, bounded evidence, and original research tooling instead.
+
+A private scratch repository should be created only for a concrete need such as sensitive environment data or large first-party diagnostics. It is not required merely to make reverse engineering easier, and it does not replace this public canonical knowledge base.
