@@ -1,4 +1,4 @@
-# Graveyard Keeper Performance Diagnostics — Working Contract
+# Graveyard Keeper Research — Working Contract
 
 This repository follows the canonical global development rules in `NikichMods/DevRules`.
 
@@ -13,30 +13,37 @@ This local `AGENTS.md` contains only project-specific additions, constraints, an
 
 ## Project identity
 
-- Project: **Graveyard Keeper Performance Diagnostics**
+- Project: **Graveyard Keeper Research**
 - Repository: `NikichMods/GraveyardKeeperResearch`
 - Game: **Graveyard Keeper 1.407**
 - Environment: modded PC installation using BepInEx and multiple independently maintained mods
-- Purpose: identify, prove, and eliminate intermittent freezes, microfreezes, stalls, excessive loading work, and performance regressions affecting the user's current Graveyard Keeper setup.
+- Purpose: preserve reusable, evidence-backed knowledge about Graveyard Keeper internals and cross-mod behavior, and host diagnostic research that does not belong to one production mod.
 
-This is a diagnostic/research project, not a general optimization mod and not the canonical production repository for other mods.
+This is a shared research/knowledge repository, not a production mod and not the canonical production repository for other mods.
 
 ## Scope
 
-The primary workflow is:
+This repository has two related roles:
+
+1. **shared knowledge base** — reusable verified facts about Graveyard Keeper 1.407 game/runtime internals, UI lifecycle, data ownership, APIs, schemas, formulas, and integration seams that may matter to multiple mods;
+2. **cross-mod diagnostics** — investigations such as performance regressions, compatibility interactions, ownership disputes, or runtime behavior that is not yet attributable to one production repository.
+
+Performance diagnostics keep the workflow:
 
 `reproduce symptom -> isolate trigger/owner -> measure or establish evidence -> identify root cause -> fix in the owning repository -> retest the original scenario`
 
-The project may investigate:
+The repository may investigate:
 
 - vanilla/game-engine behavior;
+- UI/NGUI lifecycle and layout ownership;
 - BepInEx/plugin loading and lifecycle interactions;
+- data definitions, identifiers, formulas, localization seams, item/inventory behavior, FlowCanvas graphs, buffs/effects, and other reusable host internals;
 - one mod in isolation;
 - interactions between multiple mods;
 - excessive allocations, object creation, resource scans, reflection, logging, serialization, polling, Harmony patch behavior, scene/HUD recreation, loading-time work, and event storms;
 - regressions that appeared after recent mod or configuration changes.
 
-Do not turn this repository into a grab-bag production mod. If a proven defect belongs to a specific mod, implement the production fix in that mod's own repository under its own `AGENTS.md`, versioning, test-build log, and acceptance rules. Record the cross-project diagnosis here and link the owning source state/fix.
+Do not turn this repository into a grab-bag production mod. If a proven behavior or defect belongs to a specific mod, implement the production change in that mod's own repository under its own `AGENTS.md`, versioning, test-build log, and acceptance rules. Record reusable host facts here and link the owning source state/fix when useful.
 
 ## Mandatory start-of-work checks
 
@@ -44,14 +51,39 @@ Before substantive diagnostic or code/GitHub work:
 
 1. inspect the current `GraveyardKeeperResearch` repository and read this `AGENTS.md`;
 2. read the current global DevRules contract;
-3. inspect `docs/PERFORMANCE_EVIDENCE.md` and `docs/TEST_LOG.md` for already established findings and prior A/B tests;
-4. inspect the current repository/source/history of every mod that becomes a concrete suspect before attributing a defect or changing it;
-5. read that suspect repository's local `AGENTS.md` before substantive work in it;
-6. prefer accepted existing evidence over repeating expensive or intrusive tests.
+3. start with `docs/RESEARCH_INDEX.md`, then inspect the relevant canonical knowledge document;
+4. inspect `docs/PERFORMANCE_EVIDENCE.md` and `docs/TEST_LOG.md` when performance/diagnostic history is relevant;
+5. inspect accepted history/test evidence before repeating research that may already have been performed;
+6. inspect the current repository/source/history of every mod that becomes a concrete suspect or production owner before attributing a defect or changing it;
+7. read that mod repository's local `AGENTS.md` before substantive work in it;
+8. prefer accepted existing evidence over repeating expensive or intrusive tests.
 
 Do not start from chat memory when repository evidence can answer the question.
 
+## Knowledge promotion contract
+
+Commit history, raw logs, candidate notes, decompilation notes, and test logs are evidence archives, not the primary knowledge base.
+
+When a result is accepted and likely to be reusable across Graveyard Keeper projects, promote it into a canonical shared document and add or update its entry in `docs/RESEARCH_INDEX.md`.
+
+A durable shared fact should identify, when applicable:
+
+- target game/runtime version;
+- status: **fact**, **hypothesis**, **accepted result**, or another explicit evidence state;
+- canonical owner/path or lifecycle boundary;
+- verified behavior;
+- supporting source/runtime evidence or exact source identity;
+- applicability limits and what must **not** be generalized;
+- known project consumers when useful.
+
+If a finding is specific to one mod's product behavior, balance, UX, release state, or acceptance, keep the canonical copy in that mod repository instead. The shared research repository may link to it, but should not become a second competing source of truth.
+
+Before authoring a new probe, follow:
+
+`owning project canonical docs -> RESEARCH_INDEX/shared facts -> accepted logs/history -> fresh static inspection -> narrow probe only if still needed`
+
 ## Evidence contract
+
 
 Never guess Graveyard Keeper or mod internals.
 
@@ -155,11 +187,13 @@ Direct inspection of locally available game binaries/resources may be used as ev
 
 Consult and maintain:
 
-- `AGENTS.md` — this project-specific contract;
-- `docs/PERFORMANCE_EVIDENCE.md` — verified facts, active hypotheses, ruled-out causes, and cross-project conclusions;
-- `docs/TEST_LOG.md` — controlled test history and supplied runtime evidence;
-- `docs/CHATGPT_PROJECT_INSTRUCTIONS.md` — text for the ChatGPT Project instructions field;
-- `docs/CHAT_START_PROMPT.md` — canonical prompt for starting a fresh diagnostic chat;
-- the current repositories and local contracts of any mods under investigation.
+- `AGENTS.md` — this shared-research contract;
+- `docs/RESEARCH_INDEX.md` — canonical entry point for reusable cross-project research;
+- `docs/GAME_INTERNALS.md` — distilled reusable Graveyard Keeper 1.407 internals;
+- `docs/PERFORMANCE_EVIDENCE.md` — performance-specific verified facts, active hypotheses, ruled-out causes, and cross-project conclusions;
+- `docs/TEST_LOG.md` — controlled diagnostic/runtime test history and supplied evidence;
+- `docs/CHATGPT_PROJECT_INSTRUCTIONS.md` — performance-diagnostics ChatGPT Project instructions;
+- `docs/CHAT_START_PROMPT.md` — performance-diagnostics fresh-chat bootstrap;
+- the current repositories and local contracts of any mods under investigation or ownership.
 
 When chat memory conflicts with accepted repository evidence, investigate the conflict before changing code or asking the user to repeat a test.
