@@ -177,11 +177,25 @@ Do not add automatic CI or spend hosted runner minutes for routine research/book
 
 For a production mod fix, follow that mod repository's own CI policy rather than inventing a parallel build pipeline here.
 
-## Proprietary game material
+## Research inputs, repository visibility, and proprietary game material
 
-Do not commit copied Graveyard Keeper assemblies, decompiled game source trees, extracted proprietary assets, or other copyrighted game payloads to this repository.
+This repository is intentionally the **public canonical knowledge base**. Public visibility must not restrict what may be investigated in the working environment; it restricts what is persisted here.
 
-Direct inspection of locally available game binaries/resources may be used as evidence when permitted by the working environment, but preserve only the minimum derived technical facts, identifiers, hashes, notes, or diagnostic output needed for reproducibility.
+Allowed research inputs, when the working environment permits them, include local/temporary inspection of:
+
+- Graveyard Keeper assemblies and other binaries;
+- decompiled code;
+- localization/resources;
+- generated dumps, runtime state, reflection/IL output, and extracted metadata;
+- temporary diagnostic artifacts needed to answer a concrete research question.
+
+These inputs may be inspected, transformed, compared, and used to derive evidence. They do **not** need to be committed to Git in order for the research to be valid.
+
+Do not commit copied Graveyard Keeper assemblies, full/bulk decompiled game source, extracted proprietary assets, or other copyrighted game payloads to this repository. Preserve the durable result as minimal derived facts, identifiers, signatures, formulas, hashes, original scripts/probes, bounded diagnostic output, and conclusions needed for reproducibility.
+
+Repository privacy is not treated as permission to store third-party proprietary payloads. Do not make this repository private merely to relax the research process.
+
+If a concrete need later appears for a private scratch/evidence workspace (for example, sensitive local-environment data or large first-party generated diagnostics), create it separately and narrowly. It is temporary evidence storage, not a competing source of truth. Accepted reusable findings must still be promoted back into this public repository's canonical docs.
 
 ## Long-lived sources of truth
 
