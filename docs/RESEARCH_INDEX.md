@@ -30,3 +30,9 @@ Before starting a new host-internals probe in a Graveyard Keeper mod:
 Do not leave a reusable accepted result discoverable only through a chat, old commit, candidate note, or raw log. Distill it into the appropriate canonical shared document and update this index.
 
 Project-specific mechanics, balance, UX decisions, release state, and accepted build identity remain canonical in the owning mod repository.
+
+## Research-material policy
+
+The canonical knowledge base is public, but research inputs do not have to be public or committed. Local/temporary inspection of game binaries, decompiled code, resources, runtime state, dumps, and extracted metadata is allowed as research input when the working environment permits it. Promote only the durable derived facts/evidence needed for reuse.
+
+Do not create a private scratch repository by default. Use one only when a concrete operational need appears; accepted reusable conclusions still return to this index and the linked canonical documents.
