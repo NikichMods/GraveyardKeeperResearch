@@ -206,8 +206,8 @@ Consult and maintain:
 - `docs/GAME_INTERNALS.md` — distilled reusable Graveyard Keeper 1.407 internals;
 - `docs/PERFORMANCE_EVIDENCE.md` — performance-specific verified facts, active hypotheses, ruled-out causes, and cross-project conclusions;
 - `docs/TEST_LOG.md` — controlled diagnostic/runtime test history and supplied evidence;
-- `docs/CHATGPT_PROJECT_INSTRUCTIONS.md` — performance-diagnostics ChatGPT Project instructions;
-- `docs/CHAT_START_PROMPT.md` — performance-diagnostics fresh-chat bootstrap;
+- `docs/CHATGPT_PROJECT_INSTRUCTIONS.md` — canonical thin bootstrap for this ChatGPT Project's settings field;
+- `docs/CHAT_START_PROMPT.md` — fallback bootstrap only for chats outside a correctly configured ChatGPT Project;
 - the current repositories and local contracts of any mods under investigation or ownership.
 
 When chat memory conflicts with accepted repository evidence, investigate the conflict before changing code or asking the user to repeat a test.
