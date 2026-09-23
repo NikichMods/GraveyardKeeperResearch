@@ -26,7 +26,7 @@ Performance investigation remains an explicit supported workflow:
 
 `reproduce -> isolate -> measure/verify -> root cause -> narrow fix in owning repo -> retest`
 
-The existing `docs/CHATGPT_PROJECT_INSTRUCTIONS.md` and `docs/CHAT_START_PROMPT.md` remain the performance-diagnostics project/bootstrap texts.
+`docs/CHATGPT_PROJECT_INSTRUCTIONS.md` is the canonical thin ChatGPT Project bootstrap. `docs/CHAT_START_PROMPT.md` is only a fallback for chats outside that configured Project; routine new chats inside the Project should start directly with the actual task.
 
 ## Ownership and research-material boundary
 
