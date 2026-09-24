@@ -23,7 +23,7 @@ The goal was not to copy every experiment into one place. Raw logs/branches rema
 - VisibleBodyArmour
 - GraveyardKeeperResearch
 
-The review used current canonical docs first, then accepted test/research evidence and relevant frozen/research history where the main docs pointed to it.
+The review inventoried current research/frozen/candidate branch families, used current canonical docs first, and then followed accepted test/research evidence and historical refs where those docs identified them as provenance. Branches were treated as evidence archives, not as automatically authoritative merely because they exist.
 
 ## Promotions completed
 
