@@ -28,6 +28,16 @@ Representative runtime evidence proved that builder cards expose exact `ObjectCr
 
 **Applicability limit:** not every recipe-like system shares plain `needs` semantics. Mixed alchemy, survey/research, body/autopsy, prayer, refugee/scripted craft paths and other special systems require separate evidence.
 
+## Craft-card focus callbacks
+
+**Status:** verified static + runtime for mouse build focus.
+
+`CraftItemGUI.OnMouseOvered()` is the mouse-hover callback. `CraftItemGUI.OnOver()` is the gamepad-focus callback and returns immediately when the GUI is not in gamepad mode.
+
+Crafting Planner Probe 0.2.0 runtime-confirmed mouse focus on native build cards. Its earlier 0.1.0 instrumentation of `OnOver` must not be misread as mouse evidence.
+
+Reusable implication: do not conflate mouse hover and gamepad focus merely because both ultimately select a craft card.
+
 ## Player inventory is not interaction inventory
 
 **Status:** accepted runtime fact.
@@ -161,6 +171,16 @@ Reusable implication: structural indexing may include possible conditional types
 Therefore forcing `wgo.vendor`, manufacturing Vendor instances, or invoking broad vendor-fill routines merely to answer a read-only question is not semantically neutral.
 
 Accepted buyer research derived the full catalog without vendor construction or save mutation.
+
+## Gameplay-start catalog lifecycle
+
+**Status:** accepted lifecycle seam for the inspected balance/vendor catalog.
+
+Static load order places balance loading before save/world restore and WGO rescan. Runtime evidence observed `WorldMap.RescanWGOsList()` before `MainGame.OnGameStartedPlaying()`, and the accepted Who Buys This? research produced a stable full catalog at that seam without later structural changes during the observed session.
+
+Reusable implication: `MainGame.OnGameStartedPlaying()` is a proven one-time initialization boundary for data that requires loaded GameBalance plus restored world/save objects, when the data itself is structurally stable for the session.
+
+**Applicability limit:** do not assume every subsystem is final by this event; prove the owner-specific lifecycle before using it as a universal initialization hook.
 
 ## Known NPC identity and staged vendor presence
 
