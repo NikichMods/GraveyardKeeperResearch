@@ -14,10 +14,11 @@ Before starting a new host-internals probe in a Graveyard Keeper mod:
 ### UI / NGUI / input / timing / environment
 
 - `docs/GAME_INTERNALS.md` — detailed Technology-tooltip width lifecycle.
-- `docs/UI_INPUT_TIME_AND_ENVIRONMENT.md` — gamepad bubble placement lifecycle, NGUI screen-size ownership, WaitingGUI timing/fixed-step ownership, SliderDec/SliderInc input/hold-repeat, WaitingGUI button tips, localization reload, weather-audio ownership, environment-preset refresh, and final ambient-light observation.
+- `docs/UI_INPUT_TIME_AND_ENVIRONMENT.md` — Technology-tree gamepad focus/unlock-tooltip ownership, gamepad bubble placement lifecycle, NGUI screen-size ownership, WaitingGUI timing/fixed-step ownership, SliderDec/SliderInc input/hold-repeat, WaitingGUI button tips, localization reload, weather-audio ownership, environment-preset refresh, and final ambient-light observation.
 
 Key established limits:
 - Technology-tooltip `UILabel.overflowWidth` evidence applies to the inspected Technology path, not every tooltip.
+- Technology-tree gamepad navigation focuses the parent tech node and combines visible child `TechUnlock` tooltips on the verified 1.407 path; mouse child tooltips are independent.
 - `WidgetsBubbleGUI.Update()` is a late/native placement lifecycle for the inspected gamepad bubble family; do not replace it with an earlier event merely for elegance without proving final geometry/overwrite order.
 - WaitingGUI time/fixed-step results are accepted for the tested meditation range, not arbitrary global speed mods.
 

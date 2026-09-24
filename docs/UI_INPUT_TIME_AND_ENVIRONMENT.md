@@ -10,6 +10,32 @@ Key accepted result: on the inspected Technology tooltip path, the live NGUI lab
 
 Do not generalize that exact width owner to unrelated tooltip families without evidence.
 
+## Technology-tree gamepad focus and unlock-tooltip ownership
+
+**Status:** verified static host-path fact for Graveyard Keeper 1.407.
+
+Exact 1.407 decompilation was inspected from `Kupie/GYK_DECOMP`, commit `6abf79199d92482af1c7573870dd9a20ec2270b9`; that source reports `LazyConsts.VERSION = 1.407f`.
+
+On the Technology-tree path:
+
+- `TechTreeGUI` / `BaseGUI` own gamepad navigation through `GamepadNavigationController`;
+- the parent `TechTreeGUIItem` receives the `GamepadNavigationItem` focus/select callbacks;
+- `TechTreeGUIItem.Draw` creates/draws its child `TechTreeGUIUnlockItem` objects, but passes `init_tooltip = false` for those children in gamepad mode;
+- when `init_tooltip` is false, `TechTreeGUIUnlockItem.Draw` disables the child `BoxCollider2D`;
+- `TechTreeGUIItem.InitGamepadTooltip` instead appends every visible child `TechUnlock.GetTooltip` result into the parent Technology tooltip;
+- in mouse mode, the same child renderer initializes each child Tooltip independently by clearing it and invoking that child's `TechUnlock.GetTooltip`;
+- ordinary directional input is already owned by `BaseGUI.OnPressedLeft/Right/Up/Down -> GamepadNavigationController.Navigate`.
+
+Reusable implications:
+
+- the inspected 1.407 Technology path has no native **used** child-`TechUnlock` gamepad-focus lifecycle to reuse directly; gamepad presentation is intentionally parent-focused and combined;
+- a UI extension that needs one child unlock at a time can reuse the native single-unlock writer `TechUnlock.GetTooltip` without creating new Technology/save state;
+- taking ordinary D-pad directions for an internal child selector would conflict with native tree navigation unless the extension introduces and clearly owns a separate sub-mode or uses otherwise-unused semantic actions.
+
+**Applicability limit:** this establishes the code path and ownership used by GK 1.407. It does not claim that no serialized prefab could contain additional dormant components, and it does not generalize to non-Technology UI families.
+
+**Evidence provenance:** PrayerClarity Better Save Soul Technology navigation research, 2026-09-24; exact host source identity above.
+
 ## Gamepad tooltip placement lifecycle
 
 **Status:** accepted host-lifecycle fact for the inspected bubble path.
