@@ -14,7 +14,12 @@ This repository stores reusable verified facts about game/runtime internals, cro
 ## Canonical shared knowledge
 
 - `docs/RESEARCH_INDEX.md` — entry point for reusable Graveyard Keeper 1.407 research.
-- `docs/GAME_INTERNALS.md` — distilled cross-project facts about game/UI/runtime behavior.
+- `docs/GAME_INTERNALS.md` — core distilled internals, including the Technology-tooltip width lifecycle.
+- `docs/DIALOGUE_QUEST_AND_FLOWCANVAS.md` — dialogue/task/FlowCanvas semantics.
+- `docs/CRAFTING_INVENTORY_AND_TRADING.md` — crafting/inventory/trading/buff semantics.
+- `docs/UI_INPUT_TIME_AND_ENVIRONMENT.md` — UI/input/timing/environment lifecycle facts.
+- `docs/FISHING_RUNTIME.md` — fishing lifecycle and anchor semantics.
+- `docs/CONSOLIDATION_AUDIT_2026-09-24.md` — retrospective cross-project knowledge-promotion audit.
 - `docs/PERFORMANCE_EVIDENCE.md` — performance-specific accepted facts, hypotheses, ruled-out causes, root causes, and cross-project conclusions.
 - `docs/TEST_LOG.md` — controlled runtime tests and supplied diagnostic evidence.
 
