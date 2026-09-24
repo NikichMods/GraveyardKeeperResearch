@@ -4,6 +4,8 @@ This document stores distilled host/runtime facts that are reusable across multi
 
 Each entry should state its evidence status, owner/path, verified behavior, supporting evidence, and applicability limits. Project-specific product/mechanics decisions belong in the owning project rather than here.
 
+Broader accepted internals are split by domain for maintainability: `DIALOGUE_QUEST_AND_FLOWCANVAS.md`, `CRAFTING_INVENTORY_AND_TRADING.md`, `UI_INPUT_TIME_AND_ENVIRONMENT.md`, and `FISHING_RUNTIME.md`. Start from `RESEARCH_INDEX.md` rather than assuming this single file is exhaustive.
+
 ## UI / NGUI
 
 ### Technology tooltip width lifecycle
