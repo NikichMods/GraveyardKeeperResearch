@@ -204,6 +204,11 @@ Consult and maintain:
 - `AGENTS.md` — this shared-research contract;
 - `docs/RESEARCH_INDEX.md` — canonical entry point for reusable cross-project research;
 - `docs/GAME_INTERNALS.md` — distilled reusable Graveyard Keeper 1.407 internals;
+- `docs/DIALOGUE_QUEST_AND_FLOWCANVAS.md` — shared dialogue/task/FlowCanvas semantics;
+- `docs/CRAFTING_INVENTORY_AND_TRADING.md` — shared crafting/inventory/trading/buff semantics;
+- `docs/UI_INPUT_TIME_AND_ENVIRONMENT.md` — shared UI/input/timing/environment lifecycle facts;
+- `docs/FISHING_RUNTIME.md` — shared fishing lifecycle/geometry facts;
+- `docs/CONSOLIDATION_AUDIT_2026-09-24.md` — one-time retrospective promotion audit;
 - `docs/PERFORMANCE_EVIDENCE.md` — performance-specific verified facts, active hypotheses, ruled-out causes, and cross-project conclusions;
 - `docs/TEST_LOG.md` — controlled diagnostic/runtime test history and supplied evidence;
 - `docs/CHATGPT_PROJECT_INSTRUCTIONS.md` — canonical thin bootstrap for this ChatGPT Project's settings field;
