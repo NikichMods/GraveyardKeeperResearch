@@ -173,7 +173,7 @@ This research repository is evidence-first and normally does not distribute a st
 
 Hosted CI is normally unnecessary for this repository because most work is research, logs, docs, static inspection, and controlled in-game testing.
 
-Do not add automatic CI or spend hosted runner minutes for routine research/bookkeeping. Use hosted CI only when a concrete diagnostic tool or reproducible build artifact genuinely needs compilation in a hosted environment and no cheaper equivalent proves the required property.
+Do not add automatic CI for routine research/bookkeeping when it proves no executable property. Use hosted CI when a concrete diagnostic tool, compile/test check, or reproducible build artifact benefits from hosted execution; choose the runner for fidelity, simplicity, and reliability rather than historical public-runner minute cost.
 
 For a production mod fix, follow that mod repository's own CI policy rather than inventing a parallel build pipeline here.
 
