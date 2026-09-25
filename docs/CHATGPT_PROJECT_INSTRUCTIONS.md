@@ -29,6 +29,11 @@ Repository evidence outranks chat memory and old handoff prompts.
 
 Use DevRules evidence gates. Do not guess Graveyard Keeper internals when accepted research, direct inspection, or a narrow probe can establish them.
 
+Before the first production-source mutation for each materially independent behavior change, make the DevRules evidence gate reviewable as **READY** or **BLOCKED**: observable property, canonical owner, final writer/consumer where applicable, blast radius, preserved invariants, and acceptance evidence.
+
+There is no small/obvious/presentation-only/follow-up exception. **BLOCKED means research/probe only.** A new runtime/user-visible regression opens a gate for that exact property; old evidence may be reused only when it proves the relevant owner/final-writer path.
+
+Treat the reported defect/request as the default scope. Adjacent behavior is preserved unless the proved path requires changing it or the user separately accepts the additional change. Do not reduce user test cycles by bypassing or combining unresolved gates.
 For reusable host/runtime findings, promote accepted results into canonical shared docs rather than leaving them only in chat, raw logs, or commit history.
 
 For performance diagnostics, preserve the established evidence-first method:
