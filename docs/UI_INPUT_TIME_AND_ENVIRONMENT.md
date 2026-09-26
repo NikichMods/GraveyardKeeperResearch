@@ -151,6 +151,20 @@ Reusable implication: localization extensions can be event-bound to language loa
 
 **Evidence provenance:** Food & Drink Rebalance accepted production/runtime data.
 
+## Runtime language-font ownership for custom UILabels
+
+**Status:** accepted host/runtime fact for Graveyard Keeper 1.407.
+
+The game's live language-change path does more than replace localized strings. `GameSettings.ApplyLanguageChange()` loads the new language and then asks the GUI layer to update current labels. Native `LocalizedLabel.Localize()` assigns its localized text and calls `GJL.EnsureLabelHasCorrectFont(label, true)`; `BaseGUI.UpdateLocalizedLabels()` / `GUIElements.UpdateLanguageChangeForAllBaseGUI()` likewise delegate child-label font correction to GJL.
+
+PrayerClarity runtime acceptance exposed the practical consequence for mod-owned NGUI labels: a raw persistent `UILabel` that merely copies `bitmapFont` / `trueTypeFont` once at creation can retain stale font assets or glyph metrics after live CJK/Latin/Cyrillic language switching. Re-running `GJL.EnsureLabelHasCorrectFont(label, true)` at the label's redraw/consumer boundary restored correct Japanese, Korean, English and Russian presentation without a mod-maintained language-to-font map.
+
+Reusable implication: when a mod creates or persists raw NGUI `UILabel` objects outside the native `LocalizedLabel` lifecycle, treat GJL as the authoritative current-language font owner. At the natural redraw/localization boundary, explicitly rejoin `GJL.EnsureLabelHasCorrectFont(..., true)` rather than caching a font indefinitely or maintaining a parallel per-language font table.
+
+**Evidence provenance:** Graveyard Keeper 1.407 static host inspection plus PrayerClarity: Rebalanced 0.2.37 runtime acceptance, exact source `d95eb760105fa0fdcb4922a1d0f270eb5dbc2c05`.
+
+**Applicability limit:** this proves the inspected NGUI/current-language font lifecycle. It does not imply that every Unity text component or non-NGUI UI family uses GJL.
+
 ## Weather audio ownership
 
 **Status:** accepted host-path fact.
