@@ -14,7 +14,7 @@ Before starting a new host-internals probe in a Graveyard Keeper mod:
 ### UI / NGUI / input / timing / environment
 
 - `docs/GAME_INTERNALS.md` — detailed Technology-tooltip width lifecycle.
-- `docs/UI_INPUT_TIME_AND_ENVIRONMENT.md` — Technology-tree gamepad focus/unlock-tooltip ownership, gamepad bubble placement lifecycle, NGUI screen-size ownership, Pray GUI craft-button anchor ownership, WaitingGUI timing/fixed-step ownership, SliderDec/SliderInc input/hold-repeat, WaitingGUI button tips, localization reload, weather-audio ownership, environment-preset refresh, and final ambient-light observation.
+- `docs/UI_INPUT_TIME_AND_ENVIRONMENT.md` — Technology-tree gamepad focus/unlock-tooltip ownership, gamepad bubble placement lifecycle, NGUI screen-size ownership, Pray GUI craft-button anchor ownership, WaitingGUI timing/fixed-step ownership, SliderDec/SliderInc input/hold-repeat, WaitingGUI button tips, localization reload and current-language UILabel font ownership, weather-audio ownership, environment-preset refresh, and final ambient-light observation.
 
 Key established limits:
 - Technology-tooltip `UILabel.overflowWidth` evidence applies to the inspected Technology path, not every tooltip.
