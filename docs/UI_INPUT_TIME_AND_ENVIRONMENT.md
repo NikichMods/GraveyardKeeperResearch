@@ -200,6 +200,27 @@ Reusable implication: when a mod only needs the final ambient presentation state
 
 **Evidence provenance:** Bite Countdown accepted 1.0.3, source `2b5c3cfec638098328eaf5707d0e79effb9a1bf6`.
 
+
+## Pray GUI craft-button anchor ownership
+
+**Status:** accepted runtime fact for Graveyard Keeper 1.407 `PrayCraftGUI`.
+
+PrayerClarity pulpit-layout research established the following native NGUI ownership chain for the sermon action button:
+
+- `UI Root/Pray GUI/window/craft button` carries the root `UILabel`;
+- that root `UILabel` is vertically anchored directly to `UI Root/Pray GUI/window`;
+- its anchor update mode is `OnUpdate`;
+- both vertical anchors use the window's bottom edge (`relative = 0`) with bottom/top absolute offsets `+28/+44`;
+- the visible `craft button back` `UI2DSprite` is anchored to the root craft-button widget.
+
+Runtime evidence also showed that writing `craft button.transform.localPosition` is not a durable final placement mechanism: NGUI anchor resolution later restores the button from the root-window anchor contract.
+
+Reusable implication: for this exact Pray GUI button family, change the verified upstream owner (for example the root-window geometry) or the anchor data itself when placement must change. Do not assume a late-looking transform write owns final button placement while the widget remains anchored with `OnUpdate`.
+
+**Evidence provenance:** PrayerClarity Pulpit Geometry Probe 0.1.1, runtime on Rebalanced 0.2.35; probe source `d33c141f132b430d79140b96c683886851b9cc0a`.
+
+**Applicability limit:** this proves the inspected `PrayCraftGUI` craft-button hierarchy in Graveyard Keeper 1.407. Do not generalize the exact anchor targets/offsets to unrelated NGUI buttons without inspection.
+
 ## Known consumers
 
 - PrayerClarity
