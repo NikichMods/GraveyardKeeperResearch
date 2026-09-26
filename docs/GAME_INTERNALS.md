@@ -53,3 +53,42 @@ This evidence proves the inspected **Technology tooltip** path in Graveyard Keep
 
 - `NikichMods/PrayerClarity` — Technology prayer tooltip width/layout.
 - Potentially useful to other Graveyard Keeper UI mods only after confirming they are on the same `WidgetsBubbleGUI` / `BubbleWidgetText` lifecycle.
+
+
+### Standard item-tooltip child alignment inside centered bubbles
+
+**Target:** Graveyard Keeper 1.407  
+**Status:** **accepted fact** for the inspected standard item-tooltip `WidgetsBubbleGUI` path.
+
+#### Verified behavior
+
+The standard item tooltip is populated through `ItemDefinition.GetTooltipData(Item, bool)` and rendered as child bubble widgets.
+
+For text rows on the inspected path:
+
+1. `BubbleWidgetText.Draw(BubbleWidgetTextData)` copies `data.alignment` to the child `UILabel.alignment`.
+2. That alignment controls text **inside the child label**; it does not by itself choose where the child widget sits inside the enclosing bubble.
+3. A centered `WidgetsBubbleGUI` centers each child widget as a whole.
+4. `WidgetsBubbleGUI.UpdateSize()` computes the enclosing bubble width from the **maximum current child-widget width**, then normal repositioning lays out the children.
+5. Consequently, a short one-line child whose text alignment is `Left` can still look visually centered when the child widget itself shrinks to roughly the text width.
+6. On PrayerClarity 0.2.47, runtime acceptance confirmed that expanding only selected left-aligned content children to the **already-existing maximum native child width** before stock size/reposition preserves the outer parchment width while making the intended left edge visible.
+
+#### Engineering implications
+
+- Distinguish **text alignment within a child** from **child placement within the bubble** before treating an apparent alignment defect as an enum/value error.
+- Do not change the entire bubble/container alignment merely to left-align one semantic subset if other rows must remain centered.
+- If the desired content span already exists naturally in another child, reusing that current maximum can change internal alignment without introducing a new fixed outer width.
+- Keep this separate from the accepted Technology `overflowWidth` lifecycle above; the two facts answer different UI questions.
+
+#### Evidence provenance
+
+- Graveyard Keeper 1.407 host inspection of `BubbleWidgetText.Draw` and `WidgetsBubbleGUI.UpdateSize/Reposition`.
+- PrayerClarity Rebalanced 0.2.47, exact accepted runtime source `6b3aa5399c8913d368f2b09bab963326db17e7f3`; user runtime acceptance on 2026-09-26.
+
+#### Applicability limits
+
+This establishes the inspected **standard item-tooltip bubble family** and the accepted 0.2.47 use of that lifecycle. It does not imply that every NGUI table, dialogue bubble, pulpit panel, or unrelated custom tooltip uses the same parent alignment or child-sizing policy.
+
+#### Known consumers
+
+- `NikichMods/PrayerClarity` — prayer-item Base Result / On Success content alignment.
