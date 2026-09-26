@@ -34,6 +34,9 @@ Before the first production-source mutation for each materially independent beha
 There is no small/obvious/presentation-only/follow-up exception. **BLOCKED means research/probe only.** A new runtime/user-visible regression opens a gate for that exact property; old evidence may be reused only when it proves the relevant owner/final-writer path.
 
 Treat the reported defect/request as the default scope. Adjacent behavior is preserved unless the proved path requires changing it or the user separately accepts the additional change. Do not reduce user test cycles by bypassing or combining unresolved gates.
+
+Treat gate granularity and candidate/build granularity separately. Several materially independent **READY** changes may share one coherent candidate when their interactions are understood and combined acceptance remains attributable; a non-urgent READY micro-change may wait for a natural candidate/handoff boundary. **BLOCKED** changes and independent unverified mechanisms do not ride along merely to reduce iterations or artifact count.
+
 For reusable host/runtime findings, promote accepted results into canonical shared docs rather than leaving them only in chat, raw logs, or commit history.
 
 For performance diagnostics, preserve the established evidence-first method:
