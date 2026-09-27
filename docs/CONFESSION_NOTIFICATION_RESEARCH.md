@@ -343,3 +343,16 @@ Trace, from the exact GK 1.407 graph/runtime:
 5. inspect existing game sound resources for a suitable church/confession cue.
 
 Prefer direct static/graph inspection first. Build a probe only if those owners cannot be established cleanly from existing evidence.
+
+
+## Native single-bell candidate
+
+Direct search of the installed GK `resources.assets` found a stock sound id:
+
+`bell_single`
+
+It is explicitly used by three serialized `Flow_PlaySound` nodes in refugee-story flows; each use is followed by a 1.5-second wait. This proves `bell_single` is a real short one-shot game sound id, distinct from corpse `donkey_bell`.
+
+The stock church preaching flow separately calls `Flow_PlaySound("chorus")`; therefore `bell_single` is not the normal sermon cue.
+
+Current evidence does not tie `bell_single` to a church tower and does not prove its timbre from the identifier alone. For vanilla-friendly notification work it is nevertheless a stronger first audio candidate than the longer church-prayer chorus when a single bell-like cue is desired.
