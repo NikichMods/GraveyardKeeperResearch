@@ -202,6 +202,31 @@ Game of Crone staged trade proxies are different: staged vendor WGOs are progres
 
 This is a reusable event-driven seam for appending native-style item tooltip information without per-frame UI replacement.
 
+## Craft technology-point output ownership
+
+**Status:** verified static fact for Graveyard Keeper 1.407.
+
+For ordinary crafts, technology-point rewards are represented inside the native `CraftDefinition.output` list alongside physical outputs.
+
+`TechDefinition.TECH_POINTS` identifies the technology-point item IDs, including:
+
+- `r` — red;
+- `g` — green;
+- `b` — blue;
+- `v` and `gratitude_points` as other point-like resources handled by the same classification.
+
+`CraftDefinition.GetFirstRealOutput()` explicitly skips entries whose IDs are in `TechDefinition.TECH_POINTS`, which distinguishes the physical craft result from these point outputs.
+
+On the normal completion path, `CraftComponent.ProcessFinishedCraft()` processes `current_craft.output` through the host's existing output/drop machinery. Therefore a recipe's repeatable red/green/blue reward is native recipe data rather than a separate craft-specific technology-point formula.
+
+Study/Survey follows the same data model for technology-point rewards. `ItemDefinition.GetSurveyCraft()` resolves the relevant `surv:...` `CraftDefinition`, and the standard item-tooltip Survey path reads technology-point entries from that Survey craft's `output`.
+
+**Engineering implication:** when a mod needs to change only the technology-point reward of a verified recipe, modifying the relevant `r/g/b` entries in the host-owned `CraftDefinition.output` is a lower-level native seam to investigate before replacing the craft-completion reward path.
+
+**Evidence provenance:** Graveyard Keeper 1.407 static reference `Kupie/GYK_DECOMP@6abf79199d92482af1c7573870dd9a20ec2270b9`, inspected `CraftDefinition`, `CraftComponent`, `TechDefinition`, `ItemDefinition`, and `TechPointsDrop`.
+
+**Applicability limit:** this establishes ownership and consumption for the inspected normal craft/Survey paths. It does not establish the numeric reward values of any specific recipe, nor does it imply that every non-crafting source of technology points uses `CraftDefinition.output`.
+
 ## Known consumers
 
 - `NikichMods/Crafting-Planner`
