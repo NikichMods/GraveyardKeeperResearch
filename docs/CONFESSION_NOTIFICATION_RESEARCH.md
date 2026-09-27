@@ -37,7 +37,39 @@ PrayerClarity research already establishes the relevant stock owner path:
 
 Implication for a notification mod: **do not duplicate the probability calculation or run a parallel roll.** The notification should observe the native resulting confession-availability state.
 
-The exact mutation seam that adds/removes confession_available, its persistence behavior across save/load, and the exact consumer that drives the in-world prayer icon still need to be traced before production code.
+Follow-up inspection closes the native state owner/lifecycle:
+
+- `Flow_AddInteractionEvent` calls `WorldGameObject.AddInteractionEvent(event)`;
+- the exact event string is stored in `WorldGameObject.custom_interaction_events`;
+- `Flow_RemoveInteractionEvent` removes it from that same list;
+- the custom-interaction path in `WorldGameObject.Interact` consumes the queued event before firing it;
+- `SerializableWGO.FromWGO` serializes the custom interaction-event list and `SerializableWGO.ToWGO` restores it;
+- both `church_budka_1` and `church_budka_2` define `custom_interaction_icon="(pray_bubble)"`, which the generic interaction-bubble path can use while a custom interaction exists.
+
+Therefore the canonical query for current confession availability is whether a live confessional WGO contains `"confession_available"` in `custom_interaction_events`. The game already persists that state; a notification mod should not save a parallel confession flag.
+
+The verified stock visual semantic is `(pray_bubble)`.
+
+## Corpse waiting-state ownership follow-up
+
+The stock transient corpse-arrival UI is a dedicated path:
+
+`Flow_BodyArrivedNotify -> NewBodyArrivedGUI.Display()`
+
+Accepted PrayerClarity donkey-graph evidence also establishes ordinary delivery through `Flow_DropBody` in the `npc_donkey` graph. Depending on the morgue chute state, ordinary delivery can use an outside branch or a repaired-chute branch whose drop target is resolved by `Flow_FindWGO(custom_tag="morgue_throw_out")`.
+
+The physical delivered body is host-owned loose-drop state:
+
+- `Flow_DropBody` creates the body and delegates to a WGO's `DropItem`;
+- `WorldGameObject.DropItem` delegates to `DropResGameObject.Drop`;
+- the resulting Body drop is added to `DropsList.me.drops`;
+- its native world zone is recorded in `DropResGameObject.zone_id` / `Item.drop_zone_id`;
+- collection removes the loose drop through the normal `DropsList` lifecycle;
+- `DropsList.ToGameSave` serializes loose-drop position, item/body data, and `zone_id`; `FromGameSave` recreates them.
+
+Important negative finding: player parameter `cur_bodies_count` is general morgue occupancy, not "the newly delivered corpse is still waiting". Both ordinary delivery branches increment it and body disposal paths decrement it. It can remain nonzero because of unrelated bodies in the morgue, so it must not drive a delivery reminder.
+
+The remaining unresolved point is provenance after load: native loose-drop save data preserves the corpse and its location/zone, but does not obviously encode "this body was delivered by the donkey". Before a production reminder uses a load-time reconstruction predicate, prove that the delivery endpoint/position/zone is narrow enough to avoid treating a manually dropped corpse as a new delivery.
 
 ## Community signal
 
@@ -165,8 +197,8 @@ Re-open this survey if player evidence reveals another event with the same check
 **BLOCKED — research only.**
 
 - **Observable property:** a truthful remote indication exists exactly while one or more native confession interactions are available.
-- **Canonical owner:** native confession state produced by church_budka_roll; the exact add/remove mutation seam still needs to be established.
-- **Final writer / consumer:** not yet closed for the in-world icon / interaction lifecycle.
+- **Canonical owner:** live confessional `WorldGameObject.custom_interaction_events`; the exact `confession_available` event is added/removed by native interaction-event nodes and consumed by native interaction.
+- **Final writer / consumer:** the interaction-event list is serialized/restored by `SerializableWGO`; the generic WGO bubble path consumes the object's verified `(pray_bubble)` custom interaction icon.
 - **Blast radius:** not yet established for any proposed hook.
 - **Preserved invariants:** confession RNG, PrayerClarity probability modifications, rewards, daily reset, interaction behavior, save/load behavior, and unrelated HUD behavior must remain unchanged.
 - **Acceptance evidence:** should include real daily-state creation, one- and two-confessional states if reachable, collection/clear, next-day reset, save/load while active, and compatibility with stock 15% plus PrayerClarity Rebalanced effective probabilities.
@@ -177,11 +209,10 @@ No production source should be created or mutated until the owner/final-consumer
 
 Trace, from the exact GK 1.407 graph/runtime:
 
-1. the node/method that actually adds and removes confession_available;
-2. whether that interaction/state is serialized or reconstructed on load;
-3. the exact path that produces the visible prayer icon above the confessional;
-4. whether there is a clean event-driven seam for empty -> occupied and occupied -> empty;
-5. the best native HUD anchor/prefab to reuse for a persistent indicator;
-6. only if audio remains desirable, inspect existing game sound resources for a suitable church/bell cue.
+1. verify the least-sufficient event-driven transition seam for confession empty -> occupied and occupied -> empty, including blast radius;
+2. verify whether the donkey-delivered loose corpse can be reconstructed after save/load from native drop position/zone without meaningful provenance false positives;
+3. verify the best native HUD anchor/prefab for persistent indicators;
+4. inspect whether the dedicated corpse-arrival UI can be reused/mirrored cleanly for confession arrival;
+5. inspect existing game sound resources for a suitable church/confession cue.
 
 Prefer direct static/graph inspection first. Build a probe only if those owners cannot be established cleanly from existing evidence.
