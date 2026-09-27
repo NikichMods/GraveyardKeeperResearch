@@ -30,6 +30,15 @@ Key established limits:
 Key established result:
 - current actionability is not equivalent to a visible journal task or a final answer's own gate; authored parent-route state and resource gates can matter.
 
+### Church / confessionals
+
+- `docs/CONFESSION_NOTIFICATION_RESEARCH.md` — confession-availability mechanics already established by PrayerClarity, player UX evidence, notification solution-space comparison, current hybrid presentation direction, and the remaining BLOCKED owner/lifecycle questions before production work.
+
+Key established direction:
+- observe the native resulting confession-availability state; do not duplicate the daily RNG/probability mechanics;
+- reuse the existing prayer/confessional visual semantics where practical;
+- production implementation remains BLOCKED until the exact confession_available mutation/clear and presentation lifecycle are traced.
+
 ### Crafting / inventory / trading / buffs
 
 - `docs/CRAFTING_INVENTORY_AND_TRADING.md` — CraftDefinition/build ownership, player-vs-interaction inventory, storage-local inventory, native move/capacity path, stack equivalence, craft renderer list invariants, `CraftComponent.DoAction` actor/timing semantics, PlayerBuff duration/removal primitives, vendor sale rules, dynamic product types, lazy Vendor construction, KnownNPC/staged-vendor lifecycle, and the standard item-tooltip seam.
