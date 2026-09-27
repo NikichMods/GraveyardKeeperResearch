@@ -1,7 +1,7 @@
 # Confession Notification — Feasibility and UX Research
 
 **Target:** Graveyard Keeper 1.407  
-**Status:** research/design only; no production mod exists yet.
+**Status:** shared host/runtime research; production consumer exists at `NikichMods/KeepersAlerts`.
 
 ## Expanded product direction
 
@@ -98,7 +98,78 @@ Installed balance census also found exactly two ObjectDefinitions using `custom_
 
 Reusable implication: a filtered **post-`WorldGameObject.RedrawBubble` resync** is a credible least-sufficient normal-play observation seam for confession availability. It observes the final native state after add/remove/consume instead of patching RNG or each writer separately. A one-time world/load resync is still required because no mutation necessarily occurs immediately after restoration.
 
-The `(pray_bubble)` value is rendered through the normal bubble text path: `ComponentsManager.RefreshBubblesData` places the token into `BubbleWidgetTextData`, and `BubbleWidgetText.Draw` renders it with an NGUI `UILabel` / native `UIFont`. Treat it as a native label/font-symbol token until runtime evidence proves a standalone Sprite mapping; do not assume `EasySpritesCollection.GetSprite("(pray_bubble)")`.
+The `(pray_bubble)` value is rendered through the normal bubble text path: `ComponentsManager.RefreshBubblesData` places the token into `BubbleWidgetTextData`, and `BubbleWidgetText.Draw` renders it with an NGUI `UILabel` / native `UIFont`.
+
+Accepted installed-runtime font/atlas evidence additionally closes the symbol mapping:
+
+`(pray_bubble) -> icon_pray_bubble`
+
+The installed icon atlas reports `icon_pray_bubble` as 17x20. The token and sprite ID are distinct identifiers; do not pass `"(pray_bubble)"` to `EasySpritesCollection.GetSprite`.
+
+
+## Native notification/HUD presentation follow-up
+
+Keeper's Alerts Presentation Probe 0.1.0 on GK 1.407 closes reusable host presentation facts.
+
+### Stock corpse-arrival transient
+
+The runtime owner is:
+
+`UI Root/NewBodyArrivedPanel/BodyArrivedPanel`
+
+with `NewBodyArrivedGUI` on the panel.
+
+Installed serialized presentation:
+- parent `UI Root/NewBodyArrivedPanel`: full-screen NGUI `UIPanel`;
+- notification widget: 108x62;
+- `Background`: `UI2DSprite("icon_frame_techno")`, 96x52;
+- `BodyImage`: `UI2DSprite("body_01")`, 96x96;
+- `PlusText`: `tiny_font` UILabel containing `+`;
+- timings: 0.5 s appear, 1.0 s hold, 0.5 s hide;
+- visible-point Y: 80.
+
+Static `NewBodyArrivedGUI.Display()` owns activation plus slide-in/hold/slide-out behavior. Consumers wanting a sibling transient notification should prefer reusing/cloning this native family over recreating its motion by guess.
+
+### HUD lifecycle and responsive anchor
+
+The runtime HUD root is:
+
+`UI Root/HUD`
+
+and has its own full-screen `UIPanel`.
+
+The stock `hud left` widget is anchored directly to:
+
+`UI Root/Screen size panel/Screen size`
+
+at the top-left.
+
+Static `HUD.Open()` / `HUD.Hide()` toggles the HUD root during ordinary GUI-window lifecycle.
+
+Reusable implication: a small persistent mod indicator parented under `UI Root/HUD` and anchored to the verified screen-size target can inherit native HUD visibility and responsive placement without raw `Screen.width/height` positioning.
+
+### Corpse-delivery endpoint geometry
+
+Installed runtime endpoint transforms:
+
+- `morgue_throw_out=(10656,-10992,-2297.572)`;
+- `morgue_throw_in=(3672,-1896,-374.235)`.
+
+Accepted repaired-chute delivery samples settled approximately 35-72 world units from `morgue_throw_out`.
+
+Reusable implication: current receiving-area state can be bounded relative to the native endpoint instead of treating all of `zone_id="morgue"` as equivalent.
+
+### Church prayer sound boundary
+
+Prior church-loaded evidence found:
+
+`World/[wgo] church_pulpit/content/church_pulpit(Clone)/PrayFX/pray sound`
+
+with `DarkTonic.MasterAudio.EventSounds`.
+
+A later morgue-loaded snapshot did not contain that transform. Treat this as chunk/load-state dependence, not as evidence that the object is absent from the game.
+
+The exact MasterAudio event/sound-group configuration is still unverified.
 
 ## Community signal
 
@@ -194,13 +265,12 @@ Avoid a large toast, quest log mutation, custom parchment panel, or permanent te
 
 The concept appears feasible because the game already has a discrete native confession-availability state produced by a known daily graph. The mod should be an observer/presenter of that state rather than a second mechanics implementation.
 
-Candidate native UI family already present in the game:
+Verified native UI direction:
 
-- stock corpse arrival has its own `NewBodyArrivedGUI.Display()`, invoked by `Flow_BodyArrivedNotify`; this is now the strongest first presentation family to inspect if confession arrival should look literally like a sibling of corpse arrival;
-- `EffectBubblesManager.ShowImmediately(...)` remains a secondary stock transient-feedback family, but should not be preferred merely because it is easy if the dedicated corpse-arrival presentation can be reused more faithfully;
-- persistent UI should attach to a verified existing HUD/NGUI parent and follow native screen/language lifecycle rather than raw `Screen.width/height` positioning.
-
-These are candidate presentation seams only. The exact notification owner and persistent anchor are not yet selected.
+- stock corpse arrival uses `NewBodyArrivedGUI.Display()` via `Flow_BodyArrivedNotify`, and its serialized runtime hierarchy/timings are now known;
+- a sibling transient can therefore reuse/clone that presentation family rather than imitate it from scratch;
+- `EffectBubblesManager.ShowImmediately(...)` remains a secondary stock feedback family, not the preferred first choice for this product;
+- persistent UI can use the verified `UI Root/HUD` lifecycle and screen-size anchoring rather than raw `Screen.width/height` positioning.
 
 ## Adjacent-event survey
 
