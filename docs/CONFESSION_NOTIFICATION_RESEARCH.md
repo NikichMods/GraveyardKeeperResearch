@@ -356,3 +356,49 @@ It is explicitly used by three serialized `Flow_PlaySound` nodes in refugee-stor
 The stock church preaching flow separately calls `Flow_PlaySound("chorus")`; therefore `bell_single` is not the normal sermon cue.
 
 Current evidence does not tie `bell_single` to a church tower and does not prove its timbre from the identifier alone. For vanilla-friendly notification work it is nevertheless a stronger first audio candidate than the longer church-prayer chorus when a single bell-like cue is desired.
+
+
+## Corpse receiving-corridor closure
+
+Keepers Alerts follow-up research closes the native delivery envelope for both ordinary donkey branches.
+
+Accepted host facts:
+- pre-repair `Flow_DropBody`: source is the donkey WGO, direction `Up`;
+- repaired `Flow_DropBody`: source is `morgue_throw_out`, direction `Down`;
+- directional `Flow_DropBody` passes force `3f` and `check_walls=false`;
+- `DropResGameObject` applies an immediate 28.800001-unit directional offset and then `KickComponent`;
+- `DropResCurve.duration_factor` is authored in the range 0..1;
+- `KickComponent` decays delta by 0.96 per fixed step and stops below 0.01;
+- vertical motion uses the native 0.8 factor;
+- GK sets `Time.fixedDeltaTime` to 1/60 in normal play and 1/12 during sleep/wait.
+
+Direct installed `resources.assets` inspection identifies the native DockPoint component and verifies:
+- donkey prefab has no DockPoint;
+- repaired `morgue_throw_out` has no DockPoint.
+
+Therefore both sources use their WGO transform as `GetDropPos()`.
+
+Under the worst inspected timestep (1/12), force 3 and duration factor 1, maximum kick travel is approximately 459.22 world units; with the immediate directional offset, the derived maximum forward travel is approximately 488.02 units.
+
+A conservative reusable receiving corridor is:
+- lateral half-width 96;
+- backward allowance 48;
+- forward length 544;
+relative to the applicable source and direction.
+
+Use live host anchors where possible:
+- pre-repair: `donkey_cemetery_point`;
+- repaired: `morgue_throw_out`.
+
+Pre-repair evidence shows `morgue_throw_out_broken`; its repair craft replaces it with `morgue_throw_out`, so the repaired WGO is a usable branch discriminator.
+
+### Event-driven loose-body resync
+
+For current receiving-area occupancy, the least-sufficient host seams are:
+- `DropsList.Add` after successful Body addition;
+- `DropResGameObject.CollectDrop` after Body pickup marks `is_collected=true`;
+- `DropsList.FromGameSave` after save reconstruction for whole-list resync/clear.
+
+Normal big Body items do not use stack-merging removal. Known direct list-removal exceptions inspected in GK 1.407 concern invalid drops, dungeon teardown or a stone/marble save migration, not ordinary cemetery/morgue Body pickup.
+
+This permits event-driven corpse waiting state with no recurring polling and no mod-owned persisted provenance flag.
