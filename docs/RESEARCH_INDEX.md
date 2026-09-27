@@ -41,7 +41,7 @@ Key established direction:
 
 ### Crafting / inventory / trading / buffs
 
-- `docs/CRAFTING_INVENTORY_AND_TRADING.md` — CraftDefinition/build ownership, player-vs-interaction inventory, storage-local inventory, native move/capacity path, stack equivalence, craft renderer list invariants, `CraftComponent.DoAction` actor/timing semantics, PlayerBuff duration/removal primitives, vendor sale rules, dynamic product types, lazy Vendor construction, KnownNPC/staged-vendor lifecycle, and the standard item-tooltip seam.
+- `docs/CRAFTING_INVENTORY_AND_TRADING.md` — CraftDefinition/build ownership, native craft/Survey technology-point output ownership, player-vs-interaction inventory, storage-local inventory, native move/capacity path, stack equivalence, craft renderer list invariants, `CraftComponent.DoAction` actor/timing semantics, PlayerBuff duration/removal primitives, vendor sale rules, dynamic product types, lazy Vendor construction, KnownNPC/staged-vendor lifecycle, and the standard item-tooltip seam.
 
 Key established limits:
 - `GetMultiInventoryForInteraction()` is not player-only inventory.
