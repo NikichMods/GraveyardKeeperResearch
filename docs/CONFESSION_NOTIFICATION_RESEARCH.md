@@ -408,33 +408,27 @@ This permits event-driven corpse waiting state with no recurring polling and no 
 
 Keeper's Alerts follow-up research closes the reusable native geometry/lifecycle for a persistent corpse-waiting reminder on GK 1.407.
 
-### Pre-repair / outside delivery
+Pre-repair delivery uses the donkey WGO itself as source with Direction.Up. The donkey ObjectDefinition uses `drop_point=Auto`, and direct installed `resources.assets` inspection found no DockPoint component in the donkey prefab, so `WorldGameObject.GetDropPos()` resolves to the donkey transform. The route targets native `donkey_cemetery_point`; accepted runtime logs place the donkey at or close to that point during delivery.
 
-The donkey ObjectDefinition uses `drop_point=Auto`. Direct inspection of the installed donkey prefab in `resources.assets` found no DockPoint component, so `WorldGameObject.GetDropPos()` resolves to the donkey WGO transform itself.
+Repaired delivery uses live `morgue_throw_out` with Direction.Down.
 
-The native graph's outside `Flow_DropBody` uses that self source with `Direction.Up`. The donkey route targets `donkey_cemetery_point=(3676,-2016)`; accepted historical runtime logs place the donkey at or close to that point at delivery, including exact `(3676,-2016)` and later ordinary samples up to roughly 10.5 world units away on X.
+Both directional `Flow_DropBody` branches call `DropItem` with force factor 3 and `check_walls=false`; therefore wall avoidance cannot rotate the authored Up/Down direction.
 
-### Directional drop envelope
+Native drop physics applies an immediate 28.800001-unit offset, then a decaying kick. The largest fixed timestep assigned by inspected game code is 1/12 during sleep/wait. With the authored maximum drop-curve duration factor 1, the maximum forward displacement is approximately 488.02 world units including the initial offset.
 
-Directional `Flow_DropBody` uses force factor 3. `DropResGameObject.Drop` applies an immediate 28.800001-unit offset and then a `KickComponent` impulse. Drop kick velocity decays by 0.96 per fixed step; GK startup sets fixed delta to 1/60; the authored drop-curve duration factor range is 0..1.
+Recommended bounded receiving corridor around the applicable native source:
+- lateral half-width: 96 world units;
+- backward allowance: 48;
+- forward length: 544;
+- Up for pre-repair, Down for repaired.
 
-At factor 1 the maximum source-relative displacement is approximately 143.61 world units horizontally (vertical is smaller because movement applies the native 0.8 Y factor).
+This remains substantially narrower than any whole-zone predicate.
 
-For notification-state reconstruction, a 192-world-unit radius (two native 96-unit world steps) around the authored delivery source leaves margin while remaining local.
+Recommended event-driven resync:
+- live add: postfix `DropsList.Add`, filtered to a successful Body addition;
+- live clear: postfix `DropResGameObject.DestroyLinkedHint`, filtered to `is_collected && Body`. This is required because large-item/overhead Body pickup in `BaseCharacterComponent.TryOtherInteractions` sets `is_collected=true` directly and bypasses `CollectDrop`; both it and `CollectDrop` call `DestroyLinkedHint` after the commit;
+- post-load initialization: postfix `MainGame.OnGameStartedPlaying`, after saved loose drops have been reconstructed.
 
-Recommended bounded predicate:
-- uncollected loose Body within 192 units of `donkey_cemetery_point`; OR
-- uncollected loose Body within 192 units of `morgue_throw_out`.
+Bodies do not enter stack-merging removal because `DoTryMerging` returns for `definition.is_big`.
 
-This avoids `cur_bodies_count` and whole-zone false positives.
-
-### Event-driven resync seams
-
-For consumers of this predicate:
-- live Body add/drop: postfix the exact public static `DropResGameObject.Drop(Vector3, Item, Transform, Direction, float, int, bool, bool)` overload, filter Body, then canonical resync;
-- live Body pickup/clear: postfix `DropResGameObject.DestroyLinkedHint()`, filtering `is_collected && Body`. This covers both `CollectDrop` and the special large-item/overhead pickup path in `BaseCharacterComponent.TryOtherInteractions`;
-- post-load initialization: postfix `MainGame.OnGameStartedPlaying()`, which runs after `WorldMap.FromGameSave -> DropsList.FromGameSave` has reconstructed loose drops.
-
-Body stack merging is not an alternate removal path because `DoTryMerging` explicitly returns for `definition.is_big`.
-
-Initial/load resync should establish current persistent state without synthesizing an arrival cue.
+Initial/load resync should establish persistent current state without synthesizing an arrival cue.
