@@ -432,3 +432,38 @@ Recommended event-driven resync:
 Bodies do not enter stack-merging removal because `DoTryMerging` returns for `definition.is_big`.
 
 Initial/load resync should establish persistent current state without synthesizing an arrival cue.
+
+
+## Accepted closure update — 2026-09-28
+
+This section supersedes the older BLOCKED/audio-hypothesis wording above. The production consumer is now `NikichMods/KeepersAlerts`; its repository remains the project-specific source of truth.
+
+### Confession audio
+
+The stock `bell_single` sound was directly A/B auditioned in the installed game against `chorus_short`. The user selected `bell_single` as the desired short confession-availability cue.
+
+Status: **ACCEPTED**.
+
+### Donkey drop origin runtime confirmation
+
+Keeper's Alerts Corpse Drop Origin Probe 0.1.0 performed a read-only installed-runtime snapshot and confirmed:
+
+- `donkey.GetDropPos()` exactly equaled `donkey.tf.position`;
+- the reported drop-minus-donkey delta was `(0,0,0)`;
+- the live donkey had zero DockPoints.
+
+This independently confirms the earlier asset-derived conclusion that the pre-repair directional delivery origin is the donkey transform itself.
+
+### Corpse lifecycle correction
+
+The least-sufficient ordinary Body lifecycle is:
+
+- live add: postfix `DropsList.Add`, filtered to successful Body addition;
+- live clear: postfix `DropResGameObject.DestroyLinkedHint`, filtered to collected Body, because large-item/overhead Body pickup can bypass `CollectDrop` but still commits `is_collected=true` before `DestroyLinkedHint`;
+- load: disarm during `DropsList.FromGameSave`, then perform one silent authoritative resync at `MainGame.OnGameStartedPlaying`.
+
+No recurring polling and no mod-owned persisted corpse provenance are required.
+
+### Core production gate
+
+The core state-observation/audio/HUD/transient paths are now READY for an integrated runtime candidate. Remaining acceptance is candidate-level runtime/perceptual validation of touched behavior, especially transient/HUD placement and coexistence.
