@@ -82,6 +82,24 @@ Static follow-up also confirms the evidence boundary: `Flow_DropBody` generates 
 
 For notification-style consumers, the host-native model should therefore be current **receiving-area occupancy by a loose Body**, if that semantic fits the product. Strict historical provenance after arbitrary manual movement would require separately justified mod-owned persistence.
 
+
+## Confession final-consumer seam follow-up
+
+Static GK 1.407 lifecycle inspection closes the normal-play mutation convergence for native confession availability.
+
+Relevant paths:
+
+- `WorldGameObject.AddInteractionEvent` adds the event and then calls `RedrawBubble`;
+- `Flow_RemoveInteractionEvent` removes the event from `custom_interaction_events` and then calls `RedrawBubble`;
+- `WorldGameObject.Interact` consumes the first queued custom interaction event, fires it, and then calls `RedrawBubble`;
+- `WorldGameObject.RedrawBubble` delegates to `ComponentsManager.RefreshBubblesData`, which reads the already-mutated `custom_interaction_events` list and renders `custom_interaction_icon` while the list is nonempty.
+
+Installed balance census also found exactly two ObjectDefinitions using `custom_interaction_icon="(pray_bubble)"`: `church_budka_1` and `church_budka_2`.
+
+Reusable implication: a filtered **post-`WorldGameObject.RedrawBubble` resync** is a credible least-sufficient normal-play observation seam for confession availability. It observes the final native state after add/remove/consume instead of patching RNG or each writer separately. A one-time world/load resync is still required because no mutation necessarily occurs immediately after restoration.
+
+The `(pray_bubble)` value is rendered through the normal bubble text path: `ComponentsManager.RefreshBubblesData` places the token into `BubbleWidgetTextData`, and `BubbleWidgetText.Draw` renders it with an NGUI `UILabel` / native `UIFont`. Treat it as a native label/font-symbol token until runtime evidence proves a standalone Sprite mapping; do not assume `EasySpritesCollection.GetSprite("(pray_bubble)")`.
+
 ## Community signal
 
 This is a real player-facing friction point, although the available evidence is not enough to call it a broad community consensus.
