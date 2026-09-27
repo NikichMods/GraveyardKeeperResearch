@@ -69,7 +69,18 @@ The physical delivered body is host-owned loose-drop state:
 
 Important negative finding: player parameter `cur_bodies_count` is general morgue occupancy, not "the newly delivered corpse is still waiting". Both ordinary delivery branches increment it and body disposal paths decrement it. It can remain nonzero because of unrelated bodies in the morgue, so it must not drive a delivery reminder.
 
-The remaining unresolved point is provenance after load: native loose-drop save data preserves the corpse and its location/zone, but does not obviously encode "this body was delivered by the donkey". Before a production reminder uses a load-time reconstruction predicate, prove that the delivery endpoint/position/zone is narrow enough to avoid treating a manually dropped corpse as a new delivery.
+Follow-up installed-runtime evidence from Keeper's Alerts Corpse State Probe 0.1.0 closes the physical save/load lifecycle on the repaired-chute path:
+
+- a delivered Body appeared in `DropsList` with `zone_id="morgue"` / `Item.drop_zone_id="morgue"`;
+- it settled to a stable native position near `morgue_throw_out`;
+- save/load/world reconstruction replaced the Unity object instance but recreated the Body at the exact same saved position and zone;
+- subsequent pickup removed that reconstructed Body from the loose-drop list.
+
+Reusable implication: **Unity instance identity is ephemeral, but native loose-drop position/zone/body state is host-persistent.**
+
+Static follow-up also confirms the evidence boundary: `Flow_DropBody` generates an ordinary Body Item, and `GameSave.SavedDropItem` stores the Item, position and zone but no dedicated donkey-delivery provenance field. Do not invent a hidden provenance ID.
+
+For notification-style consumers, the host-native model should therefore be current **receiving-area occupancy by a loose Body**, if that semantic fits the product. Strict historical provenance after arbitrary manual movement would require separately justified mod-owned persistence.
 
 ## Community signal
 
