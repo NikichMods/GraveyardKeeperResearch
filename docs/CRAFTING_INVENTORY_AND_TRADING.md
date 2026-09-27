@@ -221,6 +221,19 @@ On the normal completion path, `CraftComponent.ProcessFinishedCraft()` processes
 
 Study/Survey follows the same data model for technology-point rewards. `ItemDefinition.GetSurveyCraft()` resolves the relevant `surv:...` `CraftDefinition`, and the standard item-tooltip Survey path reads technology-point entries from that Survey craft's `output`.
 
+### Standard unstudied-item Survey hint semantics
+
+Pinned Graveyard Keeper 1.407 static inspection establishes the exact vanilla hint behavior inside `ItemDefinition.GetTooltipData(...)`:
+
+- when a Survey craft exists and is not yet complete, the tooltip iterates the Survey craft's processed `output`;
+- it keeps only entries whose IDs are in `TechDefinition.TECH_POINTS`;
+- it appends the technology-point **IDs/icons only** (for example `(b)`), not their numeric `Item.value`;
+- therefore vanilla intentionally tells the player **which colors** an item can yield from Study while concealing the exact quantity;
+- when the Survey is complete, the hint changes to the ordinary `survey_complete` state.
+
+This is a reusable event-driven seam for a qualitative research-value cue: a mod can derive magnitude from the same native Survey `CraftDefinition.output` while preserving vanilla's decision not to expose the exact point count. Such a cue should remain presentation-only and should not duplicate Study eligibility or completion state outside the host data.
+
+
 **Engineering implication:** when a mod needs to change only the technology-point reward of a verified recipe, modifying the relevant `r/g/b` entries in the host-owned `CraftDefinition.output` is a lower-level native seam to investigate before replacing the craft-completion reward path.
 
 **Evidence provenance:** Graveyard Keeper 1.407 static reference `Kupie/GYK_DECOMP@6abf79199d92482af1c7573870dd9a20ec2270b9`, inspected `CraftDefinition`, `CraftComponent`, `TechDefinition`, `ItemDefinition`, and `TechPointsDrop`.
