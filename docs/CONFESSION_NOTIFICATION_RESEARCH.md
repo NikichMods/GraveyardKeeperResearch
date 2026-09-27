@@ -169,7 +169,35 @@ with `DarkTonic.MasterAudio.EventSounds`.
 
 A later morgue-loaded snapshot did not contain that transform. Treat this as chunk/load-state dependence, not as evidence that the object is absent from the game.
 
-The exact MasterAudio event/sound-group configuration is still unverified.
+The exact church-pulpit prayer sound group is now verified from direct `resources.assets` inspection as `chorus_short`.
+
+
+## Direct asset closure for church prayer sound
+
+A user-supplied GK `resources.assets` was inspected directly without redistributing the proprietary asset.
+
+Source identity:
+- size: `93,209,412 bytes`;
+- SHA-256: `215c7981901a4b72d5db717666ba47ad3cc032527c95f58dc39d8af1293a69ca`;
+- Unity engine string: `2020.3.17f1`.
+
+Serialized Transform/GameObject linkage proves the prefab chain:
+
+`church_pulpit -> PrayFX -> pray sound`
+
+The `pray sound` GameObject contains a Transform plus one MonoBehaviour. Prior installed-runtime evidence identifies that component as `DarkTonic.MasterAudio.EventSounds`.
+
+Its serialized AudioEvent payload contains:
+
+`Your action name -> chorus_short -> [None]`
+
+A matching MasterAudio `AudioEvent` layout serializes `actionName`, then `isExpanded`, then `soundType`; the payload therefore identifies the stock sound group as:
+
+`chorus_short`
+
+Reusable implication: mods wanting the same native church/prayer cue should invoke the existing MasterAudio group `chorus_short`; do not extract or ship the game's audio asset.
+
+The accompanying `resources.assets.resS` stream is not required to identify/reuse the group. It would only be needed to extract the underlying streamed clip for offline inspection.
 
 ## Community signal
 
