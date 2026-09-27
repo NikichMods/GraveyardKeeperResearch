@@ -3,6 +3,17 @@
 **Target:** Graveyard Keeper 1.407  
 **Status:** research/design only; no production mod exists yet.
 
+## Expanded product direction
+
+The concept is no longer limited to confessionals. The durable product goal is a small, vanilla-friendly **important waiting-state notification layer** for remote events that otherwise require the player to remember/check a location.
+
+Current core scope:
+
+1. **Corpse waiting** — preserve the stock donkey arrival sound/transient notification and add a persistent HUD reminder while an unprocessed/delivered corpse state still warrants player attention.
+2. **Confession waiting** — add a thematically appropriate church/confession arrival sound plus a transient icon, then retain a persistent HUD reminder while at least one native confession is available.
+
+Do not generalize this into a generic production-complete notifier. A future event should be added only when it matches the same product class: asynchronous/remote, discrete and actionable, reasonably important, locally invisible enough to create checking friction, and rare/bounded enough that a persistent alert is not HUD spam.
+
 ## Product problem
 
 A confession can become available in a church confessional without any remote indication to the player. The stock game exposes the state locally through the confessional interaction / prayer icon, so a player who is elsewhere in the world must revisit the church simply to discover whether there is anything to collect.
@@ -34,8 +45,10 @@ This is a real player-facing friction point, although the available evidence is 
 
 Examples:
 
-- Steam discussion, 2018: players note that nobody is visibly seen arriving/leaving and the only indication is the icon inside the church; one participant explicitly calls the need to keep checking the church poor design.
+- Steam discussion, 2018: players note that nobody is visibly seen arriving/leaving and the only indication is the icon inside the church; one participant explicitly calls the need to keep checking the church poor design. Another proposes: "There should be a bell like with the corpses!", followed by a request for a visual indicator as well.
   - https://steamcommunity.com/app/599140/discussions/0/1733213724900982012/
+- Steam discussion, updated in 2024: a player independently asks for a church bell when somebody is in a confessional so the player knows to return before missing it.
+  - https://steamcommunity.com/app/599140/discussions/0/1694923613864163134/
 - Steam discussion, 2019: a player describes confessionals as weak partly because they must be checked repeatedly to know whether someone is there.
   - https://steamcommunity.com/app/599140/discussions/0/1742231705662858611/
 - Steam discussion, 2018: a player asks when they should check confessionals because the available information only says a confession may happen on any day.
@@ -122,10 +135,30 @@ The concept appears feasible because the game already has a discrete native conf
 
 Candidate native UI family already present in the game:
 
-- EffectBubblesManager.ShowImmediately(...) is used by stock code for short task/resource/relation/status feedback and is a credible transient-notification surface;
-- persistent UI should attach to a verified existing HUD/NGUI parent and follow native screen/language lifecycle rather than raw Screen.width/height positioning.
+- stock corpse arrival has its own `NewBodyArrivedGUI.Display()`, invoked by `Flow_BodyArrivedNotify`; this is now the strongest first presentation family to inspect if confession arrival should look literally like a sibling of corpse arrival;
+- `EffectBubblesManager.ShowImmediately(...)` remains a secondary stock transient-feedback family, but should not be preferred merely because it is easy if the dedicated corpse-arrival presentation can be reused more faithfully;
+- persistent UI should attach to a verified existing HUD/NGUI parent and follow native screen/language lifecycle rather than raw `Screen.width/height` positioning.
 
 These are candidate presentation seams only. The exact notification owner and persistent anchor are not yet selected.
+
+## Adjacent-event survey
+
+A targeted first-pass survey did **not** identify a third event that currently belongs in the same core scope.
+
+### Strong fit
+
+- **Corpse delivery:** asynchronous, remote, discrete, actionable, important, already has a stock sound + transient visual notification but lacks the proposed persistent reminder.
+- **Confession availability:** asynchronous, remote, discrete, short-lived/actionable, currently locally signaled only at the church, with repeated player requests for corpse-style audio/visual notification.
+
+### Weaker / currently excluded
+
+- **Merchant crate proceeds:** money waits in the merchant cashbox and is collected through the trading-result UI. This is a real remote waiting reward, and community questions show some discoverability friction, but the sale follows a known weekly cycle and behaves more like accumulated income than an arrival requiring immediate attention. Keep as a possible later candidate, not core scope.
+- **Tavern cashbox:** continuous/accumulating revenue rather than a discrete arrival event.
+- **Weekly NPC presence / quest availability:** already communicated structurally by the day cycle and belongs closer to the existing day-wheel/quest-marker problem domain.
+- **Crops, furnaces, zombie production/logistics:** high-frequency production completion; notifying these would create a different automation/status-dashboard product and likely HUD spam.
+- **Refugee/story NPC arrivals:** mostly one-off progression events/cutscenes rather than recurring remote waiting states.
+
+Re-open this survey if player evidence reveals another event with the same checking-friction pattern. Do not broaden scope just because a state can technically be observed.
 
 ## Production evidence gate
 
