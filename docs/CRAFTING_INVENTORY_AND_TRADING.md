@@ -249,3 +249,19 @@ This is a reusable event-driven seam for a qualitative research-value cue: a mod
 - `NikichMods/WhoBuysThis`
 
 Project-specific balance, buyer-display policy, specialized-storage classification, and planner product scope remain canonical in their owning repositories.
+
+
+### Red technology-point channels outside CraftDefinition
+
+Pinned Graveyard Keeper 1.407 static/runtime inspection establishes that red technology points are not confined to `CraftDefinition.output`.
+
+Additional native channels:
+
+- `GameBalance.works_data` stores `WorkDefinition.reward`.
+- `WorldGameObject.RewardForWork()` resolves `obj_def.work` through `GameBalance.GetData<WorkDefinition>()` and adds the work reward to the player.
+- `ObjectDefinition.drop_items` can contain technology-point items; `WorldGameObject.DropItems()` recognizes r/g/b tech-point IDs and spawns them through the normal tech-point drop path.
+- `ObjectDefinition.add_player_param_after_hp_0` is another direct player-resource channel applied during `DoZeroHPActivity()`.
+
+Accepted runtime evidence from the grave-reward project found ordinary trees, stumps, stone nodes and quarry/ore objects with red entries in `drop_items`, confirming that physical gathering is a native repeatable red source independent of recipe crafting.
+
+Research implication: whole-game red-economy analysis must inspect both craft outputs and world-object/work reward channels; a CraftDefinition-only inventory is incomplete.
