@@ -41,13 +41,14 @@ Key established direction:
 
 ### Crafting / inventory / trading / buffs
 
-- `docs/CRAFTING_INVENTORY_AND_TRADING.md` — CraftDefinition/build ownership, native craft/Survey technology-point output ownership, player-vs-interaction inventory, storage-local inventory, native move/capacity path, stack equivalence, craft renderer list invariants, `CraftComponent.DoAction` actor/timing semantics, PlayerBuff duration/removal primitives, vendor sale rules, dynamic product types, lazy Vendor construction, KnownNPC/staged-vendor lifecycle, and the standard item-tooltip seam.
+- `docs/CRAFTING_INVENTORY_AND_TRADING.md` — CraftDefinition/build ownership, native craft/Survey technology-point output ownership, player-vs-interaction inventory, storage-local inventory, native move/capacity path, stack equivalence, craft renderer list invariants, `CraftComponent.DoAction` actor/timing semantics, PlayerBuff duration/removal primitives, vendor sale rules, dynamic product types, lazy Vendor construction, KnownNPC/staged-vendor lifecycle, the standard item-tooltip seam, and vanilla crafting-location tooltip ownership/source/order.
 - `docs/INVENTORY_SLOT_PINNING_RESEARCH.md` — initial community/product research for stable/pinned player-inventory item positions, existing mod landscape, preliminary BepInEx feasibility evidence, solution-space comparison, and the remaining BLOCKED slot-order/final-writer questions.
 
 Key established limits:
 - `GetMultiInventoryForInteraction()` is not player-only inventory.
 - read-only trade queries should not force lazy Vendor construction.
 - renderer-only craft augmentation must not mutate shared recipe definitions.
+- vanilla item-tooltip crafting locations come from ordered native `GameBalance.GetItemCraftsIn(...)` data, but no generic station-family/tier relationship is yet established from static `ObjectDefinition` metadata.
 
 ### Fishing
 
