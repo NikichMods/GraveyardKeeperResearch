@@ -37,7 +37,7 @@ Key established result:
 Key established direction:
 - observe the native resulting confession-availability state; do not duplicate the daily RNG/probability mechanics;
 - reuse the existing prayer/confessional visual semantics where practical;
-- production implementation remains BLOCKED until the exact confession_available mutation/clear and presentation lifecycle are traced.
+- the owner/lifecycle/audio/presentation questions are now closed for the current Keeper's Alerts production consumer; the owning repository remains authoritative for product-specific implementation and release state.
 
 ### Crafting / inventory / trading / buffs
 
