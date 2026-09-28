@@ -265,3 +265,23 @@ Additional native channels:
 Accepted runtime evidence from the grave-reward project found ordinary trees, stumps, stone nodes and quarry/ore objects with red entries in `drop_items`, confirming that physical gathering is a native repeatable red source independent of recipe crafting.
 
 Research implication: whole-game red-economy analysis must inspect both craft outputs and world-object/work reward channels; a CraftDefinition-only inventory is incomplete.
+
+## Item crafting-location tooltip ownership
+
+**Status:** verified static fact for Graveyard Keeper 1.407.
+
+Pinned source: `Kupie/GYK_DECOMP@6abf79199d92482af1c7573870dd9a20ec2270b9`.
+
+`ItemDefinition.GetTooltipData(Item, bool)` constructs the vanilla standard-item crafting-location row from `ItemDefinition.GetItemDetails().crafts_in`. It localizes each `ObjectDefinition.id` with `GJL.L(id)`, joins them using the localized comma token when available, and appends one `BubbleWidgetTextData` row headed by `GJL.L("crafted_at")`.
+
+`GetItemDetails()` gets that station list from `GameBalance.GetItemCraftsIn(item_id)`. The backing cache is built by `GameBalance.CreateCraftsCache()` from native `craft_data -> CraftDefinition.craft_in`, excluding `grave_ground`, hidden recipes, and recipes marked `dont_show_in_hint`; duplicate station definitions are suppressed while first native encounter order is preserved.
+
+`ItemDefinition.GetTooltipDataCraftAt(Item)` duplicates the same craft-location formatter as a dedicated helper.
+
+Known direct consumers in the pinned source:
+- `BaseItemCellGUI` calls `GetTooltipData(..., true)` for standard item cells;
+- `TechUnlock` calls `GetTooltipData(..., false)` and, in its special multi-quality prayer-output branch, also calls `GetTooltipDataCraftAt(...)`.
+
+`BubbleWidgetText.Draw(BubbleWidgetTextData)` is the verified final text writer on this path: it assigns `UILabel.text = data.text`; enclosing `WidgetsBubbleGUI` then owns normal bubble sizing/repositioning.
+
+**Applicability limit:** this establishes ownership, source, ordering, direct callers and final text consumption. It does **not** establish a generic station-family/tier relationship. `ObjectDefinition` exposes no obvious universal tier/upgrade-parent field in the pinned class definition, so grouping tiered station variants requires separate balance/runtime evidence rather than assuming that every numeric ID suffix is a tier.
