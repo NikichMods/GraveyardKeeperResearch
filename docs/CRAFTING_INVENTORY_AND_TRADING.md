@@ -285,3 +285,18 @@ Known direct consumers in the pinned source:
 `BubbleWidgetText.Draw(BubbleWidgetTextData)` is the verified final text writer on this path: it assigns `UILabel.text = data.text`; enclosing `WidgetsBubbleGUI` then owns normal bubble sizing/repositioning.
 
 **Applicability limit:** this establishes ownership, source, ordering, direct callers and final text consumption. It does **not** establish a generic station-family/tier relationship. `ObjectDefinition` exposes no obvious universal tier/upgrade-parent field in the pinned class definition, so grouping tiered station variants requires separate balance/runtime evidence rather than assuming that every numeric ID suffix is a tier.
+
+## Tavern and refugee cooking-station routing
+
+**Status:** verified static host fact for Graveyard Keeper 1.407.
+
+Pinned source: `Kupie/GYK_DECOMP@6abf79199d92482af1c7573870dd9a20ec2270b9`.
+
+The cooking-station IDs below are not one universal tier family:
+
+- `tavern_kitchen` and `tavern_oven` have dedicated host branches in `CraftComponent` / `WorldGameObject` that route produced food through the tavern/Barman path.
+- `refugee_camp_cooking_table` and `refugee_camp_cooking_table_2` have their own refugee-camp-specific handling in `CraftComponent`.
+- ordinary `cooking_table`, `cooking_table_2`, and `oven` are distinct canonical IDs from both DLC-specific families.
+
+Engineering implication: tooltip or recipe-presentation code must not infer that `tavern_kitchen` is a later tier of `cooking_table*`, or that `tavern_oven` is a later tier of `oven`, merely because they share recipe outputs or related display wording.
+
