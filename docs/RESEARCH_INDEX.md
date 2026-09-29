@@ -33,7 +33,7 @@ Key established result:
 
 ### Church / confessionals
 
-- `docs/CONFESSION_NOTIFICATION_RESEARCH.md` — confession-availability mechanics already established by PrayerClarity, player UX evidence, notification solution-space comparison, current hybrid presentation direction, and the remaining BLOCKED owner/lifecycle questions before production work.
+- `docs/CONFESSION_NOTIFICATION_RESEARCH.md` — confession-availability mechanics established by PrayerClarity, player UX evidence, notification solution-space history, and accepted state-owner/lifecycle/audio/presentation closure used by Keeper's Alerts.
 
 Key established direction:
 - observe the native resulting confession-availability state; do not duplicate the daily RNG/probability mechanics;
