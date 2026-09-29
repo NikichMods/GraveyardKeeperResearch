@@ -6,6 +6,27 @@ Each entry should state its evidence status, owner/path, verified behavior, supp
 
 Broader accepted internals are split by domain for maintainability: `DIALOGUE_QUEST_AND_FLOWCANVAS.md`, `CRAFTING_INVENTORY_AND_TRADING.md`, `UI_INPUT_TIME_AND_ENVIRONMENT.md`, and `FISHING_RUNTIME.md`. Start from `RESEARCH_INDEX.md` rather than assuming this single file is exhaustive.
 
+## BepInEx plugin metadata
+
+### BepInPlugin version strings must be numeric/System.Version-parseable
+
+**Target:** BepInEx 5.x used by Graveyard Keeper 1.407  
+**Status:** **verified framework/runtime fact**.
+
+A plugin whose `[BepInPlugin]` version contains a prerelease suffix such as `0.0.0-research` is rejected by the BepInEx chainloader before the plugin's `Awake()` executes. The observed runtime diagnostic is:
+
+`Skipping type [...] because its version is invalid.`
+
+BepInEx's `BepInPlugin` constructor parses the supplied string through `TryParseLongVersion`, which uses `System.Version.TryParse` / `System.Version` semantics; unparseable metadata yields a null `Version`, and `BaseChainloader` skips the plugin.
+
+Engineering implication: keep `[BepInPlugin]` metadata numeric (for example `0.0.0` or `1.2.3`). Track research/candidate labels such as `research`, `rc`, or handoff IDs separately in logs, filenames, docs, or other display metadata rather than appending them to the BepInEx plugin version string.
+
+Evidence:
+- CompactCraftingTooltips taxonomy probe r1, source `a56bec010603b5224ad42cb36a244a90abfc00a9`, was compiled successfully but rejected at runtime on BepInEx 5.4.23.5 because its metadata version was `0.0.0-research`.
+- Upstream BepInEx source: `BepInEx.Core/Contract/Attributes.cs` (`BepInPlugin.TryParseLongVersion`) and `BepInEx.Core/Bootstrap/BaseChainloader.cs` (skip when `metadata.Version == null`).
+
+Applicability limit: this is about the BepInEx plugin metadata version supplied to `[BepInPlugin]`; it does not forbid richer human-facing semantic labels elsewhere.
+
 ## UI / NGUI
 
 ### Technology tooltip width lifecycle
