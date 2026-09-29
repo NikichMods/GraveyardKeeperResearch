@@ -300,3 +300,21 @@ The cooking-station IDs below are not one universal tier family:
 
 Engineering implication: tooltip or recipe-presentation code must not infer that `tavern_kitchen` is a later tier of `cooking_table*`, or that `tavern_oven` is a later tier of `oven`, merely because they share recipe outputs or related display wording.
 
+## Zombie mine production object identity
+
+**Status:** verified static host fact for Graveyard Keeper 1.407.
+
+Pinned source: `Kupie/GYK_DECOMP@6abf79199d92482af1c7573870dd9a20ec2270b9`.
+
+The zombie mining area uses several placed-object IDs that are interaction/production points rather than tiered workstation levels:
+
+- `mine_zombie_bench` restarts `mine_zombie_bench_iron_production`.
+- `zombie_mine_fence_left_front` restarts `zombie_mine_stone_production`.
+- `zombie_mine_fence_front` is position-dependent:
+  - the instance around `(-3932, 6622)` restarts `zombie_mine_stone_production`;
+  - instances around `(-3732, 6616)` and `(-3382, 6622)` restart `zombie_mine_marble_production`.
+
+`SmartExpression` contains the same distinction when a worker is attached.
+
+Engineering implication: code that presents crafting locations must not interpret `left_front` / `front` zombie-mine IDs as level I/II. Multiple world instances can share the same canonical object ID, so `GameBalance.GetItemCraftsIn` may already collapse several physical interaction points into one object-definition entry. An exact duplicate player-facing label can therefore be a placed-object artifact rather than a tier family.
+
