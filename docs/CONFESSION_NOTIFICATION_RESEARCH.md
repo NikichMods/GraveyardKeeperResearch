@@ -262,11 +262,18 @@ The icon should preferably reuse the same prayer/confessional symbol already use
 
 An initial version does not need a numeric count. The product requirement is "there is something to collect", not necessarily "which of two confessionals is occupied". A count can be reconsidered only if runtime behavior shows it adds meaningful value.
 
-### 4. Diegetic church-bell cue
+### 4. Diegetic audio cue
 
-A church bell when a confession becomes available is thematically strong and could complement option 3.
+A short native audio cue complements the hybrid presentation.
 
-However, no reusable church-bell sound seam/resource has yet been verified in current research. Audio is therefore a **design hypothesis**, not an implementation assumption. A sound-only solution would also be missable and is weaker than persistent state.
+Two stock sound groups were verified during Keeper's Alerts research:
+
+- `chorus_short` — the native church-pulpit prayer sound group, established from the serialized `church_pulpit -> PrayFX -> pray sound` chain;
+- `bell_single` — a stock short one-shot sound used by existing game flows.
+
+The installed game was used for direct A/B auditioning, and `bell_single` was selected for Keeper's Alerts because it better fits the desired short notification role.
+
+Reusable host fact: both sound IDs are verified native resources. The choice of `bell_single` for confession notification is a Keeper's Alerts product decision, not a general Graveyard Keeper semantic claim.
 
 ### 5. Map / quest / day-wheel marker
 
@@ -278,27 +285,32 @@ These are technically plausible presentation families but currently less attract
 
 Do not pursue these unless simpler notification families fail a concrete acceptance need.
 
-## Proposed presentation
+## Accepted Keeper's Alerts presentation resolution
 
-Current visual concept:
+The production consumer resolved the presentation as:
 
-- **arrival:** a brief native-style prayer-icon cue, optionally with localized text such as "Someone is waiting for confession" / equivalent;
-- **persistent state:** the same prayer icon, small and unobtrusive, in a verified HUD anchor;
-- **clear:** disappear as soon as the last native confession_available state is gone;
-- **optional later:** one verified diegetic sound on the transition, not repeated polling audio.
+- **arrival audio:** one native `bell_single` cue on the aggregate false -> true confession transition;
+- **arrival visual:** a private sibling clone of the stock `BodyArrivedPanel` / `NewBodyArrivedGUI.Display()` presentation, using the native prayer symbol while leaving the stock corpse-arrival instance untouched;
+- **persistent state:** a small prayer indicator parented under the live `HUD.bar_energy` transform while at least one confession remains available;
+- **clear:** remove the persistent indicator when the aggregate native confession state returns to false;
+- **load:** restore persistent state silently without synthesizing a new-arrival cue.
 
-Avoid a large toast, quest log mutation, custom parchment panel, or permanent text label unless testing shows the icon alone is not understandable.
+A numeric count is intentionally unnecessary for the current product requirement. Exact visual calibration is project-specific and remains canonical in `NikichMods/KeepersAlerts`.
 
-## Technical feasibility
+## Technical feasibility and accepted host seams
 
-The concept appears feasible because the game already has a discrete native confession-availability state produced by a known daily graph. The mod should be an observer/presenter of that state rather than a second mechanics implementation.
+The production path is feasible without duplicating confession mechanics or introducing recurring polling.
 
-Verified native UI direction:
+Accepted host/runtime seams for the current consumer:
 
-- stock corpse arrival uses `NewBodyArrivedGUI.Display()` via `Flow_BodyArrivedNotify`, and its serialized runtime hierarchy/timings are now known;
-- a sibling transient can therefore reuse/clone that presentation family rather than imitate it from scratch;
-- `EffectBubblesManager.ShowImmediately(...)` remains a secondary stock feedback family, not the preferred first choice for this product;
-- persistent UI can use the verified `UI Root/HUD` lifecycle and screen-size anchoring rather than raw `Screen.width/height` positioning.
+- canonical confession truth: `WorldGameObject.custom_interaction_events` containing `"confession_available"` on `church_budka_1` / `church_budka_2`;
+- normal add/remove/consume convergence: filtered postfix on `WorldGameObject.RedrawBubble(bool?)`, after the native list mutation;
+- load boundary: silent authoritative resync at `MainGame.OnGameStartedPlaying`;
+- transient family: private clone of the stock `BodyArrivedPanel` / `NewBodyArrivedGUI.Display()` lifecycle;
+- persistent HUD family: private children of the live `HUD.bar_energy` transform, so normal HUD visibility, anchoring and scaling remain host-owned;
+- audio: invoke the verified stock `bell_single` group; do not extract or redistribute game audio.
+
+The owning Keeper's Alerts repository is authoritative for product-specific patch composition, exact calibration, compatibility guards and release acceptance.
 
 ## Adjacent-event survey
 
@@ -319,31 +331,22 @@ A targeted first-pass survey did **not** identify a third event that currently b
 
 Re-open this survey if player evidence reveals another event with the same checking-friction pattern. Do not broaden scope just because a state can technically be observed.
 
-## Production evidence gate
+## Production evidence closure
 
-**BLOCKED — research only.**
+**Status: CLOSED for the existing Keeper's Alerts consumer on Graveyard Keeper 1.407.**
 
-- **Observable property:** a truthful remote indication exists exactly while one or more native confession interactions are available.
-- **Canonical owner:** live confessional `WorldGameObject.custom_interaction_events`; the exact `confession_available` event is added/removed by native interaction-event nodes and consumed by native interaction.
-- **Final writer / consumer:** the interaction-event list is serialized/restored by `SerializableWGO`; the generic WGO bubble path consumes the object's verified `(pray_bubble)` custom interaction icon.
-- **Blast radius:** not yet established for any proposed hook.
-- **Preserved invariants:** confession RNG, PrayerClarity probability modifications, rewards, daily reset, interaction behavior, save/load behavior, and unrelated HUD behavior must remain unchanged.
-- **Acceptance evidence:** should include real daily-state creation, one- and two-confessional states if reachable, collection/clear, next-day reset, save/load while active, and compatibility with stock 15% plus PrayerClarity Rebalanced effective probabilities.
+- **Observable property:** a truthful remote notification appears when aggregate native confession availability changes from none to at least one, and persistent state remains visible exactly while at least one native confession interaction is available.
+- **Canonical owner:** live confessional `WorldGameObject.custom_interaction_events`; native save serialization/restoration owns persistence.
+- **Final writer / consumer:** native add/remove/consume paths mutate the list before `WorldGameObject.RedrawBubble`; the production consumer performs a filtered postfix resync there and a silent post-load resync at `MainGame.OnGameStartedPlaying`.
+- **Blast radius:** the hook is globally placed but immediately filtered to the two verified confessionals before Keeper's Alerts state/presentation work; stock corpse presentation uses a separate untouched instance.
+- **Preserved invariants:** confession RNG/probability, PrayerClarity probability changes, rewards, daily reset, interaction behavior, save/load semantics and unrelated HUD/audio behavior remain host-owned.
+- **Acceptance evidence:** integrated runtime testing covered existing active state after load, false -> true notification, clear behavior, one/both persistent states, stock corpse notification coexistence and the selected audio/transient presentation.
 
-No production source should be created or mutated until the owner/final-consumer questions above are closed.
+The accepted reusable conclusion is that an observer/presenter can implement this feature event-driven from native state without reproducing the daily roll or storing a parallel confession flag.
 
-## Next research
+## Research boundary
 
-Trace, from the exact GK 1.407 graph/runtime:
-
-1. verify the least-sufficient event-driven transition seam for confession empty -> occupied and occupied -> empty, including blast radius;
-2. verify whether the donkey-delivered loose corpse can be reconstructed after save/load from native drop position/zone without meaningful provenance false positives;
-3. verify the best native HUD anchor/prefab for persistent indicators;
-4. inspect whether the dedicated corpse-arrival UI can be reused/mirrored cleanly for confession arrival;
-5. inspect existing game sound resources for a suitable church/confession cue.
-
-Prefer direct static/graph inspection first. Build a probe only if those owners cannot be established cleanly from existing evidence.
-
+No additional host-internals research is required for the current Graveyard Keeper 1.407 Keeper's Alerts implementation. Re-open research only for a new game build, a materially different presentation/behavior requirement, or evidence that one of the verified owner/lifecycle assumptions changed.
 
 ## Native single-bell candidate
 
