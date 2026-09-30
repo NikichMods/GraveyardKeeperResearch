@@ -228,3 +228,22 @@ Do not record routine repository inspection as an in-game test. Do not rewrite a
 - Interpretation: this log does **not** support Crafting Planner as the owner of the Bishop-walk stutter. The strongest existing owner hypothesis is a regression/persistence of the previously confirmed Merchant freeze class, but version 1.0.1 is **not yet confirmed** because no controlled 1.0.1 A/B has been run and the user's phrase "every half-second" describes recurrence frequency rather than a measured stall duration.
 - Status: `supports hypothesis` for Merchant 1.0.1 as first suspect; `does not support` Crafting Planner ownership for this captured segment; exact current owner remains unconfirmed.
 - Next step: one-variable A/B on the same current baseline — disable/remove The Merchant's Promise 1.0.1 only, keep the rest unchanged (using a corrected Crafting Planner build), then reproduce the shortest convenient walking/cinematic scenario. If the characteristic stutter disappears, promote Merchant 1.0.1 ownership; if it remains, reopen grouped isolation from the current baseline.
+
+### 2026-09-30 — Technology Work / Perk Audit 0.1.0 handoff
+
+- Question: for authored-visible Graveyard Keeper 1.407 Technology Work and Perk unlocks, what native current-game data explains the actual unlock effect well enough for Detailed Technology Tooltips without a hand-maintained wiki table?
+- Scope: research-only, read-only diagnostic. It does not mutate Technology definitions, Work/Perk state, balance, drops, recipes, localization, UI content, progression, or save data.
+- Trigger: runs once per process after `TechTreeGUI.Open()`; opening the Technology tree once is sufficient.
+- Captured data: all authored-visible Work/Perk unlocks, authored-description presence, Work-gated object-group members, Perk `show` / `stars` / `output_res`, and native craft/object/drop SmartExpression references to each visible Perk ID. SmartExpressions are read as raw authored text and are not evaluated by the diagnostic.
+- Research branch: `research/technology-work-perk-audit`.
+- Frozen diagnostic source: `64a3751a67e3a1950c2ccfb9970e7991fb304daf`.
+- Build evidence: GitHub Actions run `36714753757` on `windows-latest`; restore, Release build, identity preparation, and artifact upload all succeeded.
+- Artifact ID: `11095279962`.
+- CI artifact: `GKTechnologyUnlockAudit-0.1.0-64a3751a67e3a1950c2ccfb9970e7991fb304daf`.
+- Handoff DLL: `GKTechnologyUnlockAudit-0.1.0.dll`; installed basename should be `GKTechnologyUnlockAudit.dll`.
+- DLL size: 18,432 bytes.
+- DLL SHA-256: `6b035058f73a30d270ba54d354b5048a7a7fdf0c0a54c90d4d510d92e57901df`.
+- Save safety: nonpersistent/read-only; no cleanup is required beyond removing the diagnostic DLL after capture.
+- Requested test: keep the current mod set and Detailed Technology Tooltips candidate unchanged, install the diagnostic, start Graveyard Keeper 1.407, open the Technology tree once, exit the game, and return `LogOutput.log`. No prior recipe/blueprint screenshots or acceptance scenarios need to be repeated.
+- Status: `inconclusive` until the runtime snapshot is returned and analyzed.
+
