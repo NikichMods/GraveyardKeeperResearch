@@ -15,14 +15,14 @@ Before starting a new host-internals probe in a Graveyard Keeper mod:
 
 - `docs/GAME_INTERNALS.md` — BepInEx plugin-metadata constraints, detailed Technology-tooltip width lifecycle, and accepted standard item-tooltip child-alignment/native-span behavior.
 - `docs/UI_INPUT_TIME_AND_ENVIRONMENT.md` — Technology-tree gamepad focus/unlock-tooltip ownership, gamepad bubble placement lifecycle, NGUI screen-size ownership, Pray GUI craft-button anchor ownership, WaitingGUI timing/fixed-step ownership, SliderDec/SliderInc input/hold-repeat, WaitingGUI button tips, localization reload, the verified 1.407 `GJL.L(string)` localization ABI / firstpass identity, current-language UILabel font ownership, weather-audio ownership, environment-preset refresh, and final ambient-light observation.
-- `docs/TECH_TREE_INFORMATION_RESEARCH.md` — community/product evidence for richer Technology-tree information, verified 1.407 unlock/tooltip ownership, the vanilla ObjectCraftDefinition tooltip omission, solution-space analysis, and remaining build-location/data-coverage research before a production mod is created.
+- `docs/TECH_TREE_INFORMATION_RESEARCH.md` — community/product evidence for richer Technology-tree information, full 1.407 balance-data audit, verified unlock/tooltip ownership, blueprint/recipe coverage and special cases, exact location semantics, stress cases, and the closed research gate for production bootstrap.
 
 Key established limits:
 - BepInEx 5 `[BepInPlugin]` version metadata must be numeric/System.Version-parseable; keep research/RC labels outside that metadata.
 - Technology-tooltip `UILabel.overflowWidth` evidence applies to the inspected Technology path, not every tooltip.
 - Standard item-tooltip alignment evidence distinguishes child-label text alignment from centered child-widget placement; it applies to the inspected `WidgetsBubbleGUI` item-tooltip family, not arbitrary NGUI tables.
 - Technology-tree gamepad navigation focuses the parent tech node and combines visible child `TechUnlock` tooltips on the verified 1.407 path; mouse child tooltips are independent.
-- Technology-information research supports enriching the existing `TechUnlock.GetTooltip` path as the least-complex current product direction; blueprint/build data exists natively, but generic player-facing `builder_ids` / `sub_zone_id` location wording remains unverified and must not be guessed.
+- Technology-information research supports enriching the existing `TechUnlock.GetTooltip` path as the least-complex current product direction; all current visible Technology blueprints have one resolvable native `builder_id`, while `sub_zone_id` is a separate placement restriction and should not be repurposed as a guessed area label.
 - `WidgetsBubbleGUI.Update()` is a late/native placement lifecycle for the inspected gamepad bubble family; do not replace it with an earlier event merely for elegance without proving final geometry/overwrite order.
 - WaitingGUI time/fixed-step results are accepted for the tested meditation range, not arbitrary global speed mods.
 
@@ -52,6 +52,7 @@ Key established limits:
 - read-only trade queries should not force lazy Vendor construction.
 - renderer-only craft augmentation must not mutate shared recipe definitions.
 - vanilla item-tooltip crafting locations come from ordered native `GameBalance.GetItemCraftsIn(...)` data, but no generic station-family/tier relationship is yet established from static `ObjectDefinition` metadata.
+- a Technology recipe's exact `CraftDefinition.craft_in` and an output item's aggregate `GetItemCraftsIn(...)` answer different questions; in the audited visible 1.407 recipe population the exact station set is a strict subset in 138/229 comparable cases.
 
 ### Fishing
 
