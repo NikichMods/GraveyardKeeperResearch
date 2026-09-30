@@ -33,6 +33,18 @@ jobs:
             "UnityPy==1.23.0" \
             "TypeTreeGeneratorAPI==0.0.10"
 
+      - name: Download CLR and Unity reference assemblies
+        run: |
+          mkdir -p refs/packages
+          curl -fsSL "https://www.nuget.org/api/v2/package/Microsoft.NETFramework.ReferenceAssemblies.net472/1.0.3" -o refs/packages/net472.nupkg
+          unzip -q refs/packages/net472.nupkg -d refs/packages/net472
+          cp "$(find refs/packages/net472 -type f -iname mscorlib.dll | head -n 1)" refs/mscorlib.dll
+          curl -fsSL "https://www.nuget.org/api/v2/package/UnityEngine.CoreModule/2020.3.1" -o refs/packages/unity-core.nupkg
+          unzip -q refs/packages/unity-core.nupkg -d refs/packages/unity-core
+          cp "$(find refs/packages/unity-core -type f -iname UnityEngine.CoreModule.dll | head -n 1)" refs/UnityEngine.CoreModule.dll
+          rm -rf refs/packages
+          sha256sum refs/* | sort > refs/SHA256SUMS.txt
+
       - name: Record hashes
         run: |
           cd wheelhouse
@@ -42,7 +54,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: research-python-wheelhouse-py313-linux-x64
-          path: wheelhouse/
+          path: |
+            wheelhouse/
+            refs/
           retention-days: 1
           if-no-files-found: error
 
