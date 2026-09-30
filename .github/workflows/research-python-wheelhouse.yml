@@ -31,7 +31,7 @@ jobs:
             --only-binary=:all: \
             --dest wheelhouse \
             "UnityPy==1.23.0" \
-            "TypeTreeGeneratorAPI==0.0.10"
+            "TypeTreeGeneratorAPI==0.0.6"
 
       - name: Download CLR and Unity reference assemblies
         run: |
