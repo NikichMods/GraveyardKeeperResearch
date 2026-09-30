@@ -549,3 +549,30 @@ Direct serialized-file inspection established:
 **Research implication:** the balance payload is present, but the custom field schema is intentionally absent from this asset because TypeTree data is disabled. Correct deserialization should therefore use the managed type schema rather than reverse-engineering field boundaries from the 4.35 MB payload by heuristics.
 
 **Checkpoint closure:** the matching `Assembly-CSharp.dll` was subsequently supplied (SHA-256 `e72e4270e4b88dd0a87ca23c9cf1750aec4c4a0fedb40b6d2dae7902fc9c7fd8`). No `Assembly-CSharp-firstpass.dll` or runtime research DLL was required. The managed schema plus CLR/Unity reference assemblies allowed the full `game_data` object to deserialize successfully; the accepted results are recorded in the full static balance audit above.
+
+
+## Special visible Technology unlock semantics: growth crafts and authored Work descriptions
+
+**Status:** verified Graveyard Keeper 1.407 static/runtime-data result.
+
+### Grape farming growth unlocks
+
+Technology `Grape farming` authors three visible Craft unlocks:
+
+- `vineyard_builddesk:p:vineyard_grapes_stick_place`;
+- `garden_grapes_growing`;
+- `garden_hop_growing`.
+
+The latter two are not ordinary item-production recipes. They are hidden automatic crop-growth crafts that run on the planted crop object. The actual player planting actions are separate `garden_grapes_planting_1/2/3` and `garden_hop_planting_1/2/3` recipes on `vineyard_grapes_stick`; those recipes consume four seeds of the selected quality, set `seed_qual`, replace the trellis state, and chain into the corresponding `garden_*_growing` craft through `craft_after_finish`.
+
+`GameSave.UnlockTech` copies the Technology's authored craft IDs into `unlocked_crafts`, so the growth-craft entries are genuine Technology unlock records even though the vanilla generic Craft tooltip language ("Create") is semantically misleading for them.
+
+**Reusable implication:** a Technology presentation layer should not assume every visible `CraftDefinition` represents player-facing item creation. For these two records, a growth/cultivation presentation is more faithful to the native lifecycle. If requirements/location are shown, the authoritative player-facing planting recipes can be related to the growth craft through their exact `craft_after_finish` target rather than a manual grapes/hops lookup table.
+
+### Master Gathering / Super mushroom
+
+Technology `The master gathering` contains Work unlock `t_mushroom2`. The accepted Work audit proves that this Work gates exactly one current object source, `mushroom_2`, and that harvesting it drops `shr_agaric` (localized in the inspected Russian runtime as "Красный гриб").
+
+The Work already has an authored description, but that description is flavor text about preparing a special dish and does not state the concrete unlock action. Current 1.407 item/craft data additionally shows `shr_agaric` is studyable and is an alchemy-decomposition input, but those later uses are separate progression/context and should not automatically be exposed by an informational Technology tooltip.
+
+**Reusable implication:** "authored description exists" and "description explains what this unlock enables" are not equivalent. Any production mod that augments such an authored Work description should preserve story/progression boundaries and prefer a direct unlock-action fact (for example, harvesting becomes available) over a future-use catalog.
