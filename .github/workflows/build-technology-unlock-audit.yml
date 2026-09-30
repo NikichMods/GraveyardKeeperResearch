@@ -1,0 +1,63 @@
+name: Build Technology Work Perk Audit
+
+on:
+  push:
+    branches:
+      - research/technology-work-perk-audit
+    paths:
+      - 'TechnologyUnlockAudit.csproj'
+      - 'diagnostics/TechnologyUnlockAudit.cs'
+      - 'nuget.config'
+      - '.github/workflows/build-technology-unlock-audit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: technology-work-perk-audit-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore
+        run: dotnet restore TechnologyUnlockAudit.csproj --configfile nuget.config
+
+      - name: Build Release DLL
+        run: dotnet build TechnologyUnlockAudit.csproj -c Release --no-restore --nologo
+
+      - name: Prepare diagnostic artifact
+        shell: pwsh
+        run: |
+          $dll = Resolve-Path 'bin/Release/GKTechnologyUnlockAudit.dll'
+          $out = Join-Path $PWD 'artifact'
+          New-Item -ItemType Directory -Force -Path $out | Out-Null
+          Copy-Item $dll (Join-Path $out 'GKTechnologyUnlockAudit.dll')
+          $hash = (Get-FileHash $dll -Algorithm SHA256).Hash.ToLowerInvariant()
+          @(
+            "diagnostic=Technology Work Perk Audit"
+            "version=0.1.0"
+            "source_sha=${{ github.sha }}"
+            "sha256=$hash"
+            "assembly=GKTechnologyUnlockAudit.dll"
+          ) | Set-Content -Encoding UTF8 (Join-Path $out 'BUILD_IDENTITY.txt')
+          Get-Content (Join-Path $out 'BUILD_IDENTITY.txt')
+
+      - name: Upload diagnostic artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: GKTechnologyUnlockAudit-0.1.0-${{ github.sha }}
+          path: artifact/*
+          if-no-files-found: error
+          retention-days: 7
