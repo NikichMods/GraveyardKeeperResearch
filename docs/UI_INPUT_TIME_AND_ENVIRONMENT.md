@@ -262,3 +262,30 @@ Reusable implication: for this exact Pray GUI button family, change the verified
 - Crafting Planner
 - Bite Countdown
 - Food & Drink Rebalance
+
+## Graveyard Keeper 1.407 current language selector codes
+
+**Status:** accepted runtime fact for the inspected Steam/Windows 1.407 build.
+
+A real in-game language-selector cycle loaded exactly these 11 locale codes:
+
+- `en`
+- `de`
+- `fr`
+- `pt-br`
+- `es`
+- `ru`
+- `it`
+- `pl`
+- `ja`
+- `zh_cn`
+- `ko`
+
+The same run exercised `GameSettings.ApplyLanguageChange()` / `GJL.LoadLanguageResource(...)` while the game was live. This list is suitable as the current 1.407 localization-completeness target for mods that author their own player-facing text.
+
+Reusable implication: a 1.407 mod claiming support for every current in-game language should cover those 11 codes, while still treating unknown future codes as unverified rather than assuming the list is permanent.
+
+**Evidence provenance:** Detailed Technology Tooltips 0.1.2 accepted runtime session, 2026-09-30; the BepInEx log records each loaded language resource during one selector cycle.
+
+**Applicability limit:** this proves the language set exposed by the inspected 1.407 PC build. It is not a promise that later game versions or other platforms cannot add/remove/rename locale codes.
+
