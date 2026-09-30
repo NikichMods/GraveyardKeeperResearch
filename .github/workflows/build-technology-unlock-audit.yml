@@ -32,7 +32,7 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Restore
-        run: dotnet restore TechnologyUnlockAudit.csproj --configfile nuget.config
+        run: dotnet restore TechnologyUnlockAudit.csproj
 
       - name: Build Release DLL
         run: dotnet build TechnologyUnlockAudit.csproj -c Release --no-restore --nologo
