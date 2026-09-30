@@ -485,6 +485,4 @@ Direct serialized-file inspection established:
 
 **Research implication:** the balance payload is present, but the custom field schema is intentionally absent from this asset because TypeTree data is disabled. Correct deserialization should therefore use the managed type schema rather than reverse-engineering field boundaries from the 4.35 MB payload by heuristics.
 
-**Next minimum input:** the matching `Graveyard Keeper_Data/Managed/Assembly-CSharp.dll`. The currently inspected balance types needed for this research (`GameBalance`, `GameRes`, `Item`, `SmartExpression`, `CraftDefinition`, `ObjectCraftDefinition`, `TechDefinition`, etc.) are all represented in the pinned `Assembly-CSharp` decompilation, so `Assembly-CSharp-firstpass.dll` is not requested preemptively. Ask for it only if an actual serialized dependency proves necessary.
-
-A runtime research DLL remains unnecessary at this checkpoint: the unanswered question is static balance-data structure/coverage, and `resources.assets + Assembly-CSharp.dll` is the lower-complexity evidence path.
+**Checkpoint closure:** the matching `Assembly-CSharp.dll` was subsequently supplied (SHA-256 `e72e4270e4b88dd0a87ca23c9cf1750aec4c4a0fedb40b6d2dae7902fc9c7fd8`). No `Assembly-CSharp-firstpass.dll` or runtime research DLL was required. The managed schema plus CLR/Unity reference assemblies allowed the full `game_data` object to deserialize successfully; the accepted results are recorded in the full static balance audit above.
