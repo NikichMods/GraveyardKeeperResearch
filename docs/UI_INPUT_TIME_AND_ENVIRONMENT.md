@@ -151,6 +151,23 @@ Reusable implication: localization extensions can be event-bound to language loa
 
 **Evidence provenance:** Food & Drink Rebalance accepted production/runtime data.
 
+## Graveyard Keeper 1.407 localization lookup ABI
+
+**Status:** accepted host/runtime fact.
+
+Direct metadata inspection of an installed Steam Graveyard Keeper 1.407 `Assembly-CSharp-firstpass.dll` establishes:
+
+- module MVID: `7b81560f-fee5-4bdd-ac8c-058e486c8a3f`;
+- inspected assembly SHA-256: `9dc6def3b7715dd27eeb168ddc0af47e31c6f38d3fbee24bf592899392026498`;
+- `GJL` contains a public static exact overload `string L(string lng_id)`;
+- the same type also contains multiple public static `L` overloads with 2–4 arguments and differing parameter types.
+
+Reusable implication: code that only needs one-key localization should bind the exact `GJL.L(string)` signature. Do not select a merely compatible `L` overload by scanning methods or filling optional/default arguments.
+
+**Evidence provenance:** direct metadata inspection of the user's installed Graveyard Keeper 1.407 runtime assembly during Compact Crafting Tooltips compatibility hardening. Only derived identifiers/signatures are retained; the proprietary game assembly is not stored.
+
+**Applicability limit:** the MVID identifies the inspected firstpass module. It is separate from the verified 1.407 `Assembly-CSharp` MVID `6f50b8e7-156b-49ac-bbe8-7505894b2364`.
+
 ## Runtime language-font ownership for custom UILabels
 
 **Status:** accepted host/runtime fact for Graveyard Keeper 1.407.
