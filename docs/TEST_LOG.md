@@ -247,3 +247,15 @@ Do not record routine repository inspection as an in-game test. Do not rewrite a
 - Requested test: keep the current mod set and Detailed Technology Tooltips candidate unchanged, install the diagnostic, start Graveyard Keeper 1.407, open the Technology tree once, exit the game, and return `LogOutput.log`. No prior recipe/blueprint screenshots or acceptance scenarios need to be repeated.
 - Status: `inconclusive` until the runtime snapshot is returned and analyzed.
 
+### 2026-09-30 — Technology Work / Perk Audit 0.1.0 runtime result
+
+- User returned a complete BepInEx capture from Graveyard Keeper 1.407 with Russian localization after opening the Technology tree once.
+- Diagnostic completed normally: `visible_work_refs=15`, `visible_perk_refs=38`, `work_missing_description=2`, `perk_missing_description=11`, followed by `TECH_UNLOCK_AUDIT_END`.
+- The sparse Work cases are `t_diamond` and `t_marble`; their native object-group members/drop outputs are present and sufficient for minimal action-oriented descriptions.
+- Direct native consumers were proved for nine sparse `show=false` gathering-style Perks: gold ore, silver ore, limestone/lifestone, sulfur, beeswax, bee, butterfly, moth, and maggot.
+- `p_t_old_books` remains unresolved because no consumer was found in the audited seams.
+- `p_t_pyrite` is intentionally **not accepted** for a “can now drop” description: runtime data says `output_res=p_t_pirit=1` while the coal-drop expression consumes `Ppar("p_t_pyrite")`; pinned host code shows `GameSave.UnlockPerk` applies `output_res`. This is a current-data mismatch, not evidence for a presentation claim.
+- The diagnostic's `p_t_bee` search has expected substring false positives against `p_t_beeswax`; exact conclusions were filtered by expression identity.
+- Save safety: no mutation was performed; diagnostic may be removed.
+- Status: **accepted**. Reusable facts promoted to `docs/TECH_TREE_INFORMATION_RESEARCH.md`.
+
