@@ -453,6 +453,70 @@ The least-complex adequate first scope is now:
 
 The first production evidence gate must still make the exact content-composition/final-writer behavior reviewable before mutation, but the **project-level technical feasibility question is no longer blocked**.
 
+
+## Runtime Work / Perk enrichment audit — 2026-09-30
+
+**Status:** accepted runtime evidence for Graveyard Keeper 1.407.
+
+Diagnostic identity:
+- source: `64a3751a67e3a1950c2ccfb9970e7991fb304daf`;
+- GitHub Actions run: `36714753757`;
+- DLL SHA-256: `6b035058f73a30d270ba54d354b5048a7a7fdf0c0a54c90d4d510d92e57901df`.
+
+The user ran the read-only diagnostic with the current mod set and Russian localization, opened the Technology tree once, and returned the complete BepInEx log. The audit completed normally:
+
+- 15 authored-visible Work references;
+- 38 authored-visible Perk references;
+- 2 Work references have no authored description;
+- 11 Perk references have no authored description.
+
+### Sparse Work unlocks
+
+The two visible Work unlocks without authored descriptions are:
+
+- `t_diamond` — object group resolves to `dungeon_source_diamond`, which drops `faceted_diamond`;
+- `t_marble` — object group resolves to `marble_heap_mid_1` / `marble_heap_mid_2`, which drop `marble`.
+
+This is sufficient to support a minimal action-oriented description such as “can now be mined/collected” without exposing a guessed placement label.
+
+### Sparse gathering-style Perks with proved native consumers
+
+Nine visible `show=false` Perk unlocks with no authored description have direct current-data consumers:
+
+- `p_t_gold_ore`: enables gold-nugget chance in both iron-to-small processing recipes and in `steep_iron` mining;
+- `p_t_silver_ore`: enables silver-nugget chance in the same two iron-processing recipes and in `steep_iron` mining;
+- `p_t_lifestone`: gates limestone/lifestone drops from `steep_coal`;
+- `p_t_sulfur`: gates sulfur drops from `steep_coal`;
+- `p_t_beeswax`: gates beeswax drops from the bee house and bee-tree harvest objects;
+- `p_t_bee`: gates bee drops from the bee house and bee-tree harvest objects;
+- `p_t_butterfly`: gates butterfly drops from small flowers during `IsDay()`;
+- `p_t_moth`: gates moth drops from small flowers during `IsNight()`;
+- `p_t_maggot`: gates maggot output from `peat_from_waste`.
+
+Product implication: these unlocks can receive short source/action explanations derived from the proved native consumer rather than a wiki-style use catalog. Do not include exact chance percentages in the first tooltip wording unless separately accepted.
+
+### Explicit exclusions / unresolved sparse Perks
+
+Two sparse visible Perks must **not** be given the same inferred wording yet:
+
+- `p_t_old_books`: the audit found no consumer in the inspected native craft/object/drop expression seams. Its exact effect remains unresolved.
+- `p_t_pyrite`: current runtime data is internally inconsistent. The Perk ID is `p_t_pyrite`, the coal-drop expression reads `Ppar("p_t_pyrite")`, but `PerkDefinition.output_res` is `p_t_pirit=1`. Static 1.407 host code proves `GameSave.UnlockPerk` adds `output_res` to player parameters. Therefore the Technology's direct unlock path does not prove that the parameter consumed by the coal-drop expression becomes set. An informational mod must not claim “pyrite can now drop” from this evidence, and must not silently fix the gameplay mismatch.
+
+The diagnostic's broad string search also reports `p_t_bee` against `p_t_beeswax` expressions because `p_t_bee` is a substring of `p_t_beeswax`. Those lines are diagnostic-search false positives; the exact `p_t_bee` consumer set is the bee-drop expressions.
+
+### Ordinary visible Perks
+
+The remaining visible Perks already have authored descriptions. The audit additionally confirms normal `stars`, `output_res`, craft `linked_perks`, and direct output/drop consumers for many of them. The first enrichment pass should preserve those vanilla descriptions rather than replacing them with a second generated explanation.
+
+### Production implication
+
+The least-complex Work/Perk enrichment policy is now:
+
+1. preserve authored Work/Perk descriptions when present;
+2. add a short action/source description only to sparse visible unlocks whose current 1.407 native consumer is proved;
+3. leave `p_t_old_books` and `p_t_pyrite` vanilla/sparse until their exact behavior is separately resolved;
+4. do not expose hidden `@` unlocks, future uses, dependency graphs, or guessed story/location information.
+
 ## Decision
 
 **Product hypothesis: SUPPORTED.**
