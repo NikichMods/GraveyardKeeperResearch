@@ -45,6 +45,7 @@ Key established direction:
 ### Crafting / inventory / trading / buffs
 
 - `docs/CRAFTING_INVENTORY_AND_TRADING.md` — CraftDefinition/build ownership, native craft/Survey technology-point output ownership, player-vs-interaction inventory, storage-local inventory, native move/capacity path, stack equivalence, craft renderer list invariants, `CraftComponent.DoAction` actor/timing semantics, PlayerBuff duration/removal primitives, vendor sale rules, dynamic product types, lazy Vendor construction, KnownNPC/staged-vendor lifecycle, the standard item-tooltip seam, and vanilla crafting-location tooltip ownership/source/order.
+- `docs/FARMING_AND_FERTILIZER.md` — exact 1.407 manual fertilizer state/writer/reset semantics, Boost duration formula, Quality yield and next-tier seed/crop behavior, Farmer interaction boundary, and the distinct permanent Quality-fertilizer upgrades used by zombie farms/vineyards and refugee garden beds.
 - `docs/INVENTORY_SLOT_PINNING_RESEARCH.md` — initial community/product research for stable/pinned player-inventory item positions, existing mod landscape, preliminary BepInEx feasibility evidence, solution-space comparison, and the remaining BLOCKED slot-order/final-writer questions.
 
 Key established limits:
@@ -53,6 +54,7 @@ Key established limits:
 - renderer-only craft augmentation must not mutate shared recipe definitions.
 - vanilla item-tooltip crafting locations come from ordered native `GameBalance.GetItemCraftsIn(...)` data, but no generic station-family/tier relationship is yet established from static `ObjectDefinition` metadata.
 - a Technology recipe's exact `CraftDefinition.craft_in` and an output item's aggregate `GetItemCraftsIn(...)` answer different questions; in the audited visible 1.407 recipe population the exact station set is a strict subset in 138/229 comparable cases.
+- manual fertilizer uses independent `grow_qual` / `grow_time` plot parameters and resets after the crop cycle; automatic zombie/refugee farm Quality-fertilizer upgrades are persistent `lvl` changes and must not be conflated with manual fertilizer application.
 
 ### Fishing
 
