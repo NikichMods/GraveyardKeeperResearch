@@ -302,3 +302,27 @@ There is repeated player evidence from multiple years that Graveyard Keeper's Te
 The key information owners and a shared mouse/gamepad tooltip seam are already present in GK 1.407, and a concrete vanilla blueprint-tooltip omission is statically verified. The remaining uncertainty is primarily about robust player-facing build-location semantics, representative coverage, and final information density rather than whether the concept is technically plausible.
 
 **Repository decision:** keep work in `NikichMods/GraveyardKeeperResearch` for the next research step. Do not create the production mod repository until the remaining MVP data-mapping questions above are closed enough to define a narrow implementation and acceptance envelope.
+
+
+## Static asset inspection checkpoint — resources.assets
+
+**Input:** user-supplied Graveyard Keeper 1.407 `resources.assets`  
+**SHA-256:** `215c7981901a4b72d5db717666ba47ad3cc032527c95f58dc39d8af1293a69ca`  
+**Observed Unity serialized-file version:** `2020.3.17f1` / serialized-file format 22.
+
+Direct serialized-file inspection established:
+
+- the file is a valid Unity serialized asset file;
+- its serialized metadata reports `m_EnableTypeTree = false`;
+- the named `game_data` MonoBehaviour is present;
+- `game_data` path ID: `150254`;
+- serialized object byte range begins at file offset `65329800`;
+- serialized object size: `4352660` bytes;
+- the MonoBehaviour name `game_data` appears at the expected base-object offset, confirming object identification;
+- its script pointer is external rather than a locally embedded MonoScript object.
+
+**Research implication:** the balance payload is present, but the custom field schema is intentionally absent from this asset because TypeTree data is disabled. Correct deserialization should therefore use the managed type schema rather than reverse-engineering field boundaries from the 4.35 MB payload by heuristics.
+
+**Next minimum input:** the matching `Graveyard Keeper_Data/Managed/Assembly-CSharp.dll`. The currently inspected balance types needed for this research (`GameBalance`, `GameRes`, `Item`, `SmartExpression`, `CraftDefinition`, `ObjectCraftDefinition`, `TechDefinition`, etc.) are all represented in the pinned `Assembly-CSharp` decompilation, so `Assembly-CSharp-firstpass.dll` is not requested preemptively. Ask for it only if an actual serialized dependency proves necessary.
+
+A runtime research DLL remains unnecessary at this checkpoint: the unanswered question is static balance-data structure/coverage, and `resources.assets + Assembly-CSharp.dll` is the lower-complexity evidence path.
