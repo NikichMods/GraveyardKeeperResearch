@@ -286,6 +286,53 @@ Known direct consumers in the pinned source:
 
 **Applicability limit:** this establishes ownership, source, ordering, direct callers and final text consumption. It does **not** establish a generic station-family/tier relationship. `ObjectDefinition` exposes no obvious universal tier/upgrade-parent field in the pinned class definition, so grouping tiered station variants requires separate balance/runtime evidence rather than assuming that every numeric ID suffix is a tier.
 
+## Technology recipe exact-location semantics
+
+**Status:** verified static + full-balance-data result for Graveyard Keeper 1.407.
+
+A Technology craft unlock has two different native location concepts that answer different questions:
+
+- the exact unlocked recipe owns `CraftDefinition.craft_in`;
+- the output item's standard tooltip obtains `crafted_at` from `GameBalance.GetItemCraftsIn(output_item_id)`, which aggregates stations across all eligible recipes producing that item.
+
+`TechUnlock.GetTooltip` currently delegates ordinary recipe detail to the output item's `ItemDefinition.GetTooltipData(item, false)`. Therefore its Technology-tooltip location is item-level, not necessarily exact-recipe-level.
+
+A full audit of the user-supplied 1.407 `game_data` compared these two paths for the 229 authored-visible Technology recipe unlocks that resolve to a normal physical output item:
+
+- 91 exact `craft_in` lists equal the item-level aggregate;
+- 138 (60.3%) are strict subsets of the item-level aggregate;
+- no compared case was disjoint or contradictory.
+
+Example: `Iron -> ingot_metal` is authored for `mf_furnace_0`, while the item-level cache lists `mf_furnace_0`, `mf_furnace_1`, and `mf_furnace_2`.
+
+Engineering implication: when presenting **which station owns this specific recipe**, use that recipe's `craft_in`. Use `GetItemCraftsIn` when the intended question is broader: **where can this output item be crafted in general**. Do not treat the two queries as interchangeable.
+
+Evidence:
+- pinned host source `Kupie/GYK_DECOMP@6abf79199d92482af1c7573870dd9a20ec2270b9`;
+- `resources.assets` SHA-256 `215c7981901a4b72d5db717666ba47ad3cc032527c95f58dc39d8af1293a69ca`;
+- matching `Assembly-CSharp.dll` SHA-256 `e72e4270e4b88dd0a87ca23c9cf1750aec4c4a0fedb40b6d2dae7902fc9c7fd8`;
+- detailed Technology audit in `docs/TECH_TREE_INFORMATION_RESEARCH.md`.
+
+## ObjectCraftDefinition builder routing and placement scope
+
+**Status:** verified static + full-balance-data result for the current 1.407 Technology-blueprint population.
+
+`ObjectCraftDefinition.builder_ids` is consumed by `MainGame.OpenBuildObjectGUI(build_desk)` to decide which object crafts are offered through a given build desk, subject to the save's craft-visibility predicate.
+
+`ObjectCraftDefinition.sub_zone_id` has a different role: build-grid logic consumes it as an authored placement/sub-zone restriction. It is not the owner of the build-menu routing identity.
+
+For all 105 authored-visible Technology blueprint unlocks in the audited 1.407 balance data:
+
+- exactly one `builder_id` is present;
+- every builder ID resolves to a real `ObjectDefinition`;
+- only 13 have a non-empty `sub_zone_id`.
+
+The host already treats `ObjectDefinition.id` as a localization identity: standard item crafting-location formatting calls `GJL.L(ObjectDefinition.id)`, and `WorldGameObject.GetUniversalObjectInfo()` uses `GJL.L(this.obj_def.id)` for the object header.
+
+Engineering implication: for a Technology blueprint's **owning build desk/menu**, derive the identity from `builder_ids` and localize that ObjectDefinition ID through the host. Do not substitute `sub_zone_id`, infer an area name from ID spelling, or maintain a parallel hard-coded builder-name map unless a future verified requirement demands it.
+
+Applicability limit: the one-builder cardinality is an accepted fact for the current authored-visible 1.407 Technology blueprint population, not a universal schema invariant for every ObjectCraftDefinition in the game or future versions.
+
 ## Tavern and refugee cooking-station routing
 
 **Status:** verified static host fact for Graveyard Keeper 1.407.
