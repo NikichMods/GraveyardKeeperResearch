@@ -15,7 +15,7 @@ Before starting a new host-internals probe in a Graveyard Keeper mod:
 
 - `docs/GAME_INTERNALS.md` — BepInEx plugin-metadata constraints, detailed Technology-tooltip width lifecycle, and accepted standard item-tooltip child-alignment/native-span behavior.
 - `docs/UI_INPUT_TIME_AND_ENVIRONMENT.md` — Technology-tree gamepad focus/unlock-tooltip ownership, gamepad bubble placement lifecycle, NGUI screen-size ownership, Pray GUI craft-button anchor ownership, WaitingGUI timing/fixed-step ownership, SliderDec/SliderInc input/hold-repeat, WaitingGUI button tips, localization reload, the verified 1.407 `GJL.L(string)` localization ABI / firstpass identity, current-language UILabel font ownership, weather-audio ownership, environment-preset refresh, and final ambient-light observation.
-- `docs/TECH_TREE_INFORMATION_RESEARCH.md` — community/product evidence for richer Technology-tree information, full 1.407 balance-data audit, verified unlock/tooltip ownership, blueprint/recipe coverage and special cases, exact location semantics, stress cases, and the closed research gate for production bootstrap.
+- `docs/TECH_TREE_INFORMATION_RESEARCH.md` — community/product evidence for richer Technology-tree information, full 1.407 balance-data audit, verified unlock/tooltip ownership, blueprint/recipe coverage and special cases, exact location semantics, accepted Work/Perk runtime-consumer evidence (including the p_t_pyrite mismatch and p_t_old_books unresolved case), stress cases, and the closed research gate for production bootstrap.
 
 Key established limits:
 - BepInEx 5 `[BepInPlugin]` version metadata must be numeric/System.Version-parseable; keep research/RC labels outside that metadata.
