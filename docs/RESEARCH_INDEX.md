@@ -22,7 +22,7 @@ Key established limits:
 - Technology-tooltip `UILabel.overflowWidth` evidence applies to the inspected Technology path, not every tooltip.
 - Standard item-tooltip alignment evidence distinguishes child-label text alignment from centered child-widget placement; it applies to the inspected `WidgetsBubbleGUI` item-tooltip family, not arbitrary NGUI tables.
 - Technology-tree gamepad navigation focuses the parent tech node and combines visible child `TechUnlock` tooltips on the verified 1.407 path; mouse child tooltips are independent.
-- Technology-information research supports enriching the existing `TechUnlock.GetTooltip` path as the least-complex current product direction; all current visible Technology blueprints have one resolvable native `builder_id`, while `sub_zone_id` is a separate placement restriction and should not be repurposed as a guessed area label.
+- Technology-information research supports enriching the existing `TechUnlock.GetTooltip` path as the least-complex current product direction; each visible blueprint record has a resolvable native builder, but five 1.407 visible blueprint unlocks also have same-Technology `@`-hidden sibling records that unlock additional builders. `sub_zone_id` remains a separate placement restriction and must not be repurposed as a guessed area label; global same-`out_obj` aliases can belong to separately gated progression.
 - `WidgetsBubbleGUI.Update()` is a late/native placement lifecycle for the inspected gamepad bubble family; do not replace it with an earlier event merely for elegance without proving final geometry/overwrite order.
 - WaitingGUI time/fixed-step results are accepted for the tested meditation range, not arbitrary global speed mods.
 
