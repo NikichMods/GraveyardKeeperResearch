@@ -627,3 +627,38 @@ The authored description's "special dish / or die" flavor is **not entirely base
 - external quest/reference material associates the Infusion recipe with the later Vagner / Ms. Charm quest path.
 
 Product implication for an informational Technology tooltip: preserve the authored flavor text, but add the immediate practical action only — **this unlock enables gathering red mushrooms**. Do not enumerate the later Infusion recipe or quest because that would disclose future-use/story context that the Technology itself does not unlock.
+
+
+## Multi-builder Technology blueprint ownership
+
+**Status:** accepted Graveyard Keeper 1.407 static + read-only runtime result (2026-10-01).
+
+A visible Technology blueprint record is not always the complete build-location set unlocked by that Technology.
+
+Native ownership path:
+- `TechDefinition.crafts` contains authored craft references;
+- leading `@` is consumed by `TechUnlock(string,...)` as a presentation flag: the ID is retained without `@` and `TechUnlock.visible` becomes false;
+- `GameSave.UnlockTech` copies `TechDefinition.crafts` into `unlocked_crafts`;
+- `GameSave.CopyLists` also strips leading `@`, so an authored `@` craft is still unlocked by the Technology;
+- `MainGame.OpenBuildObjectGUI` enumerates `GameBalance.craft_obj_data` and admits definitions whose `builder_ids` contains the active build desk and whose native craft-visibility predicate passes.
+
+Accepted read-only runtime audit of the current 1.407 balance:
+- 187 Technology definitions;
+- 533 `ObjectCraftDefinition` records;
+- 105 visible Technology blueprint unlocks;
+- 0 unresolved visible blueprints;
+- 5 visible blueprints have same-Technology same-`out_obj` / same-`build_type` sibling records with extra builders.
+
+Exact same-Technology groups:
+- `The idea of the stone` / `mf_stones_1_place`: `mf_wood_builddesk` + `mining_builddesk`;
+- `Stone processing` / `mf_hammer_0_place`: `mf_wood_builddesk` + `mining_builddesk`;
+- `Mining` / `mf_ore_1_complete`: `mf_wood_builddesk` + `mining_builddesk`;
+- `Improvement` / `mf_box_stuff_place`: `garden_builddesk`, `mining_builddesk`, `vineyard_builddesk`, `graveyard_builddesk`, `cremation_builddesk`;
+- `Winemaking` / `mf_vine_press_place`: `mf_wood_builddesk` + `cellar_builddesk`.
+
+The audit also found three same-output builder variants outside the owning Technology:
+- trunk output: `cellar_builddesk` and `mf_wood_builddesk`, both `needs_unlock=false`;
+- corpse pallet output: `souls_builddesk`, separately `needs_unlock=true`;
+- porter station output: `vineyard_builddesk`, separately `needs_unlock=true`.
+
+**Reusable limit:** global same-`out_obj` aggregation is not sufficient to describe what a Technology unlocks and can disclose separately gated progression. For Technology UI, same-Technology sibling records are authoritative future unlock locations. Outside-Technology same-output variants should only be presented when their separate native visibility/unlock state is already satisfied.
