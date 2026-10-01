@@ -576,3 +576,54 @@ Technology `The master gathering` contains Work unlock `t_mushroom2`. The accept
 The Work already has an authored description, but that description is flavor text about preparing a special dish and does not state the concrete unlock action. Current 1.407 item/craft data additionally shows `shr_agaric` is studyable and is an alchemy-decomposition input, but those later uses are separate progression/context and should not automatically be exposed by an informational Technology tooltip.
 
 **Reusable implication:** "authored description exists" and "description explains what this unlock enables" are not equivalent. Any production mod that augments such an authored Work description should preserve story/progression boundaries and prefer a direct unlock-action fact (for example, harvesting becomes available) over a future-use catalog.
+
+
+## Grape farming seed acquisition and Super mushroom follow-up
+
+**Target:** Graveyard Keeper 1.407 PC.
+
+### Grape / hops planting and seed acquisition
+
+The visible `Grape farming` Technology unlocks the internal growth crafts `garden_grapes_growing` and `garden_hop_growing`, but the actual player planting crafts are:
+
+- grapes: `garden_grapes_planting_1/2/3`, each on `vineyard_grapes_stick`, each consuming 4 grape seeds of the selected quality;
+- hops: `garden_hop_planting_1/2/3`, each on `vineyard_grapes_stick`, each consuming 4 hops seeds of the selected quality.
+
+The crops therefore share the same manual vine-trellis station family.
+
+Current player-facing world/reference material consistently identifies the dedicated area as the **Vineyard**, west of Witch Hill / east-northeast of the Keeper's home. This is a location fact; how access/build permission is obtained is separate story progression and should not be exposed by a generic informational Technology tooltip unless separately approved.
+
+Current 1.407 trade/reference data corroborates these primary seed vendors:
+
+- grape seeds: **Merchant**;
+  - bronze and silver seed qualities are sold at trade tier II;
+  - gold seed quality is sold at trade tier III;
+- hops seeds: **Miller**;
+  - bronze seed quality is sold at trade tier II;
+  - silver and gold seed qualities are sold at trade tier III.
+
+Random dungeon seed drops can provide another source, but they are not a reliable primary acquisition path and are not suitable as the concise Technology-tree answer to "where do I get these seeds?".
+
+Once farming begins, harvesting returns same-tier seeds, and Quality fertilizer can also produce next-tier seeds according to the separately verified fertilizer mechanics. Thus a Technology tooltip does not need to enumerate every higher-quality acquisition route if it already identifies the primary vendor and the fertilizer tooltip explains quality upgrading.
+
+### Player-confusion evidence
+
+Community questions repeatedly show two distinct information gaps after players encounter farming/growing unlocks:
+
+1. **where the seeds come from** — players explicitly ask where grape/hops seeds are purchased;
+2. **where the seeds are planted** — players with the Technology and seeds still ask where the grape plot/vineyard is or why the seeds cannot be planted in the ordinary garden.
+
+This supports treating both the primary vendor source and the Vineyard/trellis location as useful first-contact information for the Grape farming Technology, rather than as encyclopedic trivia.
+
+### Super mushroom / red mushroom follow-up
+
+`The master gathering -> t_mushroom2` gates the `mushroom_2` source, which drops `shr_agaric` (Red mushroom in the inspected Russian runtime).
+
+The authored description's "special dish / or die" flavor is **not entirely baseless**, but it is not a description of what this Technology immediately unlocks:
+
+- raw `shr_agaric` is directly consumable and has `hp=-5`, grounding the harmful/death joke;
+- current 1.407 has a real later recipe `infusion` at `mf_distcube_3`, consuming 1 booze + 3 red mushrooms + fire and producing Infusion;
+- that `infusion` craft is a separately unlock-gated recipe and is not one of the visible `The master gathering` Technology unlocks;
+- external quest/reference material associates the Infusion recipe with the later Vagner / Ms. Charm quest path.
+
+Product implication for an informational Technology tooltip: preserve the authored flavor text, but add the immediate practical action only — **this unlock enables gathering red mushrooms**. Do not enumerate the later Infusion recipe or quest because that would disclose future-use/story context that the Technology itself does not unlock.
