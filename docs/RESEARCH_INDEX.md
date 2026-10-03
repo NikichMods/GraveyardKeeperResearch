@@ -46,7 +46,7 @@ Key established direction:
 
 - `docs/CRAFTING_INVENTORY_AND_TRADING.md` — CraftDefinition/build ownership, native craft/Survey technology-point output ownership, player-vs-interaction inventory, storage-local inventory, native move/capacity path, stack equivalence, craft renderer list invariants, `CraftComponent.DoAction` actor/timing semantics, PlayerBuff duration/removal primitives, vendor sale rules, dynamic product types, lazy Vendor construction, KnownNPC/staged-vendor lifecycle, the standard item-tooltip seam, and vanilla crafting-location tooltip ownership/source/order.
 - `docs/FARMING_AND_FERTILIZER.md` — exact 1.407 manual fertilizer state/writer/reset semantics, Boost duration formula, Quality yield and next-tier seed/crop behavior, Farmer interaction boundary, and the distinct permanent Quality-fertilizer upgrades used by zombie farms/vineyards and refugee garden beds.
-- `docs/ALCHEMY_SYSTEM.md` — mixed-alchemy slot categories and exact-mixture lookup, stochastic failure/goo selection, recipe-discovery persistence/scripted unlock channels, Study/decomposition metadata ownership, and the remaining quantitative balance-corpus questions.
+- `docs/ALCHEMY_SYSTEM.md` — mixed-alchemy slot categories and exact-mixture lookup, stochastic failure/goo selection, recipe-discovery persistence/scripted unlock channels, Study/decomposition metadata ownership, and accepted 1.407 runtime corpus structure/counts.
 - `docs/PERK_MECHANICS.md` — exact 1.407 perk quality-score ownership, linked craft consumers, surgery mistake probabilities, combat-stat effects, Persistence energy regeneration, Miner drop changes, Wine Master secondary energy effects, and Cultist skull-display semantics.
 - `docs/INVENTORY_SLOT_PINNING_RESEARCH.md` — initial community/product research for stable/pinned player-inventory item positions, existing mod landscape, preliminary BepInEx feasibility evidence, solution-space comparison, and the remaining BLOCKED slot-order/final-writer questions.
 
@@ -58,6 +58,7 @@ Key established limits:
 - a Technology recipe's exact `CraftDefinition.craft_in` and an output item's aggregate `GetItemCraftsIn(...)` answer different questions; in the audited visible 1.407 recipe population the exact station set is a strict subset in 138/229 comparable cases.
 - manual fertilizer uses independent `grow_qual` / `grow_time` plot parameters and resets after the crop cycle; automatic zombie/refugee farm Quality-fertilizer upgrades are persistent `lvl` changes and must not be conflated with manual fertilizer application.
 - mixed-alchemy failure goo is a stochastic clue derived from a randomly chosen same-arity valid recipe sharing at least one correctly positioned attempted ingredient; this improves forward structural discovery but does not by itself target a requested unknown output.
+- accepted loaded-balance evidence finds 43 ordinary picker-compatible formulas for 34 outputs, plus one success-classified three-slot definition outside the standard picker contract; keep that exception separate until its role is established.
 
 ### Fishing
 
