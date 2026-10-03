@@ -4,7 +4,7 @@ Target: **Graveyard Keeper 1.407 (PC)**.
 
 ## Status and evidence
 
-**Status:** verified static host-mechanics baseline; quantitative balance-corpus analysis remains open.
+**Status:** verified static host-mechanics baseline plus accepted loaded-balance runtime corpus; solver/information-gain analysis remains open.
 
 Primary static reference:
 
@@ -15,7 +15,7 @@ Accepted 1.407 identities already used by the shared research corpus:
 - `resources.assets` SHA-256 `215c7981901a4b72d5db717666ba47ad3cc032527c95f58dc39d8af1293a69ca`;
 - `Assembly-CSharp.dll` SHA-256 `e72e4270e4b88dd0a87ca23c9cf1750aec4c4a0fedb40b6d2dae7902fc9c7fd8`.
 
-This document intentionally does not publish the vanilla formula corpus. Exact recipe counts, alternative-formula statistics and search-space measurements require current loaded-balance evidence and remain a separate research task.
+This document intentionally does not publish the vanilla formula corpus. Aggregate recipe counts and structural statistics are now established from loaded-balance runtime evidence; exact formulas remain unpublished.
 
 ## Alchemy mixed-craft ownership
 
@@ -145,10 +145,9 @@ Project-local competitor/product decisions do not belong here, but reusable host
 
 A current loaded-`GameBalance` corpus is still required to establish without guesswork:
 
-- exact mixed-recipe counts by station/arity;
-- number of distinct outputs and outputs with multiple formulas;
-- actual ingredient population per positional category;
-- exact authored failure definitions;
+- progression-specific reachable ingredient populations and player search-space sizes;
+- exact role of the single picker-incompatible success-classified definition;
+- visible/output multiplicity semantics of auxiliary failure definitions when a consumer needs them;
 - candidate-set size distributions;
 - expected information gain of vanilla goo outcomes;
 - recipe/output classes that violate a common deduction model;
