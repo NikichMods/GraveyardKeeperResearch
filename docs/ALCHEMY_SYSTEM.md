@@ -81,6 +81,22 @@ This distinction is important for any mod that attempts to turn vanilla alchemy 
 
 **Open balance-data question:** exact candidate counts, ambiguity distributions and the probability/information value of failure outcomes depend on the authored 1.407 recipe corpus and are not established by static control flow alone.
 
+## Runtime corpus facts — 2026-10-04
+
+Accepted read-only capture from loaded Graveyard Keeper 1.407 balance:
+
+- 509 alchemy mixed definitions: 44 success-classified and 465 auxiliary definitions.
+- Two-slot success set: 24 formulas, 18 outputs; four outputs have alternatives, with at most three formulas for one output.
+- Three-slot success set: 20 formulas, 17 outputs; three outputs have alternatives, with at most two formulas for one output.
+- 43 of the 44 success-classified formulas conform to the standard positional alchemy picker. One three-slot definition violates the normal slot-category rule and remains an explicit exception.
+- The ordinary picker-compatible set is therefore 43 formulas for 34 outputs.
+- Loaded eligible item definitions: 16 Powder, 9 Fluid, 8 Essence, 19 Universal.
+- Ordinary success formulas use 35 unique ingredients: 15 Powder, 8 Fluid, 8 Essence, 4 Universal.
+- Those 35 ingredients map to 19 native goo identities; eight goo classes contain one Powder, one Fluid and one Essence participant, while eleven classes are singletons.
+- The auxiliary key table is regular: 21 one-goo keys for the two-slot family; the three-slot family has the same 21 one-goo keys plus 420 ordered two-goo keys.
+
+Limits: the capture does not establish progression-specific availability or the visible output multiplicity of auxiliary crafts. The exceptional picker-incompatible definition must be classified separately before treating it as player-solvable ordinary alchemy.
+
 ## Recipe discovery / persistence
 
 `GameSave.OnFinishedCraft(CraftDefinition craft)` records newly completed craft IDs in `completed_one_time_crafts` unless the craft ID uses the native ignored failure-placeholder pattern.
