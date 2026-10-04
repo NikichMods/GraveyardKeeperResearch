@@ -150,6 +150,25 @@ For ordinary item presentation in the pinned 1.407 source:
 
 These are real presentation/ownership seams. However, an icon key or internal product/source tag is not by itself proof of what visual or semantic property a human player perceives; perceptual grouping still requires asset/UI inspection or direct runtime observation.
 
+
+## Runtime property / provenance facts — 2026-10-04
+
+Accepted bounded read-only capture from Graveyard Keeper 1.407 loaded balance (AlchemyCorpusProbe 0.3.0, source \`163f07939701cff70b3a90565e125c0107d245a9\`, CI run \`37207458475\`; installed-runtime log completed \`AR_PROPERTY_BEGIN\` -> \`AR_PROPERTY_DONE\` with no \`AR_PROPERTY_ERROR\`):
+
+- the capture reproduced the accepted ordinary corpus envelope: **43** picker-compatible success formulas, **35** participating ingredients and **34** outputs;
+- all **35/35** participating ingredient definitions have an empty localized base-description field in the tested Russian localization; ordinary item-description prose is therefore not a general native ingredient-property channel for this corpus;
+- **29/35** participating ingredients have at least one authored \`AlchemyDecompose\` producer from a non-goo source item; these source relationships include plant/crop, anatomy, mineral, animal/insect and jelly/slime materials;
+- the six participants without a non-goo \`AlchemyDecompose\` source are the basic substances alcohol, water, blood, oil, ash and salt; other native producer/provenance channels exist for blood, oil, ash and salt, while alcohol/water remain basic-substance cases in this capture;
+- only **8/34** ordinary target outputs have non-empty localized base descriptions in the tested Russian localization, and those are consumable-effect descriptions rather than a uniform alchemy-discovery vocabulary.
+
+Applicability / contamination control:
+- the runtime had other BepInEx mods installed, so fields that unrelated mods can legitimately rebalance (for example arbitrary craft time/energy or food-recipe inputs) are not promoted here as pristine vanilla values;
+- exact-source inspection of the installed Alchemy Research Redux 0.1.8 patch state (\`p1xel8ted/Graveyard-Keeper-Mods@85a88e96cd5c3864f772a03d461a9ac4935df310\`) shows it reads alchemy definitions for UI/recipe memory and does not mutate the relevant balance tables;
+- exact historical Decomp Delight 0.1.9 source (\`p1xel8ted/Graveyard-Keeper-Mods@0e6aa4e67dda0c9eeaef8f0effea72253a327eb5\`) reads \`AlchemyDecompose\` records and appends tooltip presentation only; it does not rewrite the decomposition data;
+- the accepted reusable facts above therefore rely on item/decomposition identities and bounded presentation data, not on mod-sensitive timing/economy values.
+
+Product-specific grouping of these source relationships into puzzle properties belongs in AlchemyRiddle rather than this shared host document.
+
 ## Known current ecosystem overlap
 
 Project-local competitor/product decisions do not belong here, but reusable host-level distinction is:
