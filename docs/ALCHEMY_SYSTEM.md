@@ -127,12 +127,28 @@ Alchemy decomposition is represented separately from mixed-product recipes throu
 
 `BaseCraftGUI.CommonOpen(... AlchemyDecompose)` additionally gates visible decomposition crafts by `GameSave.IsSurveyComplete(...)`.
 
-The native alchemy information widget, `BubbleWidgetAlchemyItem`, also gates details on completed Study:
+The native alchemy information widget, `BubbleWidgetAlchemyItem`, is attached from the standard item tooltip only after the item's Survey craft is complete **and** `ItemDefinition.GetItemDetails()` produced non-null alchemy details.
 
-- before Study completion it shows the incomplete-alchemy state;
-- after Study it renders either decomposition classes (`ItemDetailsAlchemy.decomposes`) or per-tier slot-compatibility metadata (`ItemDetailsAlchemy.slots`).
+For the inspected 1.407 implementation, the generated path is narrower than the widget class superficially suggests:
 
-The current source therefore already contains native, Study-gated alchemical metadata that can be reused as evidence or presentation input. Its exact population and usefulness for target-directed mixed-recipe deduction require balance-data measurement.
+- `ItemDefinition.GetItemDetails()` creates `ItemDetailsAlchemy` only for source items whose own `alch_type == None`;
+- it populates `details_type = Decompose` and derives `decomposes` by scanning authored `AlchemyDecompose` crafts that consume that source item;
+- if the item itself already has a non-`None` `AlchemyType` (Powder / Fluid / Essence / Universal), `GetItemDetails()` returns before creating an alchemy-details block;
+- `BubbleWidgetAlchemyItem` contains a renderer branch for `DetailsType.Slots`, but a full search of the pinned 1.407 decompile finds no writer that assigns `DetailsType.Slots` or populates `ItemDetailsAlchemy.slots`.
+
+Therefore the verified native Study signal is **decomposition-class information for studied source materials**. Do not treat the dormant `Slots` renderer as evidence that populated per-tier slot-compatibility metadata exists in 1.407 without new runtime/balance evidence.
+
+
+### Player-facing item presentation relevant to alchemy-property research
+
+For ordinary item presentation in the pinned 1.407 source:
+
+- `ItemDefinition.GetItemName(true)` localizes the item ID through `GJL.L(...)`;
+- `GetItemDescription(...)` looks up `<item_id>_d`, with a base-ID fallback for colon-suffixed variants, and the standard tooltip places that localized description directly below the item name;
+- `ItemDefinition.GetIcon()` returns the explicit `icon` field when populated, otherwise the default key `i_<item_id>`; standard item cells resolve that key through `EasySpritesCollection.GetSprite(...)`;
+- the standard `crafted_at` row comes from `GameBalance.GetItemCraftsIn(item_id)`, whose cache includes output-producing crafts only when the craft is not hidden, is not marked `dont_show_in_hint`, and has a resolvable `craft_in` object.
+
+These are real presentation/ownership seams. However, an icon key or internal product/source tag is not by itself proof of what visual or semantic property a human player perceives; perceptual grouping still requires asset/UI inspection or direct runtime observation.
 
 ## Known current ecosystem overlap
 
