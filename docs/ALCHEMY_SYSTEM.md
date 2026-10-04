@@ -169,6 +169,24 @@ Applicability / contamination control:
 
 Product-specific grouping of these source relationships into puzzle properties belongs in AlchemyRiddle rather than this shared host document.
 
+
+## Runtime presentation / provenance facts — 2026-10-04
+
+Accepted read-only loaded-balance capture from the AlchemyRiddle property/provenance probe adds the following reusable 1.407 facts for the **35 ingredients that participate in ordinary picker-compatible successful mixed-alchemy formulas**:
+
+- all 35 have player-facing names and icon keys, but **none has non-empty base item-description text** in the captured Russian localization;
+- the regular semantic reagent population contains eight Powder / Fluid / Essence triplets whose names correspond to the same native goo/material family across forms; the other eleven participants are singleton/special material identities;
+- **29 / 35** have at least one authored non-goo `AlchemyDecompose` source material in addition to any same-family goo source;
+- source materials span concrete world categories such as crops/plants, creature/insect materials, anatomical remains and minerals;
+- some special ingredients instead expose provenance through ordinary producer paths such as autopsy/press/pyre-style production, so decomposition sources alone are not a complete acquisition graph.
+
+For the 34 ordinary target outputs, only **8 / 34** have non-empty base description text in this capture; the populated descriptions are concentrated in consumable effect-bearing elixirs.
+
+Applicability limits:
+- these counts describe the ordinary success-corpus participants, not every globally eligible alchemy-picker item definition;
+- broad labels such as “plant-derived” or “mineral-derived” are **not native fields** and remain product-layer interpretations of authored source relationships;
+- icon keys do not by themselves establish human-perceived color/shape properties.
+
 ## Known current ecosystem overlap
 
 Project-local competitor/product decisions do not belong here, but reusable host-level distinction is:
