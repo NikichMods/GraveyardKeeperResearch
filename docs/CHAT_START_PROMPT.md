@@ -6,7 +6,7 @@ Canonical ChatGPT Project settings are stored in:
 
 `docs/CHATGPT_PROJECT_INSTRUCTIONS.md`
 
-Inside that Project, start a new chat with the actual task. The Project Instructions require ChatGPT to recover current state from GitHub and accepted evidence.
+Inside that Project, start a new chat with the actual task. The Project Instructions require recovery from repository and accepted evidence. Local Codex projects recover through AGENTS.md and DevRules/CODEX_WORKFLOW.md; this fallback prompt is not required there either.
 
 Use the fallback block below only when:
 - the chat is outside the configured ChatGPT Project;

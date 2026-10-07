@@ -2,7 +2,7 @@
 
 This repository follows the canonical global development rules in `NikichMods/DevRules`.
 
-Before substantive technical work, read:
+For local Codex startup/recovery, follow `DevRules/CODEX_WORKFLOW.md`. Read the engineering/Git contract before substantive technical work; consult CI and new-project bootstrap guidance when relevant. Global policy files:
 
 - `ENGINEERING_RULES.md`
 - `CI_POLICY.md`
