@@ -208,6 +208,20 @@ A current loaded-`GameBalance` corpus is still required to establish without gue
 
 Do not infer those quantities from community recipe lists when exact runtime balance data can establish them.
 
+## Residual paint awareness channels — 2026-10-12
+
+**Status:** verified static data/owner classification, not a first-exposure chronology or complete current-save availability proof.
+
+Direct balance inspection on the accepted 1.407 input hashes finds 26 `craft_obj_data` records consuming one or more of the seven formerly blueprint-only ordinary outputs: `yellow_paint`, `green_paint`, `brown_paint`, `red_paint`, `d_green_paint`, `d_violet_paint`, `violet_paint`. Every record belongs to `keeper_room_builddesk`, has `needs_unlock=true`, `hidden=false`, and an empty condition expression. No `techs_data.crafts` entry directly names these exact 26 records.
+
+Pinned source `Kupie/GYK_DECOMP@6abf79199d92482af1c7573870dd9a20ec2270b9`, `GameSave` save-migration path, contains explicit unlocks for the eight colored carpet and eight bed variants (including blue), plus one picture, in the `num <= 1314` migration when `The Beginning Of Alchemy` is already unlocked. The `num <= 1316` migration likewise unlocks colored wall variants. This establishes an actual persistent `unlocked_crafts` owner and an old-save repair channel, not a technology replay requirement.
+
+For a mod reconstructing current source eligibility, inspect actual native craft unlock/visibility and builder availability. `GameSave.IsCraftVisible` checks hidden/locked/one-time completion state; it alone does not prove that the relevant builder is currently accessible. Do not use the migration condition as the general rule for every current save, or invoke migration to manufacture eligibility. Normal new-save unlock writers, exact builder reachability and representative loaded-save evidence remain open.
+
+The former eighth structural/vendor gap, Spices, already has an accepted Merchant curse task/hand-in source in `AlchemyRiddle/docs/PROGRESSION_RESEARCH.md`; this closes channel existence only. Its currently available root-to-dialogue path must still be established under the shared dialogue reachability rules.
+
+No formula inputs are included. The 26/34 prior figure remains historical coverage of measured channels; it must not be relabeled a verified 34/34 save-availability result.
+
 ## Known consumer
 
 - `NikichMods/AlchemyRiddle` — design/research phase for a target-directed deductive alchemy-discovery layer. Product architecture and acceptance remain canonical in the owning repository.

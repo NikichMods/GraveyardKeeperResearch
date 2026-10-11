@@ -28,6 +28,21 @@ Representative runtime evidence proved that builder cards expose exact `ObjectCr
 
 **Applicability limit:** not every recipe-like system shares plain `needs` semantics. Mixed alchemy, survey/research, body/autopsy, prayer, refugee/scripted craft paths and other special systems require separate evidence.
 
+## Study-table sample boundary and native work ownership — 2026-10-12
+
+**Status:** verified static control flow in the pinned 1.407 source; new mod integration has no runtime acceptance.
+
+Source: `Kupie/GYK_DECOMP@6abf79199d92482af1c7573870dd9a20ec2270b9`, `ResourceBasedCraftGUI`, `BaseCraftGUI`, `CraftGUI`, `CraftComponent`, `GameBalance` and `CraftsInventory`. Matching accepted local resources.assets/Assembly-CSharp.dll identities were rechecked; direct balance inspection identifies `mf_alchemy_survey`, inventory preset `surv`, decoration preset `survey_table_back`, and additional header item `science`.
+
+- `ResourceBasedCraftGUI.Open` derives selectable IDs from each craft's first `needs` item; `ChooseItem` opens an inventory resource picker. `OnResourcePickerClosed` resolves the selected item back to a craft by that first input. This is a sample-oriented selection path, not a product-topic catalog.
+- `CraftComponent.FinishCurrentCraft` routes Survey, except `SurveySciencePoints`, through `ShowSurveyCompleteWindow`. That method dereferences `craft.needs[0]`, obtains its item details and continues completion through the dialog callback. `ProcessFinishedCraft` also returns the studied sample, including a fallback drop of the first input when `_current_item` is null. Removing the target input alone does not implement sample-free Survey safely.
+- The common execution owner is `BaseCraftGUI.OnCraft -> CraftComponent.CraftAsPlayer -> Craft/CraftReally`. It consumes interaction-inventory `needs` and station `needs_from_wgo`; `DoAction` owns manual progress and energy. Completion applies native outputs/scripts/events, calls `GameSave.OnFinishedCraft`, then ends the work. These mechanisms are not restricted to Survey.
+- `CraftGUI.OpenCraftList` uses `CraftType.None` through `ProceedOpen/CommonOpen`; craft cards support explicit icons and custom names even without a real item output. This supports investigating a separate native work definition rather than changing the material Survey contract; it does not yet prove a usable table-entry UI.
+- Craft identity must survive reload: `GetSerializedCraftComponent` stores the current craft ID; `DeserializeCraftDefinition` resolves it through GameBalance. Queue entries also resolve IDs through GameBalance. A definition that exists only in a UI list is therefore insufficient for resumable work.
+- `GameBalance.GetCraftsForObject` caches station lists; `FillCraftsList` clears and repopulates component lists from that owner. `CraftsInventory.additional_crafts` is consumed only by its object/build list, not `GetCraftsList`. Do not assume arbitrary transient additions automatically become registered, reloadable ordinary crafts.
+
+Limits: no research job was registered, started or saved; cancellation/refund semantics for a new station-science cost, exact registration/cache timing, table entry routing and mod uninstall behavior remain to be verified. Existing native Survey and mixed definitions were not modified.
+
 ## Craft-card focus callbacks
 
 **Status:** verified static + runtime for mouse build focus.
