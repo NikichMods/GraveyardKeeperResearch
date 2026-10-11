@@ -19,7 +19,7 @@ We are continuing Graveyard Keeper 1.407 research.
 Repository: NikichMods/GraveyardKeeperResearch
 Global rules: NikichMods/DevRules
 
-Before substantive work, inspect the current repository, read its AGENTS.md, DevRules, docs/RESEARCH_INDEX.md and relevant accepted evidence. If a production mod becomes the concrete owner/suspect, inspect that mod's current repository and local contract before attributing or changing behavior.
+Before substantive work, inspect the current repository, read its AGENTS.md, DevRules/WORKING_RULES.md, docs/RESEARCH_INDEX.md and relevant accepted evidence; follow the action-based reading map for additional guidance. If a production mod becomes the concrete owner/suspect, inspect that mod's current repository and local contract before attributing or changing behavior.
 
 Repository evidence outranks chat memory. Use the DevRules evidence gates, avoid repeating accepted research, keep production fixes in the owning mod repository, and ask me only for runtime evidence that genuinely requires my installed game.
 ```

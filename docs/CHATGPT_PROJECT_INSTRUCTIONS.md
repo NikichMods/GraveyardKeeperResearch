@@ -3,7 +3,7 @@
 Repository: `NikichMods/GraveyardKeeperResearch`. Target: Graveyard Keeper 1.407.
 Purpose: preserve reusable evidence-backed game/runtime knowledge and investigate cross-mod behavior.
 
-Before substantive work, read current DevRules `ENGINEERING_RULES.md` and `GIT_WORKFLOW.md`, this repository's `AGENTS.md`, `docs/RESEARCH_INDEX.md` and relevant canonical evidence. Consult CI, bootstrap and runtime-harness guidance when applicable. For local Codex execution also follow `CODEX_WORKFLOW.md` and inspect the actual checkout/worktree including unpublished changes.
+Start with DevRules `WORKING_RULES.md`, this repository's `AGENTS.md`, `docs/RESEARCH_INDEX.md` and relevant canonical evidence. Follow the action-based reading map; for actual local checkout work use `CODEX_WORKFLOW.md` and preserve unpublished changes.
 
 Inspect accepted research before repeating investigations. Distinguish facts, hypotheses, root causes and accepted results. Production fixes belong in the owning mod repository under its current contract; inspect that repository before attributing or changing behavior. Preserve reusable findings in the indexed shared docs.
 
