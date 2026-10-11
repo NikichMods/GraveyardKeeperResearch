@@ -211,3 +211,23 @@ Do not infer those quantities from community recipe lists when exact runtime bal
 ## Known consumer
 
 - `NikichMods/AlchemyRiddle` — design/research phase for a target-directed deductive alchemy-discovery layer. Product architecture and acceptance remain canonical in the owning repository.
+
+
+## Mixed-output / ingredient disjointness — 2026-10-11
+
+**Status:** directly verified static balance result on the same 1.407 resources.assets and Assembly-CSharp.dll SHA-256 identities listed above. Read-only local inspection; no game/save mutation.
+
+Question: can revealing acquisition routes for an ingredient of one ordinary mixed-alchemy formula disclose another mixed formula, especially a two-slot formula used inside a three-slot formula?
+
+Method: deserialize game_data with UnityPy 1.23.0 + TypeTreeGeneratorAPI 0.0.6, reproduce the accepted AlchemyCorpusProbe success classification (`mix:mf_alchemy` family, excluding `goo` and `:_:` auxiliary keys), exclude technology-point entries from needs/output, and apply the native positional picker rule. AlchemyType enum constants were read from the matching assembly metadata (Powder=1, Fluid=2, Essence=3, Universal=9). All non-technology output entries were included in the intersection, not just the primary output.
+
+Reproduced baseline: 2,101 craft_data records, 509 alchemy mixed definitions, 44 success-classified formulas, 43 picker-compatible formulas (24 two-slot and 19 three-slot), 34 ordinary outputs and 35 ordinary ingredients.
+
+Results:
+- ordinary success-output IDs intersect ordinary ingredient IDs: **0**;
+- two-slot ordinary outputs intersect three-slot ordinary ingredients: **0**;
+- three-slot ordinary outputs intersect two-slot ordinary ingredients: **0**;
+- including the single picker-incompatible success-classified definition: output/ingredient intersection still **0**;
+- success-classified outputs intersect inputs of all 509 mixed definitions, including auxiliary definitions: **0**.
+
+Therefore this fixed vanilla corpus contains no nested mixed-product dependency that would disclose another mixed formula when tracing an ordinary reagent's acquisition. This does not establish that reagents lack other non-mixed crafting or gameplay uses. Mod-altered balance and broader host versions are outside this static result. No formula rows or concrete product/ingredient names are published.
