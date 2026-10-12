@@ -52,7 +52,19 @@ Further pinned-source inspection identifies a static integration path, still wit
 - `CraftReally` removes inventory needs and station `needs_from_wgo`, sets current_craft and starts progress. `Cancel` refunds `_cur_craft_items_used` as drops and applies `set_when_cancelled`, but does not generically restore `needs_from_wgo`. Station science therefore has different native cancellation treatment from an ordinary item cost. Research refund semantics are not established merely by reusing Cancel.
 - `ProcessFinishedCraft` reaches `GameSave.OnFinishedCraft` for the real job before `End` clears it. This is a narrow completion boundary for a namespaced research-only consumer. Native scripted `SmartExpression.UnlockAlchemy` writes actual formula IDs to `completed_one_time_crafts`; formula knowledge need not use a second save ledger. Calling OnFinishedCraft on fabricated mixed crafts would also invoke quest/achievement and mixed-key consequences and should not be treated as equivalent to authored knowledge disclosure.
 
-Limits: no research job was registered, started or saved; the table selection UX, installed loader order, one completion granting multiple variants, knowledge reload, chosen cancellation behavior and mod uninstall behavior remain untested. Existing native Survey and mixed definitions were not modified.
+These are static findings; the following installed test closes the bounded work path, without closing formula reward or final table UI.
+
+### Installed sample-free work result — 2026-10-12
+
+**Status:** confirmed native work lifecycle in the user's modded Graveyard Keeper 1.407 installation. Consumer: Researchable Alchemy Recipes, research-only Study Table Work Probe 0.1.0, exact source `6f4fd3bd21e6fee2247c0edfdc372bb1e1f988ef`, DLL SHA-256 `319a0a277c418587b71f0195cede9346ffd27d65774cb8d0c3cbdeef0b550612`. Returned log snapshot SHA-256 `c21fcb3a4c23589b85ac25b1ccddff00b9c72f1f7cf0280daf8f93f343f8c732`; detailed procedure and evidence are in that project's docs/TEST_LOG.md on research/study-table-work.
+
+- Pre-ID-cache insertion resolves through the real native cache. Temporary table-local controller selection opens ordinary Survey or native None-type craft cards without removing Survey definitions.
+- A real sample-free manual job with no output starts through CraftReally: faith 6 -> 5, station science 21 -> 20. Native work reaches progress 0.268 and spends energy before cancellation; no observer-written progress/completion.
+- Native Cancel leaves no active craft and science remains 20. Faith is a world-drop refund: immediate inventory still reads 5, the user observes return, and the next launch reads 6. Inventory-only sampling at the cancel return boundary would incorrectly conclude no refund.
+- After another start and a save/menu-load cycle, DeserializeCraftComponent reports saved active, definition resolved and current active. The user observes preserved partial progress and completes manual work. GameSave.OnFinishedCraft writes the native completed marker; cleanup removes it and stored last-job references.
+- No probe error occurs. The loaded-state observer attached to MainGame.OnGameLoaded is not reached in this capture; Save Now! 2.5.14 participates in the loading environment. Do not generalize one private MainGame callback as a universal loaded-state boundary from its name alone.
+
+Limits: this test used menu-load within one process, not a reported full process restart; numeric post-load progress is user-observed rather than logged. Controller selection is verified; mouse and pre-alchemy gate are not shown by this run. Installed Alchemy Research Redux 0.1.8/Decomp Delight! 0.1.9 coexistence is representative, not a general compatibility guarantee. Ordinary Survey visually completed but emitted a separate native sample-return warning of unknown cause before the probe job. No final UI, refund economics, formula disclosure/knowledge reload or general uninstall behavior is accepted. The modal entry is diagnostic; the consumer prefers two tabs.
 
 ## Craft-card focus callbacks
 
