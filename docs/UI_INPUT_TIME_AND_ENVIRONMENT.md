@@ -313,8 +313,10 @@ Reusable implication: a 1.407 mod claiming support for every current in-game lan
 
 ## Temporary native input containment for calibration — 2026-10-12
 
-**Status:** static installed-assembly/source facts; ResearchableAlchemyRecipes 0.1.5 tool operation/restoration remains runtime-pending in its TEST_LOG.md.
+**Status:** static installed-assembly/source facts; returned exact 0.1.5 screenshot/log demonstrates the panel, chosen exports and four restoration paths. No general input compatibility guarantee. The tool is removed after selection in 0.1.6; details/identities remain in the consuming project TEST_LOG.md.
 
 - Installed Assembly-CSharp-firstpass.dll SHA-256 9dc6def3b7715dd27eeb168ddc0af47e31c6f38d3fbee24bf592899392026498 contains public static bool UICamera.ignoreAllEvents. Exact UICamera.Update IL body (32 bytes) first reads this flag and returns when true, otherwise processing continues. A temporary tool may snapshot/restore it to suppress native NGUI event processing while a separate IMGUI panel owns pointer input; this is global event containment and must not be confused with a local icon property.
 - Pinned ResourceBasedCraftGUI.Update processes keyboard Interaction before calling BaseGUI.Update; intercepting only the base update does not contain that Survey shortcut. A scoped calibration guard must account for the derived owner as well. Native key dictionaries and GUI stack need not be mutated for this containment.
 - Flag restoration after mouse release and plugin destruction is a consuming-tool responsibility, not a native automatic guarantee. The current bounded implementation is research-only; installed success cannot be inferred merely from the existence of the flag or a successful build.
+
+Bounded returned calibration evidence: log SHA-256 4a48481db590b8d0556e8c572167deabc4e3cc3502ff5907588f17bd088e88f8, installed 0.1.5 DLL digest matched its handed artifact. Four panel opens/restoration markers, six paired closes/layout restorations, 25 tab switches and no probe/enumeration errors; screenshot shows the panel and selected offsets. This observes the implemented restoration path and continued window interactions, without independently proving every input device/global UI combination. Chosen positions are product-specific and owned by ResearchableAlchemyRecipes docs/DESIGN.md.
