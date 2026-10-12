@@ -89,3 +89,5 @@ Project-specific mechanics, balance, UX decisions, release state, and accepted b
 The canonical knowledge base is public, but research inputs do not have to be public or committed. Local/temporary inspection of game binaries, decompiled code, resources, runtime state, dumps, and extracted metadata is allowed as research input when the working environment permits it. Promote only the durable derived facts/evidence needed for reuse.
 
 Do not create a private scratch repository by default. Use one only when a concrete operational need appears; accepted reusable conclusions still return to this index and the linked canonical documents.
+
+- Native formula final consumer: ALCHEMY_SYSTEM.md, Native known-formula list section, records exact completed_one_time_crafts -> station-filtered CraftGUI.OpenAsAlchemy, specific authored disclosure vs manufactured completion, grouped pseudotech dialog capacity and native save preparation/serialization boundaries. Installed reward/full-restart evidence belongs to the consuming project.

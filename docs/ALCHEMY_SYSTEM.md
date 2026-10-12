@@ -249,3 +249,14 @@ Results:
 - success-classified outputs intersect inputs of all 509 mixed definitions, including auxiliary definitions: **0**.
 
 Therefore this fixed vanilla corpus contains no nested mixed-product dependency that would disclose another mixed formula when tracing an ordinary reagent's acquisition. This does not establish that reagents lack other non-mixed crafting or gameplay uses. Mod-altered balance and broader host versions are outside this static result. No formula rows or concrete product/ingredient names are published.
+
+### Native known-formula list, disclosure popup and save boundary — static 2026-10-12
+
+Fact from the pinned 1.407 source above, in CraftGUI, SmartExpression, GameSave, TechUnlockDialogGUI and TechDefinition:
+
+- CraftGUI.OpenAsAlchemy reads completed_one_time_crafts, resolves exact CraftDefinitions, includes only definitions whose craft_in contains the current station, then opens a MixedCraft inventory. CommonOpen still applies native visibility/type filtering. Neutral registered craft markers with empty craft_in do not enter this list.
+- Specific authored UnlockAlchemy adds the exact recipe ID and uses a temporary TechDefinition with a forced pseudotech dialog. It does not invoke OnFinishedCraft or simplified automation UnlockCraft; random disclosure has distinct achievement effects.
+- TechUnlockDialogGUI.Open(forced_unlock=true, pseudotech=true) displays unlocks without buying/revealing/unlocking a technology on OK. Native visible-unlock capacity is three. This establishes the static presentation seam, not installed grouped-reward usability.
+- GameSave.ToBinary captures scene state then calls SmartSerializer.Serialize<GameSave>; FromBinary deserializes the save and PrepareAfterLoad prepares loaded state. completed_one_time_crafts is a public list without NonSerialized. These paths establish a serialization candidate; full process-restart knowledge retention must be observed in the actual runtime.
+
+Consumer: ResearchableAlchemyRecipes research-only 0.1.7. Its synthetic setup and cleanup markers are diagnostic state, not a second production formula ledger. No native recipe ingredients are published. Actual reward/popup/list/persistence acceptance remains in the owning project.
