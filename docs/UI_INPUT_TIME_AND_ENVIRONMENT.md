@@ -263,6 +263,21 @@ Reusable implication: for this exact Pray GUI button family, change the verified
 - Bite Countdown
 - Food & Drink Rebalance
 
+## Native craft tabs and composed window input — 2026-10-12
+
+**Status:** verified static source and scene ownership; Researchable Alchemy Recipes 0.1.1 UI composition has no installed-runtime acceptance yet.
+
+Source: `Kupie/GYK_DECOMP@6abf79199d92482af1c7573870dd9a20ec2270b9`, CraftGUI, CraftTabGUI, MixedCraftGUI, ResourceBasedCraftGUI and BaseGUI. Direct installed level2 SHA-256: `1f75a0328dc4987f3020688a0feb0d310c2bf3f6e288c6e4a64ad09db1f39041`; Assembly-CSharp.dll matches the shared accepted 1.407 identity.
+
+- GUIElements serializes distinct references to CraftGUI, ResourceBasedCraftGUI and the tabbed MixedCraftGUI. Both ordinary Survey and the tabbed mixing panel have `add_to_opened_stack=true`; the latter is a separate UI-root window, not simply a component parented inside CraftGUI's content transform.
+- CraftGUI.RedrawCraftTabs builds CraftTabGUI instances and changes the header height from 50 to 82 UI units. The inspected native tab prefab is 66 by 32 units. CraftTabGUI.Draw provides icon presentation and a click delegate; it has no authored text caption field.
+- Ordinary tab selection filters craft cards by tab_id. A `?` tab is explicitly wired to MixedCraftGUI: it hides the card scroll view, opens the tabbed mixing window and changes button-tip/controller ownership. It is not a generic container for Survey or arbitrary custom content.
+- BaseGUI.Open adds the window to the native stack and calls the previous top window's OnHiddenByAnotherGUI, which disables that window's controller. BaseGUI.Update consumes semantic keys only when is_shown_and_top is true, which means the window is exactly the stack's last entry. Merely setting add_to_opened_stack=false would therefore stop this BaseGUI key path; do not infer generic embedded-input support from that flag.
+- MixedCraftGUI forwards PrevTab/NextTab to CraftGUI while acting as its subwindow, and closes the outer craft window on its close action. ResourceBasedCraftGUI has no equivalent tab bridge; its native sample-picker/craft behavior must remain owned by its own callbacks if composed elsewhere.
+- BaseGUI.Hide removes the window from the stack, disables its controller and clears keys. Survey Hide also destroys extra ingredient widgets. Closing/switching composition must account for both owners; making a parent GameObject inactive without native Hide is not an equivalent lifecycle operation.
+
+Applicability limit: these facts support a narrow research UI experiment, not verified geometry/focus or compatibility with arbitrary layout mods. Pixel/layout changes need installed observation. The exact recipe-research composition and its pending candidate are owned by ResearchableAlchemyRecipes docs/DESIGN.md and docs/TEST_LOG.md.
+
 ## Graveyard Keeper 1.407 current language selector codes
 
 **Status:** accepted runtime fact for the inspected Steam/Windows 1.407 build.
