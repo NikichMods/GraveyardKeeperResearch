@@ -265,7 +265,7 @@ Reusable implication: for this exact Pray GUI button family, change the verified
 
 ## Native craft tabs and composed window input — 2026-10-12
 
-**Status:** verified static source and scene ownership; Researchable Alchemy Recipes 0.1.1 UI composition has no installed-runtime acceptance yet.
+**Status:** verified static source/scene ownership and bounded 0.1.1 installed usability evidence; close-time key-map errors block acceptance of that UI candidate.
 
 Source: `Kupie/GYK_DECOMP@6abf79199d92482af1c7573870dd9a20ec2270b9`, CraftGUI, CraftTabGUI, MixedCraftGUI, ResourceBasedCraftGUI and BaseGUI. Direct installed level2 SHA-256: `1f75a0328dc4987f3020688a0feb0d310c2bf3f6e288c6e4a64ad09db1f39041`; Assembly-CSharp.dll matches the shared accepted 1.407 identity.
 
@@ -276,7 +276,10 @@ Source: `Kupie/GYK_DECOMP@6abf79199d92482af1c7573870dd9a20ec2270b9`, CraftGUI, C
 - MixedCraftGUI forwards PrevTab/NextTab to CraftGUI while acting as its subwindow, and closes the outer craft window on its close action. ResourceBasedCraftGUI has no equivalent tab bridge; its native sample-picker/craft behavior must remain owned by its own callbacks if composed elsewhere.
 - BaseGUI.Hide removes the window from the stack, disables its controller and clears keys. Survey Hide also destroys extra ingredient widgets. Closing/switching composition must account for both owners; making a parent GameObject inactive without native Hide is not an equivalent lifecycle operation.
 
-Applicability limit: these facts support a narrow research UI experiment, not verified geometry/focus or compatibility with arbitrary layout mods. Pixel/layout changes need installed observation. The exact recipe-research composition and its pending candidate are owned by ResearchableAlchemyRecipes docs/DESIGN.md and docs/TEST_LOG.md.
+- CraftTabGUI.Draw resolves ordinary IDs as tab_<id> and ? IDs as tab_custom_<suffix>; SetSelectedState supplies selected/normal tint. Direct inspection of the accepted resources.assets identity confirms tab_book (33x25, quill/scroll) and tab_custom_alch (40x23, paired flasks). These are derived identifiers/dimensions; no extracted assets are retained publicly.
+- BaseGUI.Update enumerates the live gamekey_delegates.Keys and invokes delegates through that dictionary field. Do not mutate that dictionary from a callback, including restoration of existing values. ResearchableAlchemyRecipes 0.1.1 recorded eight Dictionary KeyCollection Enumerator exceptions immediately after composed-window closes; its source restores PrevTab/NextTab values there. A .NET Framework reproduction confirms that existing-value replacement invalidates this enumeration. Installing a separate map and restoring the original field reference completes the same enumeration pattern; installed verification of that correction is pending.
+
+Runtime limits: user observations for exact ResearchableAlchemyRecipes 0.1.1 cover keyboard/mouse/gamepad switching, picker select/cancel and reopening; log SHA-256 04aa127c681b8a3df008dc33324c27011d6eb64a577e682ca1d3f8c5d050b028 records ten paired closes/layout restorations alongside the eight exceptions, 20 missing custom tab icons and six NGUI layer warnings with unassigned cause. Do not infer a clean session, arbitrary-mod compatibility or final UI acceptance. Exact source/DLL identities, product-specific composition and its 0.1.2 correction are owned by ResearchableAlchemyRecipes docs/TEST_LOG.md and docs/DESIGN.md.
 
 ## Graveyard Keeper 1.407 current language selector codes
 
