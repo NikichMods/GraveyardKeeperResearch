@@ -194,6 +194,20 @@ Project-local competitor/product decisions do not belong here, but reusable host
 - decomposition-property presentation and mixed-recipe preview are separable concerns in the host;
 - neither should be assumed to solve target-directed discovery of an unknown mixed product.
 
+## Ingredient producers beyond decomposition — static 1.407
+
+Bounded static inspection for ResearchableAlchemyRecipes 0.1.19 rechecks the accepted resources.assets / Assembly-CSharp identities and selects the same 43 ordinary manual-table formulas, 34 outputs and 35 inputs by native slot types (Powder/Fluid/Essence or Universal). Filtering visible authored None/AlchemyDecompose producers with real input/equipment, excluding zombie mirrors, yields 123 producer records covering all 35 ingredients. This coverage includes goo conversions and must not be mistaken for complete world acquisition/provenance.
+
+Additional native channels are important for the six basic substances discussed above:
+
+- ItemDefinition.can_be_used/drop_on_use and Item.UseItem supply inventory-use channels for water/alcohol; the inspected simple-use definitions have no on_use_script. Source material acquisition itself is a separate question.
+- Native ex:-prefixed body extraction is identified by CraftDefinition.IsBodyPartExtractionCraft. CraftComponent.CraftReally captures the selected body part and End processes authored output; these records have no ordinary needs array. A fixed-input-recipe filter therefore loses blood extraction.
+- corp_burning/crematorium_corp_burning are hidden automatic output records, not manually selectable recipes. mf_pyre_put_body changes the object to mf_pyre_corp; its ObjectDefinition.craft_after_hp_0 starts corp_burning. The crematorium's object/script transitions lead to mf_crematorium_burning and its Flow_StartCraftByName. Construction records own their equipment access; ordinary IsCraftVisible on the hidden burning recipe would be the wrong availability predicate for guidance.
+- Authored techs_data.crafts can identify named unlock prerequisites for some extraction/construction records. No match is not proof of unrestricted access: dialogue/script grants and parent/context gates remain distinct owners.
+- ResModificator.ProcessItemsListBeforeDrop evaluates min/max counts and can use RNG or p_scientist-dependent expressions. A quantity UI should not evaluate that drop path merely to describe acquisition. Two equipment tiers can share input and product while having different yield expressions.
+
+Source pointer: Kupie/GYK_DECOMP@6abf79199d92482af1c7573870dd9a20ec2270b9, Item, ItemDefinition, CraftDefinition, CraftComponent, ResModificator; matched local native metadata. Private graph serialized-text SHA-256: mf_pyre_put_body e4cd68a499d2a7d714796925673592382de388945e60358dee0368c656ebbcb4; mf_crematorium 46f3257fcea9c9f21de47e6f5e646a6786517f0410ed74fdaa1196baca0c56ab; mf_crematorium_burning f25c6b6234aacc2df9d96178ba75b2a57a621c11ce26c6de5d7aba4ef63196b3. Extracted assets/graphs/source lists stay private. This is static/read-only dependency evidence; current live guidance acceptance belongs to the consuming project's TEST_LOG.md. Shops, quest rewards, arbitrary world drops and every DLC/mod-altered progression case are not enumerated by this source audit.
+
 ## Quantitative research still required
 
 A current loaded-`GameBalance` corpus is still required to establish without guesswork:
