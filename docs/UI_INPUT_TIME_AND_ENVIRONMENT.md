@@ -203,6 +203,12 @@ NGUIText.ParseSymbol accepts two-digit alpha tags as byte/255; [AA] sets 170/255
 
 Evidence: installed 1.407 Assembly-CSharp/firstpass IL and resources.assets SHA-256 215c7981901a4b72d5db717666ba47ad3cc032527c95f58dc39d8af1293a69ca (rechecked 2026-10-13), plus previously pinned level2 tooltip metadata. Private extraction/IL remains in ResearchableAlchemyRecipes work/palette; no native assets/source dumps are published. Consumer experiment: StudyTableWorkProbe 0.1.28; installed visual acceptance is separate.
 
+## Tooltip overlap and panel render-group ownership (1.407 static inspection)
+
+Native TooltipBubbleGUI copies have no panel on their root and share Above-any-gui bubbles UIPanel (level2 component 37556, depth 5000, Automatic render queue). The tooltip root widget depth is 0 and parchment background 33075 depth is 1. Widget depth is scoped to the shared panel, so two bubbles can draw both backgrounds before both text groups, allowing one bubble's text to cross the other's parchment. Static prefab structure plus returned StudyTableWorkProbe 0.1.29 screenshot establishes this interleaving problem.
+
+UIPanel.CompareFunc sorts panels by depth; UIPanel.LateUpdate first updates panels and then allocates consecutive Automatic render queues for each panel's complete draw-call group. A separately owned child panel can therefore isolate an entire tooltip relative to the native tooltip panel, rather than rewrite a guessed depth range for each child widget. UIWidget.RemoveFromPanel clears ownership/drawCall and CreatePanel finds the nearest ancestor panel if started; native Start joins later otherwise. Panel OnDisable removes registration/draw calls. A panel attached to an owned bubble follows that bubble's destruction lifecycle. Consumer experiment 0.1.30 places only guidance one panel depth below native tooltips and inherits sorting settings. Actual overlap, placement and cleanup need installed evidence; compilation/static inspection do not prove those outcomes.
+
 ## Weather audio ownership
 
 **Status:** accepted host-path fact.
