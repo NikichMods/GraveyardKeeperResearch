@@ -193,6 +193,16 @@ Reusable implication: when a mod creates or persists raw NGUI `UILabel` objects 
 
 **Applicability limit:** this proves the inspected NGUI/current-language font lifecycle. It does not imply that every Unity text component or non-NGUI UI family uses GJL.
 
+## Native font effects and independent tooltip text widgets (1.407 static inspection)
+
+All 11 GJL languages route either to the ordinary atlas fonts (including tiny_font) or to custom ch_jp_12 (ja/zh_cn, size 12, spacingY 2) and korean (ko, size 13, spacingY 1). Direct resources.assets inspection finds all these UIFonts have mAtlas set and no mReplacement/dynamic font. UIFont.packedFontShader follows a replacement first, then returns false for atlas-backed fonts; otherwise it checks the material shader name for Packed. Thus none of these built-in language fonts takes UILabel.OnFill's packed-font outline exclusion. This establishes static eligibility, not visual quality or runtime acceptance in every language; unknown/replaced font paths still need capability-aware local fallback.
+
+BubbleWidgetText.Draw applies the requested native style and GJL.EnsureLabelHasCorrectFont before text assignment. Separate BubbleWidgetTextData entries therefore provide separate native UILabel effect scopes. Tooltip prefab 25244 uses SimpleUITable 23831 with offset=0; native table positioning and WidgetsBubbleGUI sizing consume child widget dimensions. NGUIText.CalculatePrintedSize counts newline line heights, including trailing blank lines. A split renderer must preserve text/blank lines and colour scopes and still verify installed spacing.
+
+NGUIText.ParseSymbol accepts two-digit alpha tags as byte/255; [AA] sets 170/255 and [FF] restores 1. Print initializes alpha to 1 per label. These tags can span a source's rich-text Study annotation and reset before the next row; they do not change glyph widths. UILabel Outline creates four diagonal effect copies and accepts fractional effectDistance, which applies to the entire label. Source-specific effects therefore must not be applied to a shared body label.
+
+Evidence: installed 1.407 Assembly-CSharp/firstpass IL and resources.assets SHA-256 215c7981901a4b72d5db717666ba47ad3cc032527c95f58dc39d8af1293a69ca (rechecked 2026-10-13), plus previously pinned level2 tooltip metadata. Private extraction/IL remains in ResearchableAlchemyRecipes work/palette; no native assets/source dumps are published. Consumer experiment: StudyTableWorkProbe 0.1.28; installed visual acceptance is separate.
+
 ## Weather audio ownership
 
 **Status:** accepted host-path fact.

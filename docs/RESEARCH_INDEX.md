@@ -19,6 +19,7 @@ Before starting a new host-internals probe in a Graveyard Keeper mod:
 - `docs/TECH_TREE_INFORMATION_RESEARCH.md` — community/product evidence for richer Technology-tree information, full 1.407 balance-data audit, verified unlock/tooltip ownership, blueprint/recipe coverage and special cases, exact location semantics, stress cases, and the closed research gate for production bootstrap.
 
 Key established limits:
+- Native font-effects section in UI_INPUT_TIME_AND_ENVIRONMENT.md: all 11 built-in language routes use atlas-backed UIFonts and do not take the packed-shader outline exclusion; separate native tooltip text widgets scope effects, and rich-text alpha tags can subdue source rows. Static eligibility is not multilingual visual acceptance.
 - BepInEx 5 `[BepInPlugin]` version metadata must be numeric/System.Version-parseable; keep research/RC labels outside that metadata.
 - Technology-tooltip `UILabel.overflowWidth` evidence applies to the inspected Technology path, not every tooltip.
 - Standard item-tooltip alignment evidence distinguishes child-label text alignment from centered child-widget placement; it applies to the inspected `WidgetsBubbleGUI` item-tooltip family, not arbitrary NGUI tables.
