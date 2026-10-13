@@ -55,6 +55,8 @@ Therefore positional ingredient identity is part of the native recipe key; mixed
 
 ## Failure / goo algorithm
 
+**Native learned-list boundary, inspected 2026-10-13:** GameSave.OnFinishedCraft adds a completed craft to completed_one_time_crafts only when its ID does not contain `:_:`. CraftGUI.OpenAsAlchemy constructs its learned recipe list from completed_one_time_crafts and matching craft_in. Thus auxiliary failed-mix records do not become learned cards through ordinary completion. This is a specific writer/consumer fact, not a claim that external mods or manually injected save IDs cannot put such records in that list.
+
 If no exact recipe resolves, `MixedCraftGUI.OnCraftPressed()` asks `GetCraftDefinition(true,...)` for the failure craft.
 
 The verified current algorithm is:
