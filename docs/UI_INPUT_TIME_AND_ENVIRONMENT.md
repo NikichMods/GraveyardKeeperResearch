@@ -38,6 +38,16 @@ Reusable implications:
 
 ## Gamepad tooltip placement lifecycle
 
+### Native tooltip backing and NGUI geometry commit — 1.407
+
+Direct installed level2/firstpass inspection for ResearchableAlchemyRecipes StudyTableWorkProbe 0.1.24, 2026-10-13:
+
+- GUIElements native TooltipBubbleGUI 25244 has content widget 25242; optional inherited `back_spr` is null. The four `corners` GameObjects contain tail sprites and BubbleCornerPoint attachments, not the rectangular backing. The backing is widget 33075 at `back and points/back`, anchored to intermediary widget 24430, which surrounds the root content. Disabling all four corner groups preserves that rectangle. Earlier project descriptions calling corners frame groups were incomplete.
+- Installed UIPanel.LateUpdate invokes panel UpdateSelf once per frame; UpdateSelf calls UpdateWidgets before filling draw calls. UpdateWidgets calls UIWidget.UpdateTransform, UpdateVisibility and UpdateGeometry. Moving a bubble only in its own LateUpdate does not establish that the change preceded that frame's mesh generation. A reference-scoped prefix at the backing's UIPanel.UpdateSelf can prepare the owned bubble immediately before that consumer while preserving native processing of all panel contents.
+- UIWidget alpha invalidates cumulative/final-alpha state; geometry uses CalculateFinalAlpha at UpdateGeometry. Native collider-mode WidgetsBubbleGUI.Update raises a zero root alpha, so a withheld owned tooltip must contain that native exposure until its render-ready point.
+
+Inputs: level2 SHA-256 `1f75a0328dc4987f3020688a0feb0d310c2bf3f6e288c6e4a64ad09db1f39041`; Assembly-CSharp SHA-256 `e72e4270e4b88dd0a87ca23c9cf1750aec4c4a0fedb40b6d2dae7902fc9c7fd8`; firstpass identity is recorded in the project's build manifest. Native BaseBubbleGUI/WidgetsBubbleGUI sources at Kupie/GYK_DECOMP `6abf79199d92482af1c7573870dd9a20ec2270b9` agree with inspected ownership. These are static lifecycle facts; no claim that one ordering defect is the sole cause of an observed flash, or that candidate 0.1.24 passes live rendering, follows from them. Private dumps stay outside tracked files.
+
 **Status:** accepted host-lifecycle fact for the inspected bubble path.
 
 Relevant native seams include:
