@@ -2,6 +2,8 @@
 
 This is the canonical entry point for reusable cross-project research.
 
+Local installation/log collection across Graveyard Keeper mods follows [DevRules/CODEX_WORKFLOW.md — Local installed-runtime loop](https://github.com/NikichMods/DevRules/blob/main/CODEX_WORKFLOW.md#local-installed-runtime-loop): execute authorized DLL replacement and accessible log capture directly, preserving exact identity, previous payload and unrelated mods. This is an operating-workflow pointer; runtime findings and project acceptance remain in their owning evidence documents.
+
 Before starting a new host-internals probe in a Graveyard Keeper mod:
 
 1. read the owning project's canonical verified-data / architecture docs;
