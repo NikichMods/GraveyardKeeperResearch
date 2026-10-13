@@ -31,6 +31,8 @@ Applicability limit: this is about the BepInEx plugin metadata version supplied 
 
 ### Technology tooltip width lifecycle
 
+**Additional inspected consumer — native tooltip text widget (2026-10-13):** ResearchableAlchemyRecipes 0.1.25 returned mixed/broken Study-marker wraps. Direct installed level2 inspection identifies GameObject 747 `text widget` with UILabel `mOverflow=ResizeFreely` and `mOverflowWidth=150`; a populated clone has the same ceiling. Installed firstpass UILabel.ProcessText applies that ceiling even in ResizeFreely before CalculatePrintedSize. Thus natural-width measurement of that copied label must first remove/replace its inherited ceiling; otherwise it measures an already wrapped paragraph. Candidate 0.1.26 clears overflowWidth only on its owned labels for measurement, then applies the separately measured screen-bounded ResizeHeight width. This extends the static ownership evidence to the inspected text-widget prefab; live corrected-marker acceptance remains pending, not inferred from the accepted Technology test.
+
 **Target:** Graveyard Keeper 1.407  
 **Status:** **accepted fact** for the inspected Technology tooltip path.
 
