@@ -196,6 +196,12 @@ Project-local competitor/product decisions do not belong here, but reusable host
 
 ## Ingredient producers beyond decomposition — static 1.407
 
+### Source-material quality audit
+
+One-time raw-data audit on the same resources.assets SHA-256 215c7981901a4b72d5db717666ba47ad3cc032527c95f58dc39d8af1293a69ca: all 123 visible manual producer records have needs_quality=0 and no input ID ending in an exact numeric quality suffix. All 508 non-hidden authored records referencing either manual alchemy-table ID likewise have no needs_quality or exact-quality input suffix; this broad set includes failure records and is not a count of known success formulas. Including the nonstandard memory-potion recipe gives 44 success formulas/36 distinct inputs; the same manual producer set remains 123, so this does not establish full acquisition coverage of the extra input.
+
+The producer inputs onion_crop/hop_crop/hamp_crop are unsuffixed family IDs. Native item definitions contain :1/:2/:3 members for each; onion/hops members have quality 1/2/3, hemp members have quality 0 despite the suffix variants. Pinned Item.InitMultiqualityItems resolves a missing exact definition by collecting every matching id + ':' prefix. Item.IsEnoughItems accepts the family's member list when no concrete variant is selected. These are actual crop families, not generic crop waste. Material naming should resolve native localized family members (onion/hops/hemp) without asserting a specific quality. This bounded static finding does not promise that future host/modded producer data never adds quality requirements; no runtime quality-policy implementation is implied.
+
 Bounded static inspection for ResearchableAlchemyRecipes 0.1.19 rechecks the accepted resources.assets / Assembly-CSharp identities and selects the same 43 ordinary manual-table formulas, 34 outputs and 35 inputs by native slot types (Powder/Fluid/Essence or Universal). Filtering visible authored None/AlchemyDecompose producers with real input/equipment, excluding zombie mirrors, yields 123 producer records covering all 35 ingredients. This coverage includes goo conversions and must not be mistaken for complete world acquisition/provenance.
 
 Additional native channels are important for the six basic substances discussed above:
