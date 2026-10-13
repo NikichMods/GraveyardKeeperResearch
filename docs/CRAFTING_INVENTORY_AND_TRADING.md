@@ -4,6 +4,14 @@ This document consolidates reusable accepted facts promoted from Crafting Planne
 
 ## CraftDefinition and builder recipe model
 
+### Ordinary source visibility and grouped cards — 1.407
+
+Verified static ownership plus installed manual observation: CraftComponent.FillCraftsList reads GameBalance.GetCraftsForObject; BaseCraftGUI.CommonOpen filters the station list with GameSave.IsCraftVisible and allowed craft type. Ordinary CraftType.None display is separate from BaseCraftGUI.CanCraft material/condition sufficiency. CraftGUI can merge variants into one CraftItemGUI, retaining all definitions in private _possible_crafts; craft_definition alone is not the whole displayed source set. WorldMap.GetWorldGameObjectsByObjId reads the existing object list and returns all matching instances without spawning them.
+
+ResearchableAlchemyRecipes Source Eligibility Probe 0.1.2, source `5020e89f71cef61704eb6cdc103aae3f12f87840`, installed DLL SHA-256 `3d8426ff867338fe84b7da2b0d2333b059129fcb555c20fbe34940b1d28df10f`, captures an actual opened idle table_book_constr on the accepted 1.407 host hashes. Current-launch log SHA-256 `84038132a9b0ccd2d6c59e35ad8ce8054b628a6ca80302b7114f13a1ac8be2eb` has READY/TRIGGER/RESULT/DONE, no source/probe errors and exact predicted/native-list/grouped-card ID agreement for all sixteen investigated alchemy-product source groups: eight positive groups (nine definitions) and eight zero-visible groups. The shown station is indexed and physically enabled, not removed/removing/tutorial-blocked, with native CanInteractCraft=true. No patches, native menu opening, unlocks or saved diagnostic state are used by the observer.
+
+Limits: one real loaded save and source window, not all stations, all early/absent/busy states or a universal source-access policy. CraftComponent.CanInteractCraft also tests busy/removing/interaction-type inputs; choosing whether temporary work suppresses a mod's research-topic awareness is product policy, not established by the idle capture. Product coverage and implementation acceptance remain owned by ResearchableAlchemyRecipes docs/AWARENESS_SOURCE_AUDIT.md and docs/TEST_LOG.md.
+
 **Status:** verified static + accepted runtime for representative project families.
 
 `CraftDefinition` owns the common recipe data used by many crafting/project paths, including:
