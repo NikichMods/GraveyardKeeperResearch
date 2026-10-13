@@ -196,6 +196,10 @@ Project-local competitor/product decisions do not belong here, but reusable host
 
 ## Ingredient producers beyond decomposition — static 1.407
 
+### Wall-crematorium DLC availability
+
+Native balance includes souls_builddesk:p:mf_crematorium and its soul_totem_tech owner; the owner has requires_dlc=None in inspected metadata. GameSave.IsCraftVisible delegates lock state to CraftDefinition.IsLocked (save unlocked_crafts/locked_crafts), so blueprint visibility is not an installed-DLC predicate. Matched native DLCEngine.IsDLCAvailable(Souls) checks Application.dataPath + '/gamedata_4.dat'; this is the host's existing availability contract, not a new license/Steam ownership check. Ingredient guidance should omit that optional wall-crematorium path when the native Souls availability check is false, while retaining normal skill/build prerequisites when true. Native source pointers: DLCEngine, GameSave, CraftDefinition at the pinned 1.407 decompilation; physical no-DLC gameplay has not been run by this static audit.
+
 ### Source-material quality audit
 
 One-time raw-data audit on the same resources.assets SHA-256 215c7981901a4b72d5db717666ba47ad3cc032527c95f58dc39d8af1293a69ca: all 123 visible manual producer records have needs_quality=0 and no input ID ending in an exact numeric quality suffix. All 508 non-hidden authored records referencing either manual alchemy-table ID likewise have no needs_quality or exact-quality input suffix; this broad set includes failure records and is not a count of known success formulas. Including the nonstandard memory-potion recipe gives 44 success formulas/36 distinct inputs; the same manual producer set remains 123, so this does not establish full acquisition coverage of the extra input.
