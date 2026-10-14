@@ -48,6 +48,8 @@ Key established direction:
 
 ### Crafting / inventory / trading / buffs
 
+- `docs/STUDY_RESOURCE_ECONOMY.md` — bounded static 1.407 paper/science yields, technology unlock owners and material-study/payment limits. Science is a station resource; authored paper yields do not establish player income rates or final mod prices.
+
 - Ordinary source/card observation in CRAFTING_INVENTORY_AND_TRADING.md: installed manual 0.1.2 confirms current-save church-workbench visibility against exact native/grouped-card ID sets for sixteen source groups. Preserve _possible_crafts membership when variants share one card; affordability and temporary busy-state policy are distinct from visibility. Bounds exclude universal physical/early/busy access claims.
 
 - `docs/CRAFTING_INVENTORY_AND_TRADING.md` — CraftDefinition/build ownership, native craft/Survey technology-point output ownership, player-vs-interaction inventory, storage-local inventory, native move/capacity path, stack equivalence, craft renderer list invariants, `CraftComponent.DoAction` actor/timing semantics, PlayerBuff duration/removal primitives, vendor sale rules, dynamic product types, lazy Vendor construction, KnownNPC/staged-vendor lifecycle, the standard item-tooltip seam, and vanilla crafting-location tooltip ownership/source/order.
