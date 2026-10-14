@@ -32,6 +32,8 @@ Key established limits:
 
 ### Dialogue / quests / FlowCanvas
 
+- Exact alchemy-request task owners in DIALOGUE_QUEST_AND_FLOWCANVAS.md: initial Clotho healing and Astrologer acid assignment/completion, pure persisted task readers versus mutating GetOrCreateNPC, and a bounded 764-graph Item/Flow_Answer census. Task mention policy and pending installed evidence belong to ResearchableAlchemyRecipes.
+
 - `docs/DIALOGUE_QUEST_AND_FLOWCANVAS.md` — weekday HUD semantic ownership, native quest-marker resources, task mutation, phrase state, SmartRes answer gates, `MultipleAnswerData` AND semantics, persistent blacklist ownership, root-to-answer reachability, and zone-quality mirrors.
 
 Key established result:

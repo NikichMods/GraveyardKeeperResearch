@@ -36,6 +36,16 @@ Reusable implication: when a mod needs native-looking quest markers, prefer alre
 
 ## Task-state mutation and actionability
 
+### Bounded alchemy-request task owners — 2026-10-14
+
+Same accepted 1.407 resources.assets / Assembly-CSharp identities. A read-only census of 764 serialized FlowScript graphs using the verified script owner finds Item SmartRes price requests for ordinary successful mixed products: pot_heal in npc_witch (resource node 299 -> Flow_Answer 302), acid in npc_astrologer (473 -> 476), and native spices in npc_merchant (651 -> 654). This is a bounded Item/Flow_Answer channel audit, not universal coverage of custom-script requests, modded quests or future content. The extra memory_potion reference found in this corpus is a native Flow_DropItem at witch node 892, not an Item hand-in demand.
+
+Clotho graph path_id 150562: task npc_clotho_task_1 is set Visible at node 256 after the introductory request; both memory-restoration branches set Complete at nodes 44/91. Astrologer: node 226 explicitly asks for acid, node 228 sets astrologer_acid Visible, node 268 sets it Complete. The earlier astrologer_diary task does not establish the acid request. Both NPC ObjectDefinitions have empty npc_alias. Native Spices authored disclosure remains the previously verified witch 140 -> 142 path.
+
+Actual-assembly bounded IL inspection proves KnownNPCList.GetNPC scans its existing public npcs list and returns null when absent; KnownNPC.GetQuestState scans tasks and returns the stored state or a non-Visible/non-Complete default. Neither initializes GameBalance or creates state. In contrast GetOrCreateNPC invokes GameBalance.me, resolves aliases, may append an NPC and trigger encounter achievements; it is unsuitable for pure availability reads. GameSave.known_npcs is the existing serialized field; native SmartSerializer KnownNPCList binary roundtrip retains the stored task/state in the consumer's actual-assembly tests. This is lower-level persistence evidence, not a new full installed GameSave reload test.
+
+Consumer: ResearchableAlchemyRecipes research 0.1.41; task-as-product-awareness policy belongs to its PRODUCT_REQUIREMENTS.md / QUEST_RESEARCH_SOURCES.md. Private graph projection and selected-method IL remain in the consumer's ignored work/palette files; no formula/graph/dialogue dumps are published.
+
 **Status:** accepted fact.
 
 Normal authored task mutation flows through:
