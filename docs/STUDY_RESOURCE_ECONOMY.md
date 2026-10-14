@@ -4,6 +4,12 @@ Status: bounded static findings, not installed economy/playtime measurements. Co
 
 Inputs: resources.assets SHA-256 `215c7981901a4b72d5db717666ba47ad3cc032527c95f58dc39d8af1293a69ca`; Assembly-CSharp.dll SHA-256 `e72e4270e4b88dd0a87ca23c9cf1750aec4c4a0fedb40b6d2dae7902fc9c7fd8`, matching accepted 1.407 identities. Read-only UnityPy/TypeTreeGenerator game_data projection, using the existing private loader. Consumer scratch/result: ignored work/palette/economics-audit-private.{py,json}; no game assets or full native definitions published.
 
+## Native material Study work/energy endpoints
+
+Same accepted input hashes, read-only game_data projection (consumer ignored study-time-energy-private.py/json). All 223 paid single-input Survey/Alchemy definitions have simplified constant craft_time/energy values: 0/0 (1), 1/0 (29), 1/1 (18), 1/2 (3), 2/5 (64), 2/10 (2), 3/5 (84), 10/10 (3), 10/15 (19). The zero-work definition is surv:quest_key_astrologer, a special quest-item study; do not use it as an ordinary material duration endpoint.
+
+The already-established 38 non-slime alchemy-source material studies have 1/0 (9), 1/1 (1), 1/2 (3), 3/5 (24), 10/15 (1). Ordinary source endpoints are therefore work 1/energy 0 and work 10/energy 15; the modal pair is 3/5. Read evaluated simplified constants rather than default_value (zero in these serialized expressions). This is authored vanilla data, not current mod-patched GameBalance or a measured duration. Native CraftComponent.DoAction proportional spending evidence in CRAFTING_INVENTORY_AND_TRADING.md owns execution semantics: definition energy is a whole-job budget; craft_time is a progress parameter and does not establish wall-clock seconds or a fixed key-press count. Consumer tariff interpolation belongs to ResearchableAlchemyRecipes, not shared host facts.
+
 ## Paper/science conversion and production
 
 | Native operation | Authored inputs | Authored output | Limits |
