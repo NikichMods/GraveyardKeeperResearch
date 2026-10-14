@@ -4,6 +4,12 @@ This document consolidates reusable accepted facts promoted from Crafting Planne
 
 ## CraftDefinition and builder recipe model
 
+### Station-input spend display and QueueEverything — 1.407
+
+Verified static/focused executable evidence (2026-10-15): CraftItemGUI.Redraw assigns txt_spend from CraftDefinition.GetSpendTxt. Native ingredient rows use needs; native spend text handles only fire among needs_from_wgo, so another station currency requires its own scoped presentation. ResourceBasedCraftGUI uses the native (sci) science symbol. Installed QueueEverything 2.2.1 (owner p1xel8ted.gyk.queueeverything, DLL SHA-256 fc90e74404ac8b1ff3e540b414f0e2d5d69da10808b0b5a52ad382aa888442dd) additionally replaces GetSpendTxt's result with its own calculation, also filtering station inputs to fire. Earlier result extensions can therefore be erased despite correct native payment data.
+
+ResearchableAlchemyRecipes 0.1.46 returns missing prices; its focused regression reproduces the loss using the actual installed QueueEverything postfix and real Harmony ordering, then passes after its own scoped science addition is ordered after that owner at Priority.Last. The executable fixture supplies empty vanilla text to avoid unrelated Unity calculations; competing postfixes are actual code. Sufficient/insufficient science, unrelated craft/station fallthrough and unpatch baseline are checked. This establishes the final-writer dependency, not universal compatibility or final UI rendering; consumer exact source/candidate/readability acceptance belongs to that project's VERIFIED_RUNTIME_DATA.md and TEST_LOG.md. No foreign binaries or bulk source are published.
+
 ### Ordinary source visibility and grouped cards — 1.407
 
 Verified static ownership plus installed manual observation: CraftComponent.FillCraftsList reads GameBalance.GetCraftsForObject; BaseCraftGUI.CommonOpen filters the station list with GameSave.IsCraftVisible and allowed craft type. Ordinary CraftType.None display is separate from BaseCraftGUI.CanCraft material/condition sufficiency. CraftGUI can merge variants into one CraftItemGUI, retaining all definitions in private _possible_crafts; craft_definition alone is not the whole displayed source set. WorldMap.GetWorldGameObjectsByObjId reads the existing object list and returns all matching instances without spawning them.
