@@ -11,6 +11,8 @@ Before starting a new host-internals probe in a Graveyard Keeper mod:
 3. search accepted test logs and relevant repository history if the fact has not yet been promoted;
 4. perform fresh static/runtime research only when the question remains open.
 
+Active-station cancellation access: CRAFTING_INVENTORY_AND_TRADING.md records native CanInteractCraft/GUIElements.OpenCraftGUI busy non-zombie entry blockers and why existing cancel-dialog/queue callbacks do not establish reachable UI. Static host evidence; consumer-specific cancellation necessity/control remains open in ResearchableAlchemyRecipes.
+
 ## Shared game/runtime internals
 
 ### UI / NGUI / input / timing / environment

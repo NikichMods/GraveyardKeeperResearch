@@ -61,6 +61,12 @@ Source: `Kupie/GYK_DECOMP@6abf79199d92482af1c7573870dd9a20ec2270b9`, `ResourceBa
 - Craft identity must survive reload: `GetSerializedCraftComponent` stores the current craft ID; `DeserializeCraftDefinition` resolves it through GameBalance. Queue entries also resolve IDs through GameBalance. A definition that exists only in a UI list is therefore insufficient for resumable work.
 - `GameBalance.GetCraftsForObject` caches station lists; `FillCraftsList` clears and repopulates component lists from that owner. `CraftsInventory.additional_crafts` is consumed only by its object/build list, not `GetCraftsList`. Do not assume arbitrary transient additions automatically become registered, reloadable ordinary crafts.
 
+### Active-station menu access and cancellation reachability — static 2026-10-14
+
+Direct IL inspection of the accepted Assembly-CSharp.dll identity verifies that CraftComponent.CanInteractCraft returns false when is_crafting is true and the station cannot insert a zombie. CraftComponent.Interact checks this predicate before calling GUIElements.OpenCraftGUI. That GUI dispatcher independently returns for an enabled active non-zombie craft component before opening a station window. Same-hash resources inspection gives mf_alchemy_survey.can_insert_zombie=false. These upstream checks matter even though CraftGUI.Open can offer NeedToCancelCraftsDialog for non-enqueueable current work and CraftQueueGUI.OnDeleteItemPressed can cancel its current queue row: callback existence does not prove that the player can reach that UI from an active station.
+
+Status: native static control flow, not an installed cancellation-access observation or universal modded-input claim. Consumer ResearchableAlchemyRecipes's current table-entry prefix also falls through on active work; its RESEARCH_WORK_LIFECYCLE.md owns the open product need/control decision and accepted diagnostic F9/removal-refund limits. No global busy-interaction change is implied. Private IL/tools remain in the consumer's ignored work/palette; no host source or assets are published.
+
 ### Registration, table routing and completion continuation — 2026-10-12
 
 Further pinned-source inspection identifies a static integration path, still without installed-runtime acceptance:
