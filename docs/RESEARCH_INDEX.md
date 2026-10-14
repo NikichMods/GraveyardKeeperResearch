@@ -15,6 +15,8 @@ Active-station cancellation access: CRAFTING_INVENTORY_AND_TRADING.md records na
 
 ## Shared game/runtime internals
 
+Native window/overlay coordination: UI_INPUT_TIME_AND_ENVIRONMENT.md records BaseGUI stack/event ordering, separate tooltip/speech/context/corner overlays, native player-control guard and three-row/no-scroll information-window limits. Static owners for later safe-notification integration; no installed popup-coordination acceptance is implied.
+
 ### UI / NGUI / input / timing / environment
 
 - `docs/GAME_INTERNALS.md` — BepInEx plugin-metadata constraints, detailed Technology-tooltip width lifecycle, and accepted standard item-tooltip child-alignment/native-span behavior.

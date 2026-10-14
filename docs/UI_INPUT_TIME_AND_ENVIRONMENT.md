@@ -2,6 +2,14 @@
 
 This document consolidates reusable host/runtime facts promoted from PrayerClarity, Gamepad Tooltip Position Fix, Meditation Speed, Rain & Wind Volume Controls, Keeper's Lantern, Crafting Planner, and Bite Countdown.
 
+## Native window events, overlays and information-list limits — static 2026-10-14
+
+Direct accepted Assembly-CSharp.dll IL: BaseGUI.all_guis_closed is opened_windows.Count==0. Its native on_window_opened/on_window_closed events receive a BaseGUI; Open updates state/stack before its event. Hide removes state/stack before its event, but _on_hide and other native close callbacks run afterwards. A consumer should schedule later work rather than open a replacement window inside the close event.
+
+Stack emptiness does not prove that all presentation is gone. TooltipBubbleGUI._all registers/removes native tooltip instances; SpeechBubbleGUI.all registers speaker bubbles; ContextMenuBubbleGUI.Show uses the existing GUIElements.context_menu_bubble instance and its is_shown field. Accepted-hash level2 corner_talk has add_to_opened_stack=false. BaseCharacterComponent.PlayerControlIsDisabled checks control_enabled, can_be_locally_controlled, the native stack and building mode. These are static guard owners, not universal third-party-overlay or installed notification coordination acceptance.
+
+TextWindowGUI's native prefab has an expanding text label and no scroll component. TechUnlockDialogGUI.OpenAsItemsList retains a three-row capacity. Neither is a verified arbitrary-length notification list. Consumer ResearchableAlchemyRecipes owns the unresolved scroll/page presentation choice and its eventual renderer/real-runtime checks. Native inputs: Assembly-CSharp.dll e72e4270e4b88dd0a87ca23c9cf1750aec4c4a0fedb40b6d2dae7902fc9c7fd8; level2 1f75a0328dc4987f3020688a0feb0d310c2bf3f6e288c6e4a64ad09db1f39041. Private bounded IL/prefab projection remains in that consumer's ignored work/palette; no host source/assets are published.
+
 ## Technology tooltip width lifecycle
 
 The canonical detailed entry remains in `docs/GAME_INTERNALS.md#technology-tooltip-width-lifecycle`.
