@@ -2,6 +2,10 @@
 
 This document consolidates reusable host/runtime facts promoted from PrayerClarity, Gamepad Tooltip Position Fix, Meditation Speed, Rain & Wind Volume Controls, Keeper's Lantern, Crafting Planner, and Bite Countdown.
 
+## Native item sprite shader — static 2026-10-15
+
+On the pinned 1.407 inputs (Assembly-CSharp SHA-256 e72e4270e4b88dd0a87ca23c9cf1750aec4c4a0fedb40b6d2dae7902fc9c7fd8; level2 1f75a0328dc4987f3020688a0feb0d310c2bf3f6e288c6e4a64ad09db1f39041; resources.assets 215c7981901a4b72d5db717666ba47ad3cc032527c95f58dc39d8af1293a69ca), CraftItemGUI 24662 references BaseItemCellGUI 24850, whose x1 UI2DSprite 33400 has shader pointer resources.assets 7928, named `Unlit/Transparent Blue Color Replace`, material pointer zero and a dark native tint. Its visual GameObject contains only Transform/UI2DSprite; counter 28851 contains Transform/UILabel/StaticFontLabel. BaseItemCellGUI.DrawIcon assigns the sprite to that existing renderer. UI2DSprite.shader instead defaults to `Unlit/Transparent Colored` when neither material nor shader is supplied. Therefore copying a native item sprite into a newly constructed default UI2DSprite does not preserve the native rendering contract. Preserve the native renderer/shader/tint together; assigning Color.white is not equivalent. ResearchableAlchemyRecipes .49's returned blue science appearance and .50 correction are owned by that project's TEST_LOG.md/VERIFIED_RUNTIME_DATA.md; this static fact does not prove the .50 installed result or the cause of its unrelated .48 loading nonresponse.
+
 ## Native window events, overlays and information-list limits — static 2026-10-14
 
 Direct accepted Assembly-CSharp.dll IL: BaseGUI.all_guis_closed is opened_windows.Count==0. Its native on_window_opened/on_window_closed events receive a BaseGUI; Open updates state/stack before its event. Hide removes state/stack before its event, but _on_hide and other native close callbacks run afterwards. A consumer should schedule later work rather than open a replacement window inside the close event.
