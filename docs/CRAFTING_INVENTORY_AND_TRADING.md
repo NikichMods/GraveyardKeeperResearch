@@ -4,6 +4,10 @@ This document consolidates reusable accepted facts promoted from Crafting Planne
 
 ## CraftDefinition and builder recipe model
 
+### Actual vendor tier commits versus temporary projections — 1.407
+
+On the pinned Assembly-CSharp SHA-256 e72e4270e4b88dd0a87ca23c9cf1750aec4c4a0fedb40b6d2dae7902fc9c7fd8, Vendor.TryLevelUpVendor() returns true after committing cur_tier + 1 and its native analytics event. Vendor.OnEndOfDay invokes it after TradeWithBank and before its success return. Vendor.cur_tier reads/writes vendor_data parameter vendor_tier. GetMoneyNeededForVendorLevelUp and GetTotalGoodsOnNextTier also temporarily increment that same property and restore it while projecting values. Thus observing the setter or every vendor_tier write would misclassify temporary projections as real upgrades. Observe the successful semantic method, verify actual before/after increase, and defer dependent work until native processing settles. Existing Vendor.vendor_data is readable without constructing/filling another Vendor. ResearchableAlchemyRecipes .54 consumes this seam for known-Clotho research discovery; its per-save policy/tests and installed event acceptance limits belong to that project.
+
 ### Station-input spend display and QueueEverything — 1.407
 
 Verified static/focused executable evidence (2026-10-15): CraftItemGUI.Redraw assigns txt_spend from CraftDefinition.GetSpendTxt. Native ingredient rows use needs; native spend text handles only fire among needs_from_wgo, so another station currency requires its own scoped presentation. ResourceBasedCraftGUI uses the native (sci) science symbol. Installed QueueEverything 2.2.1 (owner p1xel8ted.gyk.queueeverything, DLL SHA-256 fc90e74404ac8b1ff3e540b414f0e2d5d69da10808b0b5a52ad382aa888442dd) additionally replaces GetSpendTxt's result with its own calculation, also filtering station inputs to fire. Earlier result extensions can therefore be erased despite correct native payment data.
