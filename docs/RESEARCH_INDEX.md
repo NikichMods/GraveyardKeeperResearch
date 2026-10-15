@@ -19,6 +19,9 @@ Native window/overlay coordination: UI_INPUT_TIME_AND_ENVIRONMENT.md records Bas
 
 ### UI / NGUI / input / timing / environment
 
+- Native picker warning attribution in UI_INPUT_TIME_AND_ENVIRONMENT.md: InventoryPanelGUI.DoOpening creates bare separator widgets without assigning their layer; bounded .56 runtime identifies five layer0 separators against panel13, corrected by native CheckLayer. Initial image/text asset scans miss these generated widgets. No general layer patch or clean-game compatibility claim follows. Consumer-specific cleanup/acceptance stays in ResearchableAlchemyRecipes.
+
+
 - `docs/GAME_INTERNALS.md` — BepInEx plugin-metadata constraints, detailed Technology-tooltip width lifecycle, and accepted standard item-tooltip child-alignment/native-span behavior.
 - `docs/UI_INPUT_TIME_AND_ENVIRONMENT.md`, native craft tabs section — static CraftGUI/CraftTabGUI tab ownership, separate top-of-stack MixedCraftGUI composition, Survey's distinct picker owner and semantic-key/close lifecycle; bounded study-table two-tab usability is observed in 0.1.1, but live key-map mutation on close produces enumeration errors. Native icon IDs and the field-replacement correction are documented and observed in the returned 0.1.2 run; picker-related NGUI layer-warning ownership remains open.
 - `docs/UI_INPUT_TIME_AND_ENVIRONMENT.md` — Technology-tree gamepad focus/unlock-tooltip ownership, gamepad bubble placement lifecycle, NGUI screen-size ownership, Pray GUI craft-button anchor ownership, WaitingGUI timing/fixed-step ownership, SliderDec/SliderInc input/hold-repeat, WaitingGUI button tips, localization reload, the verified 1.407 `GJL.L(string)` localization ABI / firstpass identity, current-language UILabel font ownership, weather-audio ownership, environment-preset refresh, and final ambient-light observation.
