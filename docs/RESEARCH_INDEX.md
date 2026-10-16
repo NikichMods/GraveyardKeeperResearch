@@ -107,3 +107,6 @@ The canonical knowledge base is public, but research inputs do not have to be pu
 Do not create a private scratch repository by default. Use one only when a concrete operational need appears; accepted reusable conclusions still return to this index and the linked canonical documents.
 
 - Native formula final consumer: ALCHEMY_SYSTEM.md, Native known-formula list section, records exact completed_one_time_crafts -> station-filtered CraftGUI.OpenAsAlchemy, specific authored disclosure vs manufactured completion, grouped pseudotech dialog capacity and native save preparation/serialization boundaries. Installed reward/full-restart evidence belongs to the consuming project.
+
+- Native outbound transfer invalidation: CRAFTING_INVENTORY_AND_TRADING.md, Successful native inventory transfer section, explains why MultiInventory.MoveItemTo bypasses Item.RemoveItem observers and records the bounded Quick Stack refresh acceptance from Building Planner0.1.14. Observe the successful semantic transfer, preserve native capacity/ownership and avoid polling.
+- Native action-tip palette/artwork: UI_INPUT_TIME_AND_ENVIRONMENT.md, Native action-tip gradient section, records public UILabel gradient properties, inspected cream-to-brown tip styling and native round direction sprites. Native copy/layout acceptance remains consumer-specific.
