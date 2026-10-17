@@ -6,6 +6,18 @@ Each entry should state its evidence status, owner/path, verified behavior, supp
 
 Broader accepted internals are split by domain for maintainability: `DIALOGUE_QUEST_AND_FLOWCANVAS.md`, `CRAFTING_INVENTORY_AND_TRADING.md`, `UI_INPUT_TIME_AND_ENVIRONMENT.md`, and `FISHING_RUNTIME.md`. Start from `RESEARCH_INDEX.md` rather than assuming this single file is exhaustive.
 
+## Current-save player ownership after scene restoration
+
+**Target:** Graveyard Keeper 1.407. **Status:** accepted native lifecycle fact, static IL plus installed repeat-load regression (2026-10-17).
+
+Existing live NPC/player objects alone do not prove a newly deserialized save has restored its scene. During repeat loading, mods can still see the previous scene's live WorldObjects before RestoreScene destroys them. Same-save reloads and cross-save reloads can both expose this window.
+
+The native `SaveSlotsMenuGUI.<StartPlayingGame>b__15_7` startup callback runs after world restoration, zone initialization and InitAllWorldWGOs. It obtains `MainGame.me.save.GetSavedPlayerInventory()` and passes that Item to `PlayerComponent.SpawnPlayer(true, inventory)`. SpawnPlayer installs MainGame.player and invokes `WorldGameObject.RestoreSavedInventory(Item)`, which directly assigns `_data`; GameSave.GetSavedPlayerInventory directly returns `_inventory`.
+
+A cheap read-only ownership boundary on this verified path is: current `GameSave._inventory` is non-null and reference-identical to live player's `_data`. Reading the fields avoids an initializing data getter. Existing loading-state and consumer-specific graph/binding checks remain necessary. This is not a universal readiness condition for every game subsystem, other game versions, or save mutation, and it does not replace later reference validation.
+
+Evidence/consumer: [Day Wheel Quest Markers native boundary and accepted 1.1.16](https://github.com/NikichMods/DayWheelQuestMarkers/blob/main/docs/SCENE_READINESS_1.1.16.md), exact tested source `e9d9b86427a5155f91299676249d9636dae354ff`. Its read-only diagnostic proved all six cached weekday WorldObjects became destroyed when prepared before restoration. With the ownership gate, player-operated A -> A -> B -> A produced four canonical Ready states, prewarm after RestoreScene/GetSavedPlayerInventory and before loading hid, with zero plugin warnings/errors or final-binding recovery; cold bootstrap and cached reads both passed. [Exact diagnostic and test identities](https://github.com/NikichMods/DayWheelQuestMarkers/blob/main/docs/TEST_BUILD_LOG.md). Product marker rules and release ownership remain in that repository.
+
 ## BepInEx plugin metadata
 
 ### BepInPlugin version strings must be numeric/System.Version-parseable

@@ -15,6 +15,8 @@ Active-station cancellation access: CRAFTING_INVENTORY_AND_TRADING.md records na
 
 ## Shared game/runtime internals
 
+- [Current-save player ownership after scene restoration](GAME_INTERNALS.md#current-save-player-ownership-after-scene-restoration): verified GK 1.407 startup inventory writer, stale prior-scene window on same/cross-save loads, and accepted read-only readiness boundary; consumer-specific checks remain required.
+
 Native window/overlay coordination: UI_INPUT_TIME_AND_ENVIRONMENT.md records BaseGUI stack/event ordering, separate tooltip/speech/context/corner overlays, native player-control guard and three-row/no-scroll information-window limits. Static owners for later safe-notification integration; no installed popup-coordination acceptance is implied.
 
 ### UI / NGUI / input / timing / environment
