@@ -57,6 +57,8 @@ Key established direction:
 
 ### Crafting / inventory / trading / buffs
 
+- Repeatable builder placement in CRAFTING_INVENTORY_AND_TRADING.md: exact DoPlace material/preview/just_built ordering, capture-before-next-preview identity, and bounded passive observation of two commits, busy rejection, cancellations and upstream material refusal. Common craft completion and upgrade/repair/clearing remain separate; planner decrement acceptance belongs to Building Planner.
+
 - `docs/STUDY_RESOURCE_ECONOMY.md` — bounded static 1.407 paper/science yields, technology unlock owners and material-study/payment limits. Science is a station resource; authored paper yields do not establish player income rates or final mod prices.
 
 - Ordinary source/card observation in CRAFTING_INVENTORY_AND_TRADING.md: installed manual 0.1.2 confirms current-save church-workbench visibility against exact native/grouped-card ID sets for sixteen source groups. Preserve _possible_crafts membership when variants share one card; affordability and temporary busy-state policy are distinct from visibility. Bounds exclude universal physical/early/busy access claims.
