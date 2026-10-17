@@ -114,3 +114,5 @@ Do not create a private scratch repository by default. Use one only when a concr
 
 - Native outbound transfer invalidation: CRAFTING_INVENTORY_AND_TRADING.md, Successful native inventory transfer section, explains why MultiInventory.MoveItemTo bypasses Item.RemoveItem observers and records the bounded Quick Stack refresh acceptance from Building Planner0.1.14. Observe the successful semantic transfer, preserve native capacity/ownership and avoid polling.
 - Native action-tip palette/artwork: UI_INPUT_TIME_AND_ENVIRONMENT.md, Native action-tip gradient section, records public UILabel gradient properties, inspected cream-to-brown tip styling and native round direction sprites. Native copy/layout acceptance remains consumer-specific.
+
+- World repair/clearing completion in CRAFTING_INVENTORY_AND_TRADING.md: bounded passive observation separates successful start/spend from later ProcessFinishedCraft/OnFinishedCraft/End; original-owner capture survives replacement, and clearing target0 remains Unity-alive at return despite native DestroyMe. Builder upgrade and negative paths remain separate; consumer planner removal is not established.
