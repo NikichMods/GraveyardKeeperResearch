@@ -16,6 +16,7 @@ Active-station cancellation access: CRAFTING_INVENTORY_AND_TRADING.md records na
 ## Shared game/runtime internals
 
 - [Current-save player ownership after scene restoration](GAME_INTERNALS.md#current-save-player-ownership-after-scene-restoration): verified GK 1.407 startup inventory writer, stale prior-scene window on same/cross-save loads, and accepted read-only readiness boundary; consumer-specific checks remain required.
+- [Native binary save slot, writer and loaded identity](GAME_INTERNALS.md#native-binary-save-slot-writer-and-loaded-identity):1.407 save_slot/FromBinary/scene-start identity, delayed load and internally caught native disk failures; bounded Building Planner save/load/two-slot/empty/unsaved-change acceptance, without native payload mutation or a forced I/O-failure claim.
 
 Native window/overlay coordination: UI_INPUT_TIME_AND_ENVIRONMENT.md records BaseGUI stack/event ordering, separate tooltip/speech/context/corner overlays, native player-control guard and three-row/no-scroll information-window limits. Static owners for later safe-notification integration; no installed popup-coordination acceptance is implied.
 
