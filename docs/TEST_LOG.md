@@ -240,3 +240,13 @@ Do not record routine repository inspection as an in-game test. Do not rewrite a
 - The diagnostic's `p_t_bee` search has expected substring false positives against `p_t_beeswax`; exact conclusions were filtered by expression identity.
 - Save safety: no mutation was performed; diagnostic may be removed.
 - Status: **accepted**. Reusable facts promoted to `docs/TECH_TREE_INFORMATION_RESEARCH.md`.
+
+## 2026-10-19 — Max Buttons redraw observer0.1.0 prepared/installed
+
+User reopens deferred Max Buttons Redux errors and asks for attribution/planner relation, with a game check if needed. MAX_BUTTONS_REDRAW_RESEARCH.md owns known facts, hypotheses and exact method selection. No production defect fix is implemented. Existing producer-side cached flag/row state is suspicious, but the failing native member and planner necessity remain unproved.
+
+Frozen observer source c3777c192e7bbe07becf71d6c95eeedec2f400ba on research/max-buttons-redraw. Local native-reference build via research/MaxButtonsRedrawProbe/Build.ps1, Roslyn SDK6.0.406, C#7.3, optimized/deterministic/warnings-as-errors passes. DLL version0.1.0.0 SHA256d82e8071958493ef31ec5877333dc5b4b9b4ead2a824698e8a290a88cd681f38. No proprietary references distributed. Desktop executable checks actual compiled finalizers preserve identical exception objects and normal null returns, restore input scope and do not consume the detailed observation budget on per-frame input ticks; real Unity/patch activation remains untested until return.
+
+Installed passive sidecar at2026-10-18T21:15:17Z (2026-10-19 Moscow) with host closed. Existing planner0.1.25 SHA2560922e8d7c27699cbe8483c2ee6c158034c105916df256070011609c49f31b1e2 and Max Buttons SHA256e811fc228ece102e389759d278bb66569884898b827369f99e11c984ffc2af30 are unchanged/verified. Exact artifact/build identity and install receipt stay private in the consuming Crafting-Planner checkout under artifacts/MaxButtonsRedrawProbe-0.1.0/ and .local/evidence/max-redraw-observer-install/. Observer is standalone MaxButtonsRedrawProbe.dll, GUIDnikich.gyk.maxbuttonsredrawprobe. It propagates native exceptions and changes no save/inventory/row/quantity policy; existing Max Buttons SetAmount still operates normally. No recurring scan/per-frame logging.
+
+Pending user sequence: ordinary crafting max/min -> close -> technologies4–5 branches -> building menu open/close -> technologies -> ordinary crafting max/min. Do not start work or require saving. Read MAX_REDRAW ready/patch/window/set_amount/redraw_result/input_exception markers after return. If unresolved, actual planner-absent control is required; a non-reproduction is not a fix. Remove observer after final evidence collection.
