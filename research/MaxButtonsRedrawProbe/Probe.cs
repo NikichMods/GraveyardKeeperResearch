@@ -10,17 +10,18 @@ using BepInEx;
 using BepInEx.Logging;
 using HarmonyLib;
 using UnityEngine;
-[assembly: AssemblyVersion("0.1.0.0")]
-[assembly: AssemblyFileVersion("0.1.0.0")]
+[assembly: AssemblyVersion("0.1.1.0")]
+[assembly: AssemblyFileVersion("0.1.1.0")]
 namespace NikichMods.MaxButtonsRedrawResearch
 {
-    [BepInPlugin(Id, "Max Buttons Redraw Observer", "0.1.0")]
+    [BepInPlugin(Id, "Max Buttons Redraw Observer", "0.1.1")]
     public sealed class Probe : BaseUnityPlugin
     {
         private const string Id = "nikich.gyk.maxbuttonsredrawprobe";
         private static ManualLogSource _log;
         private static Type _plugin, _plannerControls;
-        private static int _inputs, _windows, _errors;
+        private static int _inputs, _windows, _errors, _hides;
+        private static bool _craftSeen;
         private Harmony _harmony;
         [ThreadStatic] private static int _input;
         private sealed class State { internal string Before; internal int Input; }
@@ -41,7 +42,7 @@ namespace NikichMods.MaxButtonsRedrawResearch
                 Bind(AccessTools.Method(typeof(CraftGUI), "Hide", new[] {typeof(bool)}), "BeforeHide", "AfterHide");
                 BaseGUI.on_window_opened += Window;
                 BaseGUI.on_window_closed += Window;
-                Emit("ready version=0.1.0 max_sha256=" + Digest(assembly.Location) + " planner=" + (planner == null ? "absent" : planner.GetName().Version.ToString()) +
+                Emit("ready version=0.1.1 max_sha256=" + Digest(assembly.Location) + " planner=" + (planner == null ? "absent" : planner.GetName().Version.ToString()) +
                      " planner_sha256=" + (planner == null ? "absent" : Digest(planner.Location)));
                 Owners(AccessTools.Method(typeof(CraftItemGUI), "Redraw", Type.EmptyTypes));
                 Owners(AccessTools.Method(typeof(CraftItemGUI), "OnOver", Type.EmptyTypes));
@@ -145,11 +146,30 @@ namespace NikichMods.MaxButtonsRedrawResearch
             if (__state != null && (__exception != null || __state.Input <= 12)) Emit("redraw_result input=" + __state.Input + " outcome=" + (__exception == null ? "normal" : "exception") + __state.Before + (__exception == null ? "" : " exception=" + __exception));
             return __exception;
         }
-        private static void BeforeHide(out string __state) { try { __state = Context(); } catch { __state = "unavailable"; } }
+        private static string CachedSnapshot()
+        { try { return Snapshot(AccessTools.Field(_plugin, "_craftItemGui").GetValue(null) as CraftItemGUI); } catch { return "snapshot_unavailable"; } }
+        private static bool ObserveWindow(bool craft, bool technology, bool top)
+        {
+            if (craft && top) _craftSeen = true;
+            if (!_craftSeen || (!craft && !technology) || _windows >= 48) return false;
+            _windows++;
+            return true;
+        }
+        private static void BeforeHide(out string __state)
+        {
+            __state = null;
+            try
+            {
+                CraftGUI craft = GUIElements.me != null ? GUIElements.me.craft : null;
+                if (craft != null && craft.is_shown_and_top) _craftSeen = true;
+                if (_craftSeen) __state = CachedSnapshot();
+            }
+            catch { }
+        }
         private static Exception AfterHide(Exception __exception, string __state)
-        { try { if (_windows < 48) Emit("craft_hide before=" + __state + " after=" + Context()); } catch { } return __exception; }
+        { try { if (__state != null && _hides++ < 24) Emit("craft_hide before=" + __state + " after=" + CachedSnapshot()); } catch { } return __exception; }
         private static void Window(BaseGUI gui)
-        { try { if (_windows++ < 48) Emit("window_change type=" + (gui == null ? "null" : gui.GetType().Name) + Context()); } catch { } }
+        { try { if (gui != null && ObserveWindow(gui is CraftGUI, gui is TechTreeGUI, gui.is_shown_and_top)) Emit("window_change type=" + gui.GetType().Name + CachedSnapshot()); } catch { } }
         private void Stop()
         {
             BaseGUI.on_window_opened -= Window; BaseGUI.on_window_closed -= Window;
