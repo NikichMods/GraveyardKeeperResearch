@@ -22,6 +22,8 @@ Native window/overlay coordination: UI_INPUT_TIME_AND_ENVIRONMENT.md records Bas
 
 ### UI / NGUI / input / timing / environment
 
+- [Max Buttons Redux redraw attribution](MAX_BUTTONS_REDRAW_RESEARCH.md): open1.407 cross-mod investigation, cached craft-input flag versus technology-window errors; passive observer0.1.0 captures actual row/patch/window state. Cause and planner contribution remain unproved; no production compatibility fix is accepted.
+
 - Native picker warning attribution in UI_INPUT_TIME_AND_ENVIRONMENT.md: InventoryPanelGUI.DoOpening creates bare separator widgets without assigning their layer; bounded .56 runtime identifies five layer0 separators against panel13, corrected by native CheckLayer. Initial image/text asset scans miss these generated widgets. No general layer patch or clean-game compatibility claim follows. Consumer-specific cleanup/acceptance stays in ResearchableAlchemyRecipes.
 
 
