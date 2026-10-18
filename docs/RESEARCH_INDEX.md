@@ -62,6 +62,8 @@ Key established direction:
 
 ### Crafting / inventory / trading / buffs
 
+- Carried builder-bag ownership/capacity in CRAFTING_INVENTORY_AND_TRADING.md: native1.407 bag_builder/flitch data/filter/16-slot initialization, carried-vs-stored bag count exclusion and accepted5-item native transfer into the carried bag at ordinary capacity0. One representative family; toolbelt/nested/all-bag generalization is excluded. Planner product acceptance stays in Crafting-Planner.
+
 - Repeatable builder placement in CRAFTING_INVENTORY_AND_TRADING.md: exact DoPlace material/preview/just_built ordering, capture-before-next-preview identity, and bounded passive observation of two commits, busy rejection, cancellations and upstream material refusal. Common craft completion and upgrade/repair/clearing remain separate; planner decrement acceptance belongs to Building Planner.
 
 - `docs/STUDY_RESOURCE_ECONOMY.md` — bounded static 1.407 paper/science yields, technology unlock owners and material-study/payment limits. Science is a station resource; authored paper yields do not establish player income rates or final mod prices.

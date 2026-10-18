@@ -140,6 +140,16 @@ For player-carried counts, `Item.GetTotalCount(item_id, count_in_bags:true)` is 
 
 **Evidence provenance:** Crafting Planner Probe 0.1.0, source `f94be35330d17f3dccdfbe927d4f847fb5905498`.
 
+### Carried builder bag ownership/capacity —1.407, accepted2026-10-19
+
+Native data and signature inspection: bag_builder is BagType7,4x4/16 slots; flitch stack30 accepts BagType1/7. cabbage_crop accepts1/3/8 and cannot enter bag_builder. Item(id,count) invokes its native bag initialization; Item.CanBeInsertedInBag checks the native definition filter. GetMultiInventoryOfWGOWithoutWorldZone(true) constructs Inventory(WGO) with WGO.data and appends Inventories for bags physically in that root inventory; it does not add a separate toolbelt inventory or the world-zone storage.
+
+Runtime observations in the modded PC installation: player.data.GetTotalCount(flitch,true) stays30 when ordinary/bag allocation changes25/5 ->30/0 ->5/25. With ordinary inventory empty, putting a25-flitch bag into the open chest changes carried25->0 while chest total becomes30 (5 loose+25 bag); retrieving the bag restores25. A later chest-bag30 state likewise yields carried0. This establishes physical bag ownership, not an interaction-inventory count.
+
+After native root-only cabbage filling, ordinary flitch capacity is0 while player WithoutWorldZone(true) capacity is450 with30 bag-held flitch. Actual native MoveItemTo transfers5 from a different current chest: main remains0, carried/bag30->35, source5->0, capacity450->445. Thus the native bag-aware capacity/transfer path can use carried bag storage despite no ordinary capacity; native filters/limits are preserved.
+
+Provenance: Building Planner0.1.28 source569c6185ec4a670f43e83e2a96c328309aadabde/DLL257db7aa9ca9012952a1d87994bf2c20d8f29a12dc72a612c5e246fc1e3014f7; separate CarriedBagSetup0.1.0 source323113d0982d747b98d8d992eaca38eba81c9bc8/DLL5b991bfd3358127016cf405d0c792899bbe3d256de1cab019a74b29a1b8d4dbd. Private native log SHA256d31815479139f5ba47ed6cc1b2fb6dee0d768150f4fffce368225bce7ab389a3. The helper grants/fills only explicitly, observes real native counts/moves and never invokes Planner or replaces the tested transfer; it is backed up/removed afterwards. User reports behavior correct despite checklist deviations. Planner acceptance/cleanup remains owned by Crafting-Planner/docs/CARRIED_BAG_CHECK.md and TEST_LOG.md. Limits: one builder-bag/flitch family in the tested mod set, not all bags/filters, toolbelt, nested bags, arbitrary direct-list mutation or unmodded compatibility.
+
 ## Storage-local inventory and native transfer
 
 **Status:** verified static + accepted runtime.
