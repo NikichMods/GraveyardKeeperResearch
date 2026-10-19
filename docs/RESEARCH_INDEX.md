@@ -22,6 +22,8 @@ Native window/overlay coordination: UI_INPUT_TIME_AND_ENVIRONMENT.md records Bas
 
 ### UI / NGUI / input / timing / environment
 
+- Cinematic HUD alpha ownership in UI_INPUT_TIME_AND_ENVIRONMENT.md: ChangeHUDAlpha can hide an active HUD, distinct from EnableHUD and menu lifecycle; representative Building Planner1.0.4 prayer/bishop hide/return and chest/build continuity are accepted, without an all-script guarantee.
+
 - Native location/status and NPC anchor coordinates in UI_INPUT_TIME_AND_ENVIRONMENT.md: whole-block quality preservation, exact no-zone placeholder, external normal/additional anchor owners and configured Show Me Moar HUD-scale conversion. Bounded Building Planner1.0.3 cemetery acceptance; simultaneous two-card native coverage remains pending.
 
 - [Max Buttons Redux redraw attribution](MAX_BUTTONS_REDRAW_RESEARCH.md): 1.407 matched control confirms stale Max craft-input/cache state after automatic Hide reaches destroyed rows in technologies, with20 failures with planner and15 without. Planner is unnecessary for this scenario; exact dynamic fault member/other-mod contribution remain unisolated. Observer removed, original planner restored; no production compatibility fix accepted.
