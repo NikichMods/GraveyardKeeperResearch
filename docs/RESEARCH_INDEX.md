@@ -22,6 +22,8 @@ Native window/overlay coordination: UI_INPUT_TIME_AND_ENVIRONMENT.md records Bas
 
 ### UI / NGUI / input / timing / environment
 
+- Native location/status and NPC anchor coordinates in UI_INPUT_TIME_AND_ENVIRONMENT.md: whole-block quality preservation, exact no-zone placeholder, external normal/additional anchor owners and configured Show Me Moar HUD-scale conversion. Bounded Building Planner1.0.3 cemetery acceptance; simultaneous two-card native coverage remains pending.
+
 - [Max Buttons Redux redraw attribution](MAX_BUTTONS_REDRAW_RESEARCH.md): 1.407 matched control confirms stale Max craft-input/cache state after automatic Hide reaches destroyed rows in technologies, with20 failures with planner and15 without. Planner is unnecessary for this scenario; exact dynamic fault member/other-mod contribution remain unisolated. Observer removed, original planner restored; no production compatibility fix accepted.
 
 - Native picker warning attribution in UI_INPUT_TIME_AND_ENVIRONMENT.md: InventoryPanelGUI.DoOpening creates bare separator widgets without assigning their layer; bounded .56 runtime identifies five layer0 separators against panel13, corrected by native CheckLayer. Initial image/text asset scans miss these generated widgets. No general layer patch or clean-game compatibility claim follows. Consumer-specific cleanup/acceptance stays in ResearchableAlchemyRecipes.
