@@ -136,9 +136,37 @@ The stored player parameter is therefore not necessarily the canonical owner of 
 
 **Evidence provenance:** accepted Day Wheel intermediate-progress research.
 
+## Native FlowCanvas resource addresses and payment callbacks
+
+**Status:** verified on Graveyard Keeper 1.407, 2026-10-19.
+
+`CustomFlowScript.GetGraph(string)` prepends `FlowCanvas/` to the argument and
+uses `SmartResourceHelper.GetResourceAs<FlowScript>`. It does not search by graph
+name across subfolders. The ResourceManager table stores Euric's graph under
+`flowcanvas/wgo scripts/npc_euric` (asset path ID 150524); its live graph name is
+still `npc_euric`. The two zone graphs `on_enter_ev_s_s25_gd_zone` and
+`on_enter_ev_s_s34_gd_zone` are directly under `flowcanvas/` (150708/150709).
+Resource addresses and live graph identities must therefore be kept separate.
+Native `SmartResourceHelperPool.GetObject` caches even a failed/null lookup;
+retries or delayed initialization do not repair a nonexistent resource key.
+
+After `FlowGraph.OnGraphStarted` binds connections, `FlowOutput.Append` is a native
+extension point for a typed continuation callback: the existing continuation runs
+first. Preserve each node's semantic port distinction: `Flow_Talk.Out` and
+`Flow_Talk.On Finished` can lead to different authored actions. Matching text alone
+does not establish whether an action is at speech start or completion.
+
+Evidence: bounded native loader/port IL, ResourceManager entries and installed
+BetterSaveSoulRebalance 1.2.1 startup/room-payment/save-reload checks; exact source
+`cddf45d1bff188dd489434f4744e2a618de008fa`. Source/CI/log hashes and verification
+limits remain in that mod's `docs/TEST_BUILD_LOG.md` and `EURIC_REWARD_DESIGN.md`.
+Its balance, release acceptance and unexercised treatment payouts are not shared
+host facts. No raw game assets, graph dumps or localization are reproduced here.
+
 ## Known consumers
 
 - `NikichMods/DayWheelQuestMarkers`
+- `NikichMods/BetterSaveSoulRebalance`
 - potentially any Graveyard Keeper mod that predicts dialogue availability, task completion routes, one-shot interactions, or weekday HUD semantics.
 
 Do not generalize these findings to unrelated FlowCanvas node families or arbitrary UI surfaces without evidence.
