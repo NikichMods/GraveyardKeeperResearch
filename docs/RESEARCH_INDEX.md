@@ -15,6 +15,8 @@ Active-station cancellation access: CRAFTING_INVENTORY_AND_TRADING.md records na
 
 ## Shared game/runtime internals
 
+- [Selected workstation mechanics](STATION_PURPOSE_MECHANICS.md): native body-storage decay multipliers, virtual mine/lantern routes, incense lifecycle, organ enhancement, healing slots, fuelled cremation, receiver zone scope and known zombie alchemy; explicit unresolved printing/extractor discrepancies. Static owner checks, not new runtime acceptance.
+
 - [Current-save player ownership after scene restoration](GAME_INTERNALS.md#current-save-player-ownership-after-scene-restoration): verified GK 1.407 startup inventory writer, stale prior-scene window on same/cross-save loads, and accepted read-only readiness boundary; consumer-specific checks remain required.
 - [Native binary save slot, writer and loaded identity](GAME_INTERNALS.md#native-binary-save-slot-writer-and-loaded-identity):1.407 save_slot/FromBinary/scene-start identity, delayed load and internally caught native disk failures; bounded Building Planner save/load/two-slot/empty/unsaved-change acceptance, without native payload mutation or a forced I/O-failure claim.
 

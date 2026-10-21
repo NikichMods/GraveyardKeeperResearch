@@ -1,0 +1,30 @@
+# Selected workstation mechanics —1.407
+
+Static findings2026-10-21. Native inputs: resources.assets SHA256215c7981901a4b72d5db717666ba47ad3cc032527c95f58dc39d8af1293a69ca; Assembly-CSharp SHA256e72e4270e4b88dd0a87ca23c9cf1750aec4c4a0fedb40b6d2dae7902fc9c7fd8, MVID6f50b8e7-156b-49ac-bbe8-7505894b2364. Readable source: `Kupie/GYK_DECOMP@6abf79199d92482af1c7573870dd9a20ec2270b9`; installed IL separately checked the durability multiplier application and extractor getter/UI methods. No new runtime acceptance. Consumer copy decisions and the23-row audit live in [DTT purpose mechanics review](https://github.com/NikichMods/DetailedTechnologyTooltips/blob/main/docs/PURPOSE_MECHANICS_REVIEW.md).
+
+## Body storage
+
+`ItemsDurabilityManager.DoRecalcStep` passes the storage object's `durability_modificator` into `Item.UpdateDurability`, which multiplies durability loss by that parent factor. Body has a positive decay rate. PreparationII (`mf_preparation_2`), EmbalmingII (`mf_balsamation_2`) and fridge pallet (`corpse_fridge`) have0; base preparation/embalming0.1; normal/double pallets0.05. This stops/slows the **stored body's** decay; it does not restore freshness or establish an equivalent preservation factor for every nested organ, whose child update has its own parameter. Do not infer surgical-error changes from this multiplier.
+
+## Virtual construction and special stations
+
+- Mine/quarry build end scripts resolve through native resources graphs150844/150848/150847 to a fixed GD point, spawning the physical bench/fence and starting iron/stone/marble production respectively. This closes the DTT virtual blueprint-to-physical route for those exact three records. Existing [iron/coal cycle and positional identity](CRAFTING_INVENTORY_AND_TRADING.md#zombie-mine-production-object-identity) still applies.
+- `lantern_network_place` graph150661 iterates eight fixed GD tags `gd_lantern_1..8` and spawns `lantern_place` at each. The native `Flow_CustomForIterator` starts at0; the graph adds1 to the tag suffix. These are construction sites, not eight finished lanterns or arbitrary placement permission.
+- `place_soul_workbench` graph150839 spawns `soul_workbench`; `GUIElements.OpenCraftGUI` routes its interaction to `OrganEnhancerGUI`. `GetModifiedItemForCraftOutput` raises a selected white/red skull count up to3 and `CraftGUI.OpenAsOrganEnhancer` builds the concrete output recipe. The picker excludes some unsuitable parts. Do not generalize this to lowering skull counts or unrestricted organ editing.
+- Six `unlock_*_healing` graphs call referenced macro151084 `unlock_sin`: find `soul_healer`, set the passed `is_{sin}_unlocked` key to1. `SinItem.IsSinUnlocked` and `SoulHealerGUI` consume it for visibility and organ selection. `SinItem.GetOrganIdBySin` maps pride/skin, wrath/blood, gluttony/fat, sloth/brain, lust/heart, envy/intestine.
+- Wall crematorium body insertion runs graph150668 and changes to `mf_crematorium_corp`; its craft consumes20 internal `fire` and changes to burning. Graph150504 starts the burning craft; output is ash3, salt2 and burial certificate1. Its finish event restores the reusable object and preserves remaining fuel. This differs from a one-use outdoor pyre.
+- `soul_totem_souls` is native `SoulTotem` type. `WorldZone.HasSoulsTotemInZone` checks that type locally; remote control uses the result for applicable stations in the zone, chooses appropriate local inventory and charges gratitude through the native craft component. This is not universal remote access to every zone/station.
+
+## Temporary incense quality
+
+The four `church_incense_*` crafts consume incense, insert a quality2/4 pseudo-item using `output_to_wgo_on_start`, and remove it at completion with negative inventory output; cancellation also removes the start output. Native times270/360. `WorldGameObject.quality` includes inventory quality, and the church sums it with base object quality1/3. The incense bonus is temporary; this path is independently proved rather than inferred from candles.
+
+## Known zombie alchemy
+
+The `alchemy_workbench_zombie` census contains36 ordinary, non-hidden `mix_*` recipes, all needing unlocks. It accepts a zombie and forbids player work, with no mixed-formula input preset. `BaseCraftGUI.CommonOpen` filters via `GameSave.IsCraftVisible`/`CraftDefinition.IsLocked`; completed manual mixed crafting unlocks the simplified ingredient-based ID through `GameSave.OnFinishedCraft`. Existing [ALCHEMY_SYSTEM](ALCHEMY_SYSTEM.md) owns the general discovery model. This does not establish that every manual success formula has a zombie recipe.
+
+## Open contradictions: do not promote UI/data existence to effect
+
+PrintingI/II flyer crafts match inputs/output/time/energy. Their Technology grants exist, but unlock-gated `printng_notes`/`printng_notes_2`/`printng_chapter` availability is not established by recipe existence; no distinguishingII benefit has been proved. No blanket absence-of-advantage claim follows without the indirect/initial-grant path or native menu evidence.
+
+Extractor recipes/UI use damage bounds base0.1–0.3,II0.05–0.15,III0. The attached `soul_extractor` graph150572 instead reads `min_corruption_chance`/`max_corruption_chance` through node91/94 and wires them to `Flow_GenerateSoul`'s damage input ports. Installed `Flow_GetWGOParam.Invoke` defaults a missing requested parameter to0. Thus the displayed bounds and recipe damage-key writes do not alone prove the damage actually consumed. This is a static key mismatch, not an installed proof that all extractors have zero damage. Check effective graph inputs/alternate writers and the extraction result before promising a damage reduction or changing native mechanics. Storage preservation is separate and uses proved factors0.6/0.2/0.
