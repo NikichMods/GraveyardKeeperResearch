@@ -30,6 +30,10 @@ For a multi-quality `CraftDefinition`:
 
 The native Craft UI already exposes this contribution in its expanded quality presentation as a **star score with one decimal place**. Therefore wording such as `+★0.3` is a native-facing quality metric, not an invented percentage.
 
+### Desk tier and recipe difficulty — static 2026-10-21
+
+The pinned1.407 balance also establishes a station-tier quality difference independent of perks: paired Desk/DeskII records have difficulty approximately0.8->0.7 for notes,0.9->0.8 for chapters,0.5->0.3 for hardcover books and-0.7->-1.0 for stories. Many prayer variants improve by0.2; the inspected imagination/excellence prayer families are unchanged. Through the multiquality model above, lower difficulty improves resulting quality score/chances at otherwise equal inputs/perks. It is not one universal+20% chance or a guarantee of gold output. Some energy costs also decrease, but that separate fact does not replace the quality effect. This is static paired-definition evidence on the resources hash above; no new installed UI acceptance is implied. DetailedTechnologyTooltips' upgrade review owns short-copy prioritization.
+
 ### Verified quality perks
 
 | Perk | Stars | Current 1.407 linked quality consumers / scope |

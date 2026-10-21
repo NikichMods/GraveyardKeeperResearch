@@ -17,6 +17,12 @@ Accepted 1.407 identities already used by the shared research corpus:
 
 This document intentionally does not publish the vanilla formula corpus. Aggregate recipe counts and structural statistics are now established from loaded-balance runtime evidence; exact formulas remain unpublished.
 
+## Distillation tier yield comparison — static 2026-10-21
+
+On the pinned1.407 resources input above, matching non-hidden/non-auxiliary distillation records by input IDs/counts and output IDs identifies26 paired recipes for `mf_distcube_2_clay` and `mf_distcube_2_cuprum`. Eighteen ordinary material-decomposition pairs gain exactly1 extract in the upper-tier `output.min_value` expression at equal inputs and equal `Ppar("p_scientist")`; eight four-goo recovery pairs have equal output. All26 inspected pairs have native craft_time90 versus60. Thus upper tier is faster and increases ordinary material yield, but neither universal doubling nor an unqualified+1 on every distillation operation is correct. These are definition-level comparisons, not installed timing/UI acceptance.
+
+Serialized output Item.value is not sufficient to establish yield: it can remain1 in both tiers while min_value carries a different evaluated expression. Compare min/max expressions and perk terms before asserting equal output. DetailedTechnologyTooltips' WORKSTATION_UPGRADE_REVIEW.md owns the consumer's editorial prioritization and copy acceptance. Raw formulas/corpus remain private.
+
 ## Alchemy mixed-craft ownership
 
 Alchemy combination crafting uses the game's special `MixedCraftGUI` / `CraftType.MixedCraft` path rather than the ordinary fixed-recipe craft-card UI.

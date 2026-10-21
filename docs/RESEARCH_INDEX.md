@@ -68,6 +68,9 @@ Key established direction:
 
 ### Crafting / inventory / trading / buffs
 
+- Distillation tier yield comparison in `ALCHEMY_SYSTEM.md`:26 matched native1.407 pairs,18 material formulas+1 extract at equal perks and8 unchanged goo recoveries; time90->60. Item.value alone does not establish yield.
+- Desk tier difficulty in `PERK_MECHANICS.md`: different quality gains by output family, with some unchanged prayers; no universal quality percentage. Consumer copy prioritization belongs to DTT.
+
 - Carried builder-bag ownership/capacity in CRAFTING_INVENTORY_AND_TRADING.md: native1.407 bag_builder/flitch data/filter/16-slot initialization, carried-vs-stored bag count exclusion and accepted5-item native transfer into the carried bag at ordinary capacity0. One representative family; toolbelt/nested/all-bag generalization is excluded. Planner product acceptance stays in Crafting-Planner.
 
 - Repeatable builder placement in CRAFTING_INVENTORY_AND_TRADING.md: exact DoPlace material/preview/just_built ordering, capture-before-next-preview identity, and bounded passive observation of two commits, busy rejection, cancellations and upstream material refusal. Common craft completion and upgrade/repair/clearing remain separate; planner decrement acceptance belongs to Building Planner.
