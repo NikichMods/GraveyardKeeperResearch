@@ -461,6 +461,16 @@ The zombie mining area uses several placed-object IDs that are interaction/produ
 
 Engineering implication: code that presents crafting locations must not interpret `left_front` / `front` zombie-mine IDs as level I/II. Multiple world instances can share the same canonical object ID, so `GameBalance.GetItemCraftsIn` may already collapse several physical interaction points into one object-definition entry. An exact duplicate player-facing label can therefore be a placed-object artifact rather than a tier family.
 
+### Iron/coal work cycle and water-pump local supply
+
+**Static extension,2026-10-21.** Inspected1.407 `resources.assets` SHA256215c7981901a4b72d5db717666ba47ad3cc032527c95f58dc39d8af1293a69ca, plus `CraftComponent` and `SmartExpression` in the pinned source above. No new installed-runtime claim.
+
+The physical `mine_zombie_bench` has two linked crafts: `mine_zombie_bench_iron_production` outputs one `ore_metal` block and names `mine_zombie_bench_coal_production` in `craft_after_finish`; the latter outputs seven `coal` and links back to iron. Their base craft_time values are60 and40, with energy0; these are not a promise of real-time rates independent of worker efficiency. `CraftComponent.ProcessFinishedCraft` reads the next-craft field and schedules `Craft` on the same object's craft component after0.1. Coupled with the previously established worker-attachment start path, this proves a repeating iron/coal cycle rather than iron-only production or random coal byproducts. Consumer-specific virtual blueprint/placed-instance mapping still needs its own proof.
+
+The native `place_well_pump` FlowScript (resources pathID150843) connects Start -> spawn `well_pump` at `gd_well_pump_place` -> start `water_pumping` on that spawned WGO -> End. The ordinary `water_pumping` craft is automatic, has no input needs, energy0, craft_time10, `output_to_wgo=water1`, and `craft_after_finish=water_pumping`. Its output accumulates in the pump's own inventory; the object's water insertion filter/limit is500. This graph starts the ordinary recipe, not `water_pumping_test` with its different output expression.
+
+`SmartExpression.CanTakeWaterFromPump` checks that the pump's own data contains water. `TakeWaterFromPump` removes up to10 from it, drops that amount toward the player and triggers the `water_well` work animation; this function has no player-energy debit. Do not confuse it with `TakeWaterFromRefugeeWell`, which spends3 energy. The functioning pump has `open_in_multiinventory=true`, so a local supply can also be available to an applicable native crafting inventory; this is not a global replenished water pool. Automatic generation still takes time; “no time cost” would conflate passive work with instantaneous production.
+
 
 ## Successful native inventory transfer versus Item.RemoveItem observers — 1.407
 

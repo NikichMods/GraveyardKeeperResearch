@@ -36,6 +36,8 @@ Current manual-plot families include:
 
 The relevant fertilizer definitions write the same state model across these manual plot families.
 
+**Planting scope check,2026-10-21:** in the pinned1.407 balance, the exact `garden_empty_stick` craft-in census contains three planting rows, `garden_lentils_planting_1/2/3`, using four lentil seeds of the corresponding quality and changing the WGO to `garden_lentils`. Its other craft-in rows are fertilizer applications. For a short purpose description, name lentils directly; a generic “climbing crops, including lentils” category suggests an additional native planting choice that this census does not establish. This scope is the manual stick bed, not zombie/refugee farms or the vineyard trellis.
+
 ### Fertilizer tier mapping
 
 The game's internal numeric tiers include peat as tier 1:
