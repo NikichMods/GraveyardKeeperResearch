@@ -22,6 +22,8 @@ Native window/overlay coordination: UI_INPUT_TIME_AND_ENVIRONMENT.md records Bas
 
 ### UI / NGUI / input / timing / environment
 
+- [Native zone-quality and category text symbols](UI_INPUT_TIME_AND_ENVIRONMENT.md#native-zone-quality-and-category-text-symbols--static-2026-10-21): static1.407 church `(cross)` and graveyard `(wskull)` owners plus science/alchemy UIFont mappings; bare skull and crafting-quality star are different semantics. Font-route/rendering acceptance remains consumer-specific.
+
 - Cinematic HUD alpha ownership in UI_INPUT_TIME_AND_ENVIRONMENT.md: ChangeHUDAlpha can hide an active HUD, distinct from EnableHUD and menu lifecycle; representative Building Planner1.0.4 prayer/bishop hide/return and chest/build continuity are accepted, without an all-script guarantee.
 
 - Native location/status and NPC anchor coordinates in UI_INPUT_TIME_AND_ENVIRONMENT.md: whole-block quality preservation, exact no-zone placeholder, external normal/additional anchor owners and configured Show Me Moar HUD-scale conversion. Bounded Building Planner1.0.3 cemetery acceptance; simultaneous two-card native coverage remains pending.

@@ -2,6 +2,12 @@
 
 This document consolidates reusable host/runtime facts promoted from PrayerClarity, Gamepad Tooltip Position Fix, Meditation Speed, Rain & Wind Volume Controls, Keeper's Lantern, Crafting Planner, and Bite Countdown.
 
+## Native zone-quality and category text symbols — static 2026-10-21
+
+Fact on Graveyard Keeper1.407 `resources.assets` SHA-256 `215c7981901a4b72d5db717666ba47ad3cc032527c95f58dc39d8af1293a69ca`: native `game_data.world_zones_data` assigns `church.quality_icon="(cross)"` and `graveyard.quality_icon="(wskull)"`. In the inspected native UIFont symbol list (including resources pathID151301), `(cross)` maps to `icon_hud_cross` and `(wskull)` to `icon_skull_wreath_green`. Bare `(skull)` maps to `icon_hud_skull` and is not the graveyard quality symbol; `(s1)` maps to `item_star_1_font` and is not a church-quality replacement.
+
+The same symbol list provides `(sci)` -> `icon_science`, `(alc1)` -> `icon_txt_powder`, `(alc2)` -> `icon_txt_oil`, and `(alc3)` -> `icon_txt_essence`. Internal sprite names do not override native player-facing meanings (the solution-category sprite is named oil). These are static semantic/token mappings, not a guarantee that every arbitrary UILabel/font route enables symbols, or that rich-text tint, baseline, wrapping and localization presentation are acceptable. Preserve the host's active font/symbol mode and verify the consumer surface. DetailedTechnologyTooltips' purpose-copy catalogue records the proposed icon use; no new installed UI behavior is accepted by this finding. Raw asset/localization payloads remain private.
+
 ## Inventory picker separator layer warning — 2026-10-15
 
 Fact on pinned 1.407 Assembly-CSharp SHA-256 e72e4270e4b88dd0a87ca23c9cf1750aec4c4a0fedb40b6d2dae7902fc9c7fd8 and firstpass 9dc6def3b7715dd27eeb168ddc0af47e31c6f38d3fbee24bf592899392026498 (digest without spaces): InventoryPanelGUI.DoOpening creates a new GameObject named separator between inventory groups, parents it alongside inventory widgets, adds bare UIWidget, sets height6, and stores it in _separators (IL 00ca..0119). This creation path does not assign its layer. UIWidget.CheckLayer warns when widget and assigned panel layers differ, then sets the widget layer to the panel layer. Runtime-created bare UIWidgets are therefore outside an initial scene scan restricted to image/text subclasses.
