@@ -155,6 +155,8 @@ However, `TechUnlock.GetTooltip()` does not carry that resolved `ObjectCraftDefi
 
 This is a concrete host-level reason why at least the inspected blueprint unlock path is informationally sparse; it is not merely a localization-quality complaint.
 
+Bounded native-text follow-up2026-10-21 on resources SHA-256 `215c7981901a4b72d5db717666ba47ad3cc032527c95f58dc39d8af1293a69ca`: `lng_en`/`lng_ru` contain a non-empty `zombie_crafting_table_d` purpose description. Among the104 distinct visible-blueprint records inspected via direct object-ID plus `_d` lookup, this is a positive authored-purpose example. Therefore sparse blueprint presentation must not be generalized to “developers authored no station-purpose text.” Localization-key existence alone does not prove its use by the current Technology tooltip or exhaust aliases/tutorial/dialogue descriptions. DTT's TOOLTIP_LANGUAGE_RESEARCH.md owns the editorial implications; no localization corpus is imported here.
+
 ### Native recipe/build data already available
 
 For ordinary recipes, `CraftDefinition` owns useful presentation facts including:
