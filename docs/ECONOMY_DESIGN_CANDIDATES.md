@@ -15,7 +15,7 @@ Evidence owners: [resource saturation](ECONOMY_PROGRESSION_RESEARCH.md), [gravey
 - Both paid actions use **one escalating sequence for that grave**. Any paid improvement advances its shared counter; switching the action or replacing the prayer station does not restart the sequence. Illustrative 10/20/etc. prices are not agreed balance; numeric tuning is deferred. Improvements should consume substantial surplus faith.
 - Inspection shows actual contained items and quantities, including non-organ items if present. It does **not** reveal organs' skull-quality contributions. Do not devalue [Cultist](PERK_MECHANICS.md#cultist); the new contents view need not add numerical organ quality even when that perk exists. Do not assume example item contents normally occur in all native bodies.
 - **Agreed working separation:** faith changes grave state; money pays for appearance customization while preserving effectiveness. Silver/gold are selectable styles, not mandatory stronger tiers.
-- Paid improvements persist when the prayer station is demolished or moved. The station grants current access; it does not own the paid result. Exact physical-body versus grave-only implementation and exhumation/body-replacement rules remain unselected.
+- Paid improvements persist when the prayer station is demolished or moved. The station grants current access; it does not own the paid result. The user subsequently accepted grave-owned effective improvements and item-owned appearances; see the exhumation section. Implementation remains unselected.
 - **Tier candidate:** wooden prayer stations provide early access/preview and allow the first N paid improvements per grave; stone allows continuation of the same sequence without that station-tier cap. N and unlock timing are unselected. A tier cap already reached is not reset by moving/rebuilding the wooden station. Earlier effects stay when access is downgraded or absent.
 - Light/sparks on improved graves are possible feedback, not a mandatory visual treatment. The user also wants to serve players building a visually preferred cemetery rather than only maximum-score layouts.
 - The user proposed sarcophagi as tangible rewards for substantial, resource-consuming accomplishments. Only the marble candidate currently has the fuller static asset chain; runtime readiness is unproven.
@@ -34,14 +34,14 @@ Optional additional services (extra sermons/body deliveries) are candidates, not
 ## Decisions that must remain open
 
 - The surrounding-quality activation metric is removed from the current candidate. No district-quality bootstrap is required.
-- Effect ownership remains open: permanent body mutation or grave-only compensation. One selected grave per interaction is the current scope; do not silently replace it with an aura.
+- Effect ownership is agreed as grave-only compensation, not permanent body mutation. One selected grave per interaction is the current scope; do not silently replace it with an aura.
 - If the mechanism only converts red skulls, it stops when red skulls run out. A finite cemetery and decoration limits also bound useful improvement. Exponentially rising prices alone do not establish an infinite useful sink.
-- Shared price progression belongs to the grave; station replacement/reset exploits are resolved at design level by retaining this progression. Exhumation/body replacement and refunds still need a clear product rule.
+- Shared price progression belongs to the grave and remains through exhumation/body replacement. No automatic refund/reset occurs. Station replacement does not reset this progression.
 - Radius size, selection and overlap priority remain open. The former first-built-wins/overlapping-aura discussion is not an adopted dependency. Proposed simplification: show the highest available station tier when multiple stations cover the same grave, without making paid progress depend on a particular station ID.
 - Show current station type, grave improvement count/cap, shared next price and actual before/after rating. No need to reopen the user's complementary-action choice merely because both actions can sometimes yield the same numerical gain.
 - Numerical faith-income/price tuning is deferred by the user; ordinary/DLC income differences remain evidence for that later task, not a blocker to this design discussion.
 - Appearance and function need not be locked together. Useful improvement should not force a gold finish or strong particles on every player.
-- A physical-body edit can export improvements through exhumation/organs/zombie use; a cemetery-only alternative could preserve the role of anatomy elsewhere. The technical route and desired semantics are unselected.
+- The selected grave-only effect does not export skull improvements through exhumation/organs/zombie use. The technical route remains unverified.
 - Rewards should reflect completed work, not merely the number of paid button presses. Determine whether sarcophagus reward unlocks crafting, gives a first item, or does something else; no milestone or exclusivity adopted.
 
 ## Related reusable objects
@@ -72,16 +72,26 @@ Standalone browser check: shared illustrative prices 10 -> 20 -> 40; wooden cap;
 
 Next useful decision: compare these contained layouts, choose the clearest access path and agree on exhumation/body-replacement ownership. Numeric pricing remains deferred; native UI implementation is not authorized by the preview.
 
-## Exhumation and body replacement — recommendation pending agreement
+## Exhumation and body replacement — agreed working design
 
-The user requested this comparison; no ownership outcome is adopted yet. Preserve the agreed shared per-grave price/count when assessing alternatives.
+The user accepted this ownership recommendation on 2026-10-23. These are working product semantics, not verified implementation or runtime acceptance.
 
 - **Mixed ownership:** true skull conversion follows the physical body; added wreaths remain with the grave. This matches literal body editing but splits paid results from their shared price owner. Moving one body among low-count graves can reduce progressive conversion cost and may bypass a wooden-tier limit intended for the improvement sequence. Avoid claiming a proven runtime exploit: this is a consequence of the proposed pricing/ownership rules, not implemented behavior. Resolving it needs additional body history or a revised pricing contract.
-- **Recommended candidate:** both faith purchases belong to the grave. The conversion is an effective burial modifier, not a change to organs or physical body stats. Native anatomy/embalming changes still follow the body. Paid appearance treatment belongs to the selected physical decoration item, not its current grave. Cosmetic ownership is a recommendation, not an adopted rule or verified save capability.
+- **Selected:** both faith purchases belong to the grave. The conversion is an effective burial modifier, not a change to organs or physical body stats. Native anatomy/embalming changes still follow the body. Paid appearance treatment belongs to the selected physical decoration item, not its current grave. Storage/transfer/rendering capability still needs end-to-end verification.
 - Exhumation removes the original body with its ordinary anatomy changes. Both ritual investments and the shared paid-action count stay at the grave; there is no automatic refund or price reset. Empty graves receive no bonus contribution from these investments. A new body receives the grave's effects on burial.
 - Conversion capacity applies only to red skulls actually present: effective conversions are bounded by available red skulls. A red-free replacement does not gain white skulls from unused conversion capacity. Decoration remains a separate limit, and the same investment may yield a different score for a different body.
 - Moving that body elsewhere exports no prayer-station grave modifier and therefore no extra organ/zombie improvement. Moving an appearance-treated gravestone/fence carries its appearance; quality/effectiveness remains unchanged. Underlying compatible item/save identity still needs host investigation.
 - Station demolition/movement only changes current service access. It neither removes paid grave effects nor resets the action count. This repeats the agreed access/result separation, not a new dependency on the station.
 - UI should distinguish **body skulls**, **grave modifiers** and **effective burial result**. Never present a grave-only modifier as rewritten organs. Show decoration as its own quality plus paid wreaths. Keep contents inspection free/in radius and without organ-quality disclosure.
 - Before exhumation, add a compact consequence summary to the existing action/confirmation area: body leaves; grave investments and next price remain. Show replacement-body before/after result before burial when practical. No extra nested confirmation flow is proposed.
-- If the user instead wants actual persistent body cleansing, retain that as a legitimate alternative and explicitly revisit shared-counter/tier semantics before adoption. Full grave demolition/movement and mod-removal behavior still require their own clear ownership rules; no destructive rule is inferred here.
+- Actual persistent body cleansing is not the selected route. Reopen only on new user direction, including its pricing implications. Full grave demolition/movement and mod-removal behavior still require clear rules; the user's belief that an excavated grave cannot be removed is not treated as verified host evidence.
+
+## Appearance identity and presentation — 2026-10-23
+
+The user emphasized that an appearance must remain distinguishable on the physical item in inventory/storage, after installation/removal and in tooltips. A marker and changed icon are candidate presentation; an exact badge is not selected. Distinguish cosmetic treatment from native bronze/silver/gold quality. Do not alter native item-quality stats merely to obtain a quality star.
+
+Proposed presentation: retain the base item name, show a selectable finish in the icon and a separate tooltip line such as `Finish: silver-plated`; preserve the native decoration-quality information. Grave-bound extra wreaths/skull effects must not be attributed to a removed decoration in its tooltip.
+
+The [bounded host check](GRAVEYARD_RUNTIME.md#appearance-identity-seams--2026-10-23) finds serializable instance parameters and non-stackable sampled grave decorations, making a namespaced numeric appearance parameter a plausible first route. It is not a completed round trip: installation/removal recipes, UI redraw and world sprites need explicit handling. Separate definition IDs remain another route, with registration/recipe/loading implications; no architecture selected yet.
+
+Next technical acceptance slice, if implementation is later authorized: one base decoration, ordinary plus two finishes, distinguish them -> chest -> save/load -> install -> remove -> transfer to a second grave -> save/load; verify retained appearance and unchanged quality/durability. Also inspect a stack-changing mod only if it affects these items. No production probe is requested or supplied here.
