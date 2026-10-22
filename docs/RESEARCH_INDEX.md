@@ -24,7 +24,7 @@ Native window/overlay coordination: UI_INPUT_TIME_AND_ENVIRONMENT.md records Bas
 
 ### UI / NGUI / input / timing / environment
 
-- [Native zone-quality and category text symbols](UI_INPUT_TIME_AND_ENVIRONMENT.md#native-zone-quality-and-category-text-symbols--static-2026-10-21): static1.407 church `(cross)` and graveyard `(wskull)` owners plus science/alchemy UIFont mappings; bare skull and crafting-quality star are different semantics. Font-route/rendering acceptance remains consumer-specific.
+- [Native zone-quality and category text symbols](UI_INPUT_TIME_AND_ENVIRONMENT.md#native-zone-quality-and-category-text-symbols--static-2026-10-21): static1.407 church `(cross)` and graveyard `(wskull)` owners plus science/alchemy UIFont mappings; tooltip label23190 uses native NoEffect symbol mode3, with GJL owning final language font. Bare skull and crafting-quality star are different semantics. Rendering acceptance remains consumer-specific.
 
 - Cinematic HUD alpha ownership in UI_INPUT_TIME_AND_ENVIRONMENT.md: ChangeHUDAlpha can hide an active HUD, distinct from EnableHUD and menu lifecycle; representative Building Planner1.0.4 prayer/bishop hide/return and chest/build continuity are accepted, without an all-script guarantee.
 
