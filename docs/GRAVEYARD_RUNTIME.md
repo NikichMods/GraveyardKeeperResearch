@@ -56,3 +56,9 @@ Consequences:
 The marble sarcophagus manufacturing recipe consumes 4 `marble_plate_2`, 1 `marble_plate_3:3`, 3 `detail_2` at `mf_hammer_1`. Its quality 10 is a data fact, not proof of superiority to current DLC decorations. A cosmetic reward role remains possible without stronger numerical stats.
 
 Existing columbaria, lanterns, paths and flowerbeds may be candidates for additional systemic roles, but are already used objects. No missing-content or new-function claim for them is established here.
+
+## Additional bounded item/UI checks
+
+2026-10-22: targeted `items_data`/Russian-localization inspection identifies `communion_cookies` as «Печенье для причастия». The selected `craft_data` has no recipe producing this exact item. Seller/buyer eligibility, a new recipe and relationship effects are not established. Its base-price field is not a guaranteed sale quote.
+
+`GraveGUI.Redraw` in pinned [GraveGUI.cs](https://github.com/Kupie/GYK_DECOMP/blob/6abf79199d92482af1c7573870dd9a20ec2270b9/Assembly-CSharp/GraveGUI.cs) calls `body_panel.Draw(_body)` and displays grave quality. The buried-body skull panel is not a new proposed feature. Showing organ inventory/contributions would be an additional interface; usability/reachability is untested. See [Cultist semantics](PERK_MECHANICS.md#cultist) before changing visibility.
