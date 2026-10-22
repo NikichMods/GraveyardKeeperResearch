@@ -15,6 +15,8 @@ Active-station cancellation access: CRAFTING_INVENTORY_AND_TRADING.md records na
 
 ## Shared game/runtime internals
 
+- [Graveyard objects and rating](GRAVEYARD_RUNTIME.md): GK 1.407 prayer-station definitions, native body/decoration rating boundary and bounded sarcophagus/candle asset evidence. Static evidence only; placement and new mechanics unverified. [Late-game design candidates](ECONOMY_DESIGN_CANDIDATES.md) separately retain the user's exploratory prayer-station, anatomy-alternative and tangible-reward ideas; these are not adopted mechanics.
+
 - [Economy progression and resource saturation](ECONOMY_PROGRESSION_RESEARCH.md): GK 1.407 money, faith, station science and separate red/green/blue economies; conditional deficit-to-surplus transitions, DLC/automation differences, major costs and remaining-goal demand. [Scenario calculations](ECONOMY_SCENARIOS.md) distinguish explicit assumptions from measured playthroughs; [sources and contradictions](ECONOMY_SOURCES.md) record exact input identities, bounded native checks, player testimony and limits. Includes a small reproducible static extractor/derived evidence; no new game mechanics or population timing claims.
 
 - [Current-save player ownership after scene restoration](GAME_INTERNALS.md#current-save-player-ownership-after-scene-restoration): verified GK 1.407 startup inventory writer, stale prior-scene window on same/cross-save loads, and accepted read-only readiness boundary; consumer-specific checks remain required.

@@ -1,0 +1,58 @@
+# Graveyard objects and rating — GK 1.407
+
+Status: **bounded static evidence**, checked 2026-10-22. This document records host facts; proposed product mechanics live separately in [the candidate notes](ECONOMY_DESIGN_CANDIDATES.md).
+
+## Input identity and method
+
+- `resources.assets` SHA-256: `215c7981901a4b72d5db717666ba47ad3cc032527c95f58dc39d8af1293a69ca`.
+- `Assembly-CSharp.dll` SHA-256: `e72e4270e4b88dd0a87ca23c9cf1750aec4c4a0fedb40b6d2dae7902fc9c7fd8`.
+- Read selected `game_data.objs_data`, `craft_obj_data`, `craft_data`, `items_data`, `techs_data` and Russian localization with UnityPy/TypeTreeGenerator, using the same input identity and loading method as [the economy extractor](../research/economy/audit_economy.py).
+- Read IL of the installed assembly through reflection, without running gameplay methods: `WorldGameObject.get_quality`, `Item.GetBodySkulls`; inspected `ItemDefinition.type`'s nested enum.
+- Recovered the earlier bounded unused-asset audit (`definitions.json`, `targeted.json`, `verified.json`, `closure.json`, dated 2026-10-22). Those temporary local inputs are not public game payloads in this repository. This was a targeted recovery, not a fresh bulk asset scan.
+
+No runtime placement, save compatibility or proposed mechanic has been accepted by these checks.
+
+## Prayer stations
+
+| Definition | Russian localization | Authored quality |
+| --- | --- | ---: |
+| `pray_stand_wd` | Деревянная молельня | 2 |
+| `pray_stand_stn` | Каменная молельня | 4 |
+
+Construction definitions:
+
+- `graveyard_builddesk:p:pray_stand_wd_place`: 7 `flitch`, 4 `nails`, 1 `book:book_hard:1`.
+- `graveyard_builddesk:p:pray_stand_stn_place`: 4 `stone_plate_2`, 1 `stone_plate_3`, 1 `book:book_hard:2`.
+- Technology `Stone praying stand` includes the stone station construction alongside `road_marble` and `lantern_3` construction.
+
+These are existing quality-producing decorations, not literally valueless objects. The selected definitions do **not** establish an existing radius, grave ownership, skull conversion, active prayer interface or paid upgrade system. Those would be new mechanics requiring separate verification and implementation.
+
+## Native grave rating boundary
+
+For the body-present `QualityType` branch in `WorldGameObject.get_quality`, the inspected IL returns:
+
+`min(floor(inventory decoration quality) - displayed red skulls, available white skulls)`.
+
+The owner obtains skulls through `Item.GetBodySkulls(..., false)`. That method combines the body's own values and its contained items, clamps negative red/white totals to zero, and calculates available white skulls from durability. Its durability percentage is rounded up; values above 90 are treated as 100 before flooring the available-white result.
+
+Consequences:
+
+- Red-skull removal, white-skull addition and direct grave-quality addition are different interventions.
+- For an unspoiled body, an actual one-red-to-one-white conversion increases this rating by exactly 1 at unchanged decoration: both arguments of `min` rise by 1. It is not +2. With decay/rounding or a different intervention, evaluate the actual available-white result instead of promising the same gain.
+- Adding only white skulls is different: decoration may already be the limiting argument, so the rating gain can be zero.
+- Changing the physical body could also matter after exhumation or resurrection. A proposed grave-only effect must not be described as a permanent organ/body modification.
+- Empty graves, transient installation/removal state and generic object quality follow additional branches; the formula above is not a universal object-quality formula.
+
+## Bounded unused-asset candidates
+
+| Candidate | Confirmed evidence | Applicability limit |
+| --- | --- | --- |
+| `grave_top_sarcofag_mrb_1` | Item; quality 10; type 102, resolved as `ItemDefinition.ItemType.GraveFence`; locked manufacturing recipe; set/remove/fix/study references; three stage sprites | No technology craft unlock mention found in the bounded audit. Installation recipe presence does not prove compatible placement, visual composition or save/load. The name does not make it a gravestone-slot item |
+| `grave_top_sarcofag_stn_1` | Inventory icon `i_grave_top_sarcofag_stn_1` | No corresponding item or recipe in the earlier exact-ID check; no complete placeable object established |
+| `candle_6` | Item, icon and locked recipe | No use established in the selected object/construction/vendor/technology references; not proven to be a usable church candle or placeable decoration |
+| `skull_candle` | Item, icon and recipe | No input use found in the earlier recipe check; complete placeable object not established |
+| `candle_5` | Icon | No exact item established |
+
+The marble sarcophagus manufacturing recipe consumes 4 `marble_plate_2`, 1 `marble_plate_3:3`, 3 `detail_2` at `mf_hammer_1`. Its quality 10 is a data fact, not proof of superiority to current DLC decorations. A cosmetic reward role remains possible without stronger numerical stats.
+
+Existing columbaria, lanterns, paths and flowerbeds may be candidates for additional systemic roles, but are already used objects. No missing-content or new-function claim for them is established here.
