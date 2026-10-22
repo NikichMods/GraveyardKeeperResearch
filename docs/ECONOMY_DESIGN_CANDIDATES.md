@@ -1,6 +1,6 @@
 # Late-game economy — exploratory design candidates
 
-Status: **idea bank**, captured 2026-10-22 at the user's request. No production owner/mod, implementation, balance, unlock conditions or runtime acceptance is selected. This is not a second production design contract. If a production project adopts a candidate, its requirements and acceptance belong there.
+Status: **historical idea bank**, captured 2026-10-22/23. The prayer-station concept now has a production project: [Better Prayer Stations](https://github.com/NikichMods/BetterPrayerStations). Its [design](https://github.com/NikichMods/BetterPrayerStations/blob/main/docs/DESIGN.md), implementation plan and acceptance evidence are canonical there. Initial project snapshot: `60dc1b7` (documentation only, no runtime implementation). The notes below preserve exploration and decisions at transfer; do not maintain them as a second current product contract. Unadopted side ideas remain research candidates here.
 
 Evidence owners: [resource saturation](ECONOMY_PROGRESSION_RESEARCH.md), [graveyard host facts](GRAVEYARD_RUNTIME.md), [player needs and aesthetic motivation](GRAVEYARD_PLAYER_NEEDS.md).
 

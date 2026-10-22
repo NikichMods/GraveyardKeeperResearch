@@ -1,6 +1,6 @@
 # Graveyard objects and rating — GK 1.407
 
-Status: **bounded static evidence**, checked 2026-10-22. This document records host facts; proposed product mechanics live separately in [the candidate notes](ECONOMY_DESIGN_CANDIDATES.md).
+Status: **bounded static evidence**, checked 2026-10-22. This document records host facts; the consuming mod's product mechanics belong to [Better Prayer Stations](https://github.com/NikichMods/BetterPrayerStations/blob/main/docs/DESIGN.md). [Candidate notes](ECONOMY_DESIGN_CANDIDATES.md) preserve historical exploration and unrelated side ideas.
 
 ## Input identity and method
 
