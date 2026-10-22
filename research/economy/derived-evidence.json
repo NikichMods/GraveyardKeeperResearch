@@ -1,0 +1,1813 @@
+{
+  "game": "Graveyard Keeper 1.407",
+  "status": "bounded static data",
+  "input_sha256": {
+    "resources.assets": "215c7981901a4b72d5db717666ba47ad3cc032527c95f58dc39d8af1293a69ca",
+    "Assembly-CSharp.dll": "e72e4270e4b88dd0a87ca23c9cf1750aec4c4a0fedb40b6d2dae7902fc9c7fd8"
+  },
+  "unitypy_version": "1.23.0",
+  "technology_definitions": 187,
+  "technology_strata": {
+    "dlc=0;hidden=True;invisible=False": {
+      "count": 30,
+      "cost": {
+        "r": 20.0,
+        "g": 35.0,
+        "b": 65.0,
+        "v": 0.0,
+        "gratitude_points": 0.0
+      }
+    },
+    "dlc=0;hidden=False;invisible=False": {
+      "count": 120,
+      "cost": {
+        "r": 6355.0,
+        "g": 3787.0,
+        "b": 3485.0,
+        "v": 0.0,
+        "gratitude_points": 55.0
+      }
+    },
+    "dlc=3;hidden=True;invisible=True": {
+      "count": 3,
+      "cost": {
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0,
+        "v": 0.0,
+        "gratitude_points": 0.0
+      }
+    },
+    "dlc=1;hidden=True;invisible=False": {
+      "count": 11,
+      "cost": {
+        "r": 200.0,
+        "g": 315.0,
+        "b": 165.0,
+        "v": 0.0,
+        "gratitude_points": 0.0
+      }
+    },
+    "dlc=3;hidden=True;invisible=False": {
+      "count": 22,
+      "cost": {
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0,
+        "v": 0.0,
+        "gratitude_points": 0.0
+      }
+    },
+    "dlc=1;hidden=False;invisible=False": {
+      "count": 1,
+      "cost": {
+        "r": 10.0,
+        "g": 10.0,
+        "b": 0.0,
+        "v": 0.0,
+        "gratitude_points": 0.0
+      }
+    }
+  },
+  "visible_definition_branches_not_save_spend": {
+    "5": {
+      "count": 20,
+      "cost": {
+        "r": 1455.0,
+        "g": 350.0,
+        "b": 545.0,
+        "v": 0.0,
+        "gratitude_points": 0.0
+      }
+    },
+    "6": {
+      "count": 20,
+      "cost": {
+        "r": 1655.0,
+        "g": 887.0,
+        "b": 625.0,
+        "v": 0.0,
+        "gratitude_points": 0.0
+      }
+    },
+    "3": {
+      "count": 12,
+      "cost": {
+        "r": 435.0,
+        "g": 35.0,
+        "b": 270.0,
+        "v": 0.0,
+        "gratitude_points": 0.0
+      }
+    },
+    "4": {
+      "count": 17,
+      "cost": {
+        "r": 100.0,
+        "g": 760.0,
+        "b": 255.0,
+        "v": 0.0,
+        "gratitude_points": 0.0
+      }
+    },
+    "1": {
+      "count": 17,
+      "cost": {
+        "r": 140.0,
+        "g": 620.0,
+        "b": 575.0,
+        "v": 0.0,
+        "gratitude_points": 0.0
+      }
+    },
+    "2": {
+      "count": 22,
+      "cost": {
+        "r": 1985.0,
+        "g": 440.0,
+        "b": 1205.0,
+        "v": 0.0,
+        "gratitude_points": 0.0
+      }
+    },
+    "8": {
+      "count": 13,
+      "cost": {
+        "r": 595.0,
+        "g": 705.0,
+        "b": 10.0,
+        "v": 0.0,
+        "gratitude_points": 55.0
+      }
+    }
+  },
+  "technology_prerequisite_closures": {
+    "Stone gravestones": {
+      "definition_cost_including_hidden": {
+        "r": 40.0,
+        "g": 5.0,
+        "b": 15.0,
+        "v": 0.0,
+        "gratitude_points": 0.0
+      },
+      "hidden_may_be_script_granted": [
+        "Grave plate"
+      ],
+      "nodes": [
+        "Grave plate",
+        "Simple gravestones",
+        "Stone gravestones"
+      ]
+    },
+    "Carved marble gravestones": {
+      "definition_cost_including_hidden": {
+        "r": 840.0,
+        "g": 55.0,
+        "b": 345.0,
+        "v": 0.0,
+        "gratitude_points": 0.0
+      },
+      "hidden_may_be_script_granted": [
+        "Grave plate"
+      ],
+      "nodes": [
+        "Carved gravestones",
+        "Carved marble gravestones",
+        "Grave monuments",
+        "Grave plate",
+        "Marble gravestones",
+        "Simple gravestones",
+        "Stone gravestones"
+      ]
+    },
+    "Shining of faith": {
+      "definition_cost_including_hidden": {
+        "r": 500.0,
+        "g": 155.0,
+        "b": 440.0,
+        "v": 0.0,
+        "gratitude_points": 0.0
+      },
+      "hidden_may_be_script_granted": [
+        "Faith"
+      ],
+      "nodes": [
+        "Faith",
+        "Illumination of faith",
+        "Light of faith",
+        "Power of faith",
+        "Shining of faith",
+        "Softness of faith",
+        "Superpower of faith",
+        "Сomfort of faith"
+      ]
+    },
+    "Zombie winemaking": {
+      "definition_cost_including_hidden": {
+        "r": 160.0,
+        "g": 100.0,
+        "b": 90.0,
+        "v": 0.0,
+        "gratitude_points": 0.0
+      },
+      "hidden_may_be_script_granted": [
+        "Gathering",
+        "Zombie winemaking"
+      ],
+      "nodes": [
+        "Gathering",
+        "Grape farming",
+        "Transplanting",
+        "Winemaking",
+        "Zombie winemaking"
+      ]
+    },
+    "Random text generator": {
+      "definition_cost_including_hidden": {
+        "r": 5.0,
+        "g": 15.0,
+        "b": 55.0,
+        "v": 0.0,
+        "gratitude_points": 0.0
+      },
+      "hidden_may_be_script_granted": [
+        "Random text generator",
+        "Research"
+      ],
+      "nodes": [
+        "Inventing storyes",
+        "Random text generator",
+        "Research",
+        "Writing"
+      ]
+    }
+  },
+  "non_survey_faith_crafts": [
+    {
+      "id": "zombie_craft",
+      "faith": 10,
+      "one_time": false
+    },
+    {
+      "id": "lense",
+      "faith": 2,
+      "one_time": false
+    },
+    {
+      "id": "jewelry_detail_gold",
+      "faith": 2,
+      "one_time": false
+    },
+    {
+      "id": "bijouterie_gold",
+      "faith": 2,
+      "one_time": false
+    },
+    {
+      "id": "carved_wood",
+      "faith": 2,
+      "one_time": false
+    },
+    {
+      "id": "wood_magic_1",
+      "faith": 5,
+      "one_time": false
+    },
+    {
+      "id": "stone_plate_3",
+      "faith": 3,
+      "one_time": false
+    },
+    {
+      "id": "marble_plate_3",
+      "faith": 5,
+      "one_time": false
+    },
+    {
+      "id": "cover_hard",
+      "faith": 1,
+      "one_time": false
+    },
+    {
+      "id": "cover_hard_2",
+      "faith": 2,
+      "one_time": false
+    },
+    {
+      "id": "story",
+      "faith": 10,
+      "one_time": false
+    },
+    {
+      "id": "story_2",
+      "faith": 10,
+      "one_time": false
+    },
+    {
+      "id": "story_souls",
+      "faith": 5,
+      "one_time": false
+    },
+    {
+      "id": "grave_top_sculpt_mrb_1",
+      "faith": 5,
+      "one_time": false
+    },
+    {
+      "id": "grave_top_sculpt_mrb_2",
+      "faith": 5,
+      "one_time": false
+    },
+    {
+      "id": "b_faith",
+      "faith": 5,
+      "one_time": false
+    },
+    {
+      "id": "b_faith_2",
+      "faith": 5,
+      "one_time": false
+    },
+    {
+      "id": "b_faith_money",
+      "faith": 7,
+      "one_time": false
+    },
+    {
+      "id": "b_faith_money_2",
+      "faith": 7,
+      "one_time": false
+    },
+    {
+      "id": "b_money",
+      "faith": 5,
+      "one_time": false
+    },
+    {
+      "id": "b_money_2",
+      "faith": 5,
+      "one_time": false
+    },
+    {
+      "id": "b_plant",
+      "faith": 5,
+      "one_time": false
+    },
+    {
+      "id": "b_plant_2",
+      "faith": 5,
+      "one_time": false
+    },
+    {
+      "id": "b_shield",
+      "faith": 7,
+      "one_time": false
+    },
+    {
+      "id": "b_shield_2",
+      "faith": 7,
+      "one_time": false
+    },
+    {
+      "id": "b_sins",
+      "faith": 5,
+      "one_time": false
+    },
+    {
+      "id": "b_sins_2",
+      "faith": 5,
+      "one_time": false
+    },
+    {
+      "id": "b_skull",
+      "faith": 7,
+      "one_time": false
+    },
+    {
+      "id": "b_skull_2",
+      "faith": 7,
+      "one_time": false
+    },
+    {
+      "id": "b_sword",
+      "faith": 7,
+      "one_time": false
+    },
+    {
+      "id": "b_sword_2",
+      "faith": 7,
+      "one_time": false
+    },
+    {
+      "id": "b_village",
+      "faith": 5,
+      "one_time": false
+    },
+    {
+      "id": "b_village_2",
+      "faith": 5,
+      "one_time": false
+    },
+    {
+      "id": "b_pen",
+      "faith": 7,
+      "one_time": false
+    },
+    {
+      "id": "b_pen_2",
+      "faith": 7,
+      "one_time": false
+    },
+    {
+      "id": "b_star",
+      "faith": 7,
+      "one_time": false
+    },
+    {
+      "id": "b_star_2",
+      "faith": 7,
+      "one_time": false
+    },
+    {
+      "id": "b_souls",
+      "faith": 5,
+      "one_time": false
+    },
+    {
+      "id": "b_grat_points_incr",
+      "faith": 4,
+      "one_time": false
+    },
+    {
+      "id": "b_sin_shard",
+      "faith": 4,
+      "one_time": false
+    },
+    {
+      "id": "graveyard_zone_lvlup2",
+      "faith": 50,
+      "one_time": false
+    },
+    {
+      "id": "d5_2_send_items",
+      "faith": 5,
+      "one_time": true
+    },
+    {
+      "id": "players_tavern_builddesk::tavern_alcofest",
+      "faith": 5,
+      "one_time": false
+    },
+    {
+      "id": "players_tavern_builddesk::tavern_stand_up",
+      "faith": 5,
+      "one_time": false
+    },
+    {
+      "id": "players_tavern_builddesk::tavern_sharmel_song",
+      "faith": 10,
+      "one_time": false
+    },
+    {
+      "id": "players_tavern_builddesk::tavern_rat_race",
+      "faith": 5,
+      "one_time": false
+    }
+  ],
+  "selected_crafts": [
+    {
+      "id": "zombie_craft",
+      "station": [
+        "zombie_crafting_table"
+      ],
+      "inputs": [
+        [
+          "zombie_juise",
+          1
+        ],
+        [
+          "faith",
+          10
+        ]
+      ],
+      "outputs": [],
+      "work_expression_not_seconds": "2.1"
+    },
+    {
+      "id": "cutlet_carrot",
+      "station": [
+        "oven"
+      ],
+      "inputs": [
+        [
+          "carrot_crop",
+          2
+        ]
+      ],
+      "outputs": [
+        [
+          "meal:cutlet_carrot",
+          4,
+          -1,
+          "",
+          "",
+          "4",
+          ""
+        ],
+        [
+          "g",
+          1,
+          -1,
+          "",
+          "",
+          "",
+          ""
+        ]
+      ],
+      "work_expression_not_seconds": "35"
+    },
+    {
+      "id": "garden_carrot_planting_1",
+      "station": [
+        "garden_empty"
+      ],
+      "inputs": [
+        [
+          "carrot_seed",
+          4
+        ]
+      ],
+      "outputs": [
+        [
+          "g",
+          1,
+          -1,
+          "",
+          "",
+          "",
+          ""
+        ]
+      ],
+      "work_expression_not_seconds": "0"
+    },
+    {
+      "id": "box_goods_nails",
+      "station": [
+        "elevator_top"
+      ],
+      "inputs": [
+        [
+          "nails",
+          64
+        ],
+        [
+          "flitch",
+          4
+        ]
+      ],
+      "outputs": [
+        [
+          "box_goods",
+          1,
+          -1,
+          "",
+          "",
+          "1",
+          ""
+        ]
+      ],
+      "work_expression_not_seconds": "3"
+    },
+    {
+      "id": "bottle_red_vine",
+      "station": [
+        "mf_barrel_mid"
+      ],
+      "inputs": [
+        [
+          "pail_grape_juice",
+          1
+        ],
+        [
+          "pail_grape_juice",
+          1
+        ]
+      ],
+      "outputs": [
+        [
+          "bottle_red_vine",
+          20,
+          -1,
+          "",
+          "",
+          "20",
+          ""
+        ],
+        [
+          "g",
+          1,
+          -1,
+          "",
+          "",
+          "",
+          ""
+        ]
+      ],
+      "work_expression_not_seconds": "360"
+    },
+    {
+      "id": "wine_zombie_3",
+      "station": [
+        "mf_zombie_winemaking"
+      ],
+      "inputs": [
+        [
+          "fruit:grapes_crop:3",
+          60
+        ]
+      ],
+      "outputs": [
+        [
+          "bottle_red_vine:3",
+          40,
+          -1,
+          "",
+          "",
+          "40",
+          ""
+        ]
+      ],
+      "work_expression_not_seconds": "240"
+    },
+    {
+      "id": "nails",
+      "station": [
+        "mf_anvil_1"
+      ],
+      "inputs": [
+        [
+          "ingot_metal",
+          1
+        ]
+      ],
+      "outputs": [
+        [
+          "nails",
+          1,
+          -1,
+          "",
+          "",
+          "8+Ppar(\"p_blacksmith\")*3",
+          ""
+        ],
+        [
+          "r",
+          1,
+          -1,
+          "",
+          "",
+          "",
+          ""
+        ]
+      ],
+      "work_expression_not_seconds": "3"
+    },
+    {
+      "id": "firewood",
+      "station": [
+        "mf_chocks_1"
+      ],
+      "inputs": [
+        [
+          "wood1",
+          1
+        ]
+      ],
+      "outputs": [
+        [
+          "firewood",
+          1,
+          -1,
+          "",
+          "",
+          "10+Ppar(\"p_axeman\")*5",
+          ""
+        ],
+        [
+          "r",
+          1,
+          -1,
+          "",
+          "",
+          "",
+          ""
+        ]
+      ],
+      "work_expression_not_seconds": "2"
+    },
+    {
+      "id": "carved_wood",
+      "station": [
+        "mf_workbench_2"
+      ],
+      "inputs": [
+        [
+          "chisel",
+          1
+        ],
+        [
+          "wooden_plank",
+          1
+        ],
+        [
+          "faith",
+          2
+        ]
+      ],
+      "outputs": [
+        [
+          "carved_wood",
+          1,
+          -1,
+          "",
+          "",
+          "1",
+          ""
+        ],
+        [
+          "r",
+          10,
+          -1,
+          "",
+          "",
+          "",
+          ""
+        ]
+      ],
+      "work_expression_not_seconds": "3"
+    },
+    {
+      "id": "stone_plate_2",
+      "station": [
+        "mf_hammer_0"
+      ],
+      "inputs": [
+        [
+          "polishing_paste",
+          1
+        ],
+        [
+          "stone_plate_1",
+          1
+        ]
+      ],
+      "outputs": [
+        [
+          "stone_plate_2",
+          1,
+          -1,
+          "",
+          "",
+          "1",
+          ""
+        ],
+        [
+          "r",
+          3,
+          -1,
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "g",
+          1,
+          -1,
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "b",
+          1,
+          -1,
+          "",
+          "",
+          "",
+          ""
+        ]
+      ],
+      "work_expression_not_seconds": "3"
+    },
+    {
+      "id": "marble_plate_2",
+      "station": [
+        "mf_hammer_0"
+      ],
+      "inputs": [
+        [
+          "chisel:chisel_1",
+          1
+        ],
+        [
+          "marble_plate_1",
+          1
+        ]
+      ],
+      "outputs": [
+        [
+          "marble_plate_2",
+          1,
+          -1,
+          "",
+          "",
+          "1",
+          ""
+        ],
+        [
+          "r",
+          2,
+          -1,
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "g",
+          1,
+          -1,
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "b",
+          1,
+          -1,
+          "",
+          "",
+          "",
+          ""
+        ]
+      ],
+      "work_expression_not_seconds": "3"
+    },
+    {
+      "id": "marble_plate_3",
+      "station": [
+        "mf_hammer_1"
+      ],
+      "inputs": [
+        [
+          "chisel:chisel_2",
+          1
+        ],
+        [
+          "marble_plate_2",
+          1
+        ],
+        [
+          "faith",
+          5
+        ]
+      ],
+      "outputs": [
+        [
+          "marble_plate_3",
+          1,
+          -1,
+          "",
+          "",
+          "1",
+          ""
+        ],
+        [
+          "r",
+          3,
+          -1,
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "g",
+          1,
+          -1,
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "b",
+          2,
+          -1,
+          "",
+          "",
+          "",
+          ""
+        ]
+      ],
+      "work_expression_not_seconds": "3"
+    },
+    {
+      "id": "paper_bad",
+      "station": [
+        "table_book_constr"
+      ],
+      "inputs": [
+        [
+          "skroll_skin_pig",
+          1
+        ]
+      ],
+      "outputs": [
+        [
+          "paper_clean",
+          4,
+          -1,
+          "",
+          "",
+          "4",
+          ""
+        ],
+        [
+          "r",
+          1,
+          -1,
+          "",
+          "",
+          "",
+          ""
+        ]
+      ],
+      "work_expression_not_seconds": "3"
+    },
+    {
+      "id": "rope_hemp",
+      "station": [
+        "table_book_constr"
+      ],
+      "inputs": [
+        [
+          "hamp_crop:1",
+          4
+        ]
+      ],
+      "outputs": [
+        [
+          "rope_hemp",
+          5,
+          -1,
+          "",
+          "",
+          "5",
+          ""
+        ],
+        [
+          "b",
+          1,
+          -1,
+          "",
+          "",
+          "",
+          ""
+        ]
+      ],
+      "work_expression_not_seconds": "1"
+    },
+    {
+      "id": "grave_bot_stn_1",
+      "station": [
+        "mf_hammer_0"
+      ],
+      "inputs": [
+        [
+          "stone_plate_1",
+          2
+        ]
+      ],
+      "outputs": [
+        [
+          "grave_bot_stn_1",
+          1,
+          -1,
+          "",
+          "",
+          "1",
+          ""
+        ],
+        [
+          "r",
+          2,
+          -1,
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "b",
+          5,
+          -1,
+          "",
+          "",
+          "",
+          ""
+        ]
+      ],
+      "work_expression_not_seconds": "3"
+    },
+    {
+      "id": "grave_top_stn_plate_2",
+      "station": [
+        "mf_hammer_1"
+      ],
+      "inputs": [
+        [
+          "stone_plate_1",
+          3
+        ]
+      ],
+      "outputs": [
+        [
+          "grave_top_stn_plate_2",
+          1,
+          -1,
+          "",
+          "",
+          "1",
+          ""
+        ],
+        [
+          "r",
+          5,
+          -1,
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "b",
+          5,
+          -1,
+          "",
+          "",
+          "",
+          ""
+        ]
+      ],
+      "work_expression_not_seconds": "2"
+    },
+    {
+      "id": "zombie_craft_techbook",
+      "station": [
+        "zombie_pulpit"
+      ],
+      "inputs": [
+        [
+          "paper_clean",
+          3
+        ]
+      ],
+      "outputs": [
+        [
+          "techbook_g_1",
+          1,
+          1,
+          "0.4",
+          "",
+          "1",
+          ""
+        ],
+        [
+          "techbook_r_1",
+          1,
+          1,
+          "0.3",
+          "",
+          "1",
+          ""
+        ],
+        [
+          "techbook_b_1",
+          1,
+          1,
+          "0.3",
+          "",
+          "1",
+          ""
+        ]
+      ],
+      "work_expression_not_seconds": "400"
+    }
+  ],
+  "selected_prayers": [
+    {
+      "id": "pray:b_faith:1",
+      "event": "default_1",
+      "required_quality": 10.0,
+      "faith_multiplier_bonus": 0.5,
+      "money_multiplier_bonus": 0.20000000298023224,
+      "success_fixed": [
+        [
+          "faith",
+          1
+        ],
+        [
+          "money",
+          100
+        ]
+      ]
+    },
+    {
+      "id": "pray:b_faith:2",
+      "event": "default_2",
+      "required_quality": 20.0,
+      "faith_multiplier_bonus": 1.0,
+      "money_multiplier_bonus": 0.20000000298023224,
+      "success_fixed": [
+        [
+          "faith",
+          2
+        ],
+        [
+          "money",
+          200
+        ]
+      ]
+    },
+    {
+      "id": "pray:b_faith:3",
+      "event": "default_3",
+      "required_quality": 50.0,
+      "faith_multiplier_bonus": 1.5,
+      "money_multiplier_bonus": 0.20000000298023224,
+      "success_fixed": [
+        [
+          "faith",
+          3
+        ],
+        [
+          "money",
+          300
+        ]
+      ]
+    },
+    {
+      "id": "pray:b_faith_money:1",
+      "event": "default_1",
+      "required_quality": 15.0,
+      "faith_multiplier_bonus": 0.5,
+      "money_multiplier_bonus": 0.5,
+      "success_fixed": [
+        [
+          "faith",
+          1
+        ],
+        [
+          "money",
+          100
+        ]
+      ]
+    },
+    {
+      "id": "pray:b_faith_money:2",
+      "event": "default_2",
+      "required_quality": 30.0,
+      "faith_multiplier_bonus": 1.0,
+      "money_multiplier_bonus": 1.0,
+      "success_fixed": [
+        [
+          "faith",
+          2
+        ],
+        [
+          "money",
+          200
+        ]
+      ]
+    },
+    {
+      "id": "pray:b_faith_money:3",
+      "event": "default_3",
+      "required_quality": 60.0,
+      "faith_multiplier_bonus": 1.5,
+      "money_multiplier_bonus": 1.5,
+      "success_fixed": [
+        [
+          "faith",
+          3
+        ],
+        [
+          "money",
+          300
+        ]
+      ]
+    },
+    {
+      "id": "pray:b_souls:1",
+      "event": "pray_for_souls_1",
+      "required_quality": 15.0,
+      "faith_multiplier_bonus": 0.5,
+      "money_multiplier_bonus": 0.25,
+      "success_fixed": [
+        [
+          "faith",
+          1
+        ],
+        [
+          "money",
+          100
+        ]
+      ]
+    },
+    {
+      "id": "pray:b_souls:2",
+      "event": "pray_for_souls_2",
+      "required_quality": 30.0,
+      "faith_multiplier_bonus": 1.0,
+      "money_multiplier_bonus": 0.25,
+      "success_fixed": [
+        [
+          "faith",
+          2
+        ],
+        [
+          "money",
+          200
+        ]
+      ]
+    },
+    {
+      "id": "pray:b_souls:3",
+      "event": "pray_for_souls_3",
+      "required_quality": 60.0,
+      "faith_multiplier_bonus": 1.5,
+      "money_multiplier_bonus": 0.25,
+      "success_fixed": [
+        [
+          "faith",
+          3
+        ],
+        [
+          "money",
+          300
+        ]
+      ]
+    }
+  ],
+  "prayer_base_expressions": [
+    {
+      "id": "default_1",
+      "faith": "GetZoneQ(\"church\") * 0.2 * (1+0.3*Ppar(\"p_eloquence\"))",
+      "money": "GetZoneQ(\"graveyard\") * (0.03 + 0.01*Ppar(\"p_cardinal\"))"
+    },
+    {
+      "id": "default_3",
+      "faith": "GetZoneQ(\"church\") * 0.2 * (1+0.3*Ppar(\"p_eloquence\"))",
+      "money": "GetZoneQ(\"graveyard\") * (0.03 + 0.01*Ppar(\"p_cardinal\"))"
+    },
+    {
+      "id": "pray_for_souls_3",
+      "faith": "(GetZoneQ(\"church\") + Ppar(\"gratitude_points\"))  * 0.1 * (1+0.3*Ppar(\"p_eloquence\"))",
+      "money": "GetZoneQ(\"graveyard\") * (0.03 + 0.01*Ppar(\"p_cardinal\"))"
+    }
+  ],
+  "selected_items": [
+    {
+      "id": "box_goods",
+      "base_price_silver": 15.0,
+      "static_cost": false,
+      "use_resources": {}
+    },
+    {
+      "id": "box_vegetables_silver",
+      "base_price_silver": 10.75,
+      "static_cost": false,
+      "use_resources": {}
+    },
+    {
+      "id": "box_vegetables_gold",
+      "base_price_silver": 16.5,
+      "static_cost": false,
+      "use_resources": {}
+    },
+    {
+      "id": "bottle_red_vine:3",
+      "base_price_silver": 2.5,
+      "static_cost": false,
+      "use_resources": {
+        "energy": 84.0
+      }
+    },
+    {
+      "id": "cup_beer:3",
+      "base_price_silver": 0.4000000059604645,
+      "static_cost": false,
+      "use_resources": {
+        "energy": 30.0
+      }
+    },
+    {
+      "id": "ingot_silver",
+      "base_price_silver": 20.0,
+      "static_cost": false,
+      "use_resources": {}
+    },
+    {
+      "id": "ingot_gold",
+      "base_price_silver": 50.0,
+      "static_cost": false,
+      "use_resources": {}
+    },
+    {
+      "id": "techbook_r_1",
+      "base_price_silver": 3.0,
+      "static_cost": true,
+      "use_resources": {
+        "r": 25.0
+      }
+    },
+    {
+      "id": "techbook_g_1",
+      "base_price_silver": 2.0,
+      "static_cost": true,
+      "use_resources": {
+        "g": 25.0
+      }
+    },
+    {
+      "id": "techbook_b_1",
+      "base_price_silver": 5.0,
+      "static_cost": true,
+      "use_resources": {
+        "b": 25.0
+      }
+    },
+    {
+      "id": "techbook_b_2",
+      "base_price_silver": 10.0,
+      "static_cost": true,
+      "use_resources": {
+        "b": 50.0
+      }
+    }
+  ],
+  "bounded_graph_resource_edges_not_route_totals": [
+    {
+      "graph": "npc_actress",
+      "path_id": 150507,
+      "node": "253",
+      "resource": "faith",
+      "value": 5.0,
+      "edges": [
+        [
+          "256",
+          "price"
+        ]
+      ]
+    },
+    {
+      "graph": "npc_actress",
+      "path_id": 150507,
+      "node": "985",
+      "resource": "money",
+      "value": 20.0,
+      "edges": [
+        [
+          "988",
+          "price"
+        ]
+      ]
+    },
+    {
+      "graph": "npc_actress",
+      "path_id": 150507,
+      "node": "1021",
+      "resource": "money",
+      "value": 10.0,
+      "edges": [
+        [
+          "1024",
+          "price"
+        ]
+      ]
+    },
+    {
+      "graph": "npc_actress",
+      "path_id": 150507,
+      "node": "1057",
+      "resource": "money",
+      "value": 20.0,
+      "edges": [
+        [
+          "1060",
+          "price"
+        ]
+      ]
+    },
+    {
+      "graph": "npc_carpenter",
+      "path_id": 150515,
+      "node": "171",
+      "resource": "money",
+      "value": 10.0,
+      "edges": [
+        [
+          "174",
+          "price"
+        ]
+      ]
+    },
+    {
+      "graph": "npc_cultist",
+      "path_id": 150519,
+      "node": "97",
+      "resource": "faith",
+      "value": 5.0,
+      "edges": [
+        [
+          "100",
+          "price"
+        ]
+      ]
+    },
+    {
+      "graph": "npc_engineer",
+      "path_id": 150523,
+      "node": "227",
+      "resource": "money",
+      "value": 200.0,
+      "edges": [
+        [
+          "230",
+          "price"
+        ]
+      ]
+    },
+    {
+      "graph": "npc_engineer",
+      "path_id": 150523,
+      "node": "307",
+      "resource": "money",
+      "value": 50.0,
+      "edges": [
+        [
+          "310",
+          "price"
+        ]
+      ]
+    },
+    {
+      "graph": "npc_engineer",
+      "path_id": 150523,
+      "node": "363",
+      "resource": "money",
+      "value": 50.0,
+      "edges": [
+        [
+          "366",
+          "price"
+        ]
+      ]
+    },
+    {
+      "graph": "npc_euric",
+      "path_id": 150524,
+      "node": "634",
+      "resource": "money_grant",
+      "value": 100.0,
+      "edges": []
+    },
+    {
+      "graph": "npc_gypsy",
+      "path_id": 150536,
+      "node": "342",
+      "resource": "money",
+      "value": 100.0,
+      "edges": [
+        [
+          "345",
+          "price"
+        ]
+      ]
+    },
+    {
+      "graph": "npc_gypsy",
+      "path_id": 150536,
+      "node": "378",
+      "resource": "money",
+      "value": 100.0,
+      "edges": [
+        [
+          "381",
+          "price"
+        ]
+      ]
+    },
+    {
+      "graph": "npc_hunchback",
+      "path_id": 150538,
+      "node": "649",
+      "resource": "money",
+      "value": 300.0,
+      "edges": [
+        [
+          "652",
+          "price"
+        ]
+      ]
+    },
+    {
+      "graph": "npc_hunchback",
+      "path_id": 150538,
+      "node": "703",
+      "resource": "money",
+      "value": 300.0,
+      "edges": [
+        [
+          "706",
+          "price"
+        ]
+      ]
+    },
+    {
+      "graph": "npc_merchant",
+      "path_id": 150541,
+      "node": "574",
+      "resource": "money",
+      "value": 500.0,
+      "edges": [
+        [
+          "577",
+          "price"
+        ]
+      ]
+    },
+    {
+      "graph": "npc_merchant",
+      "path_id": 150541,
+      "node": "583",
+      "resource": "money",
+      "value": 1000.0,
+      "edges": [
+        [
+          "586",
+          "price"
+        ]
+      ]
+    },
+    {
+      "graph": "npc_merchant",
+      "path_id": 150541,
+      "node": "592",
+      "resource": "money",
+      "value": 5.0,
+      "edges": [
+        [
+          "595",
+          "reward"
+        ]
+      ]
+    },
+    {
+      "graph": "npc_merchant",
+      "path_id": 150541,
+      "node": "601",
+      "resource": "money",
+      "value": 10.0,
+      "edges": [
+        [
+          "604",
+          "price"
+        ]
+      ]
+    },
+    {
+      "graph": "npc_merchant",
+      "path_id": 150541,
+      "node": "610",
+      "resource": "money",
+      "value": 100.0,
+      "edges": [
+        [
+          "613",
+          "price"
+        ]
+      ]
+    },
+    {
+      "graph": "npc_refugee_moneylender",
+      "path_id": 150549,
+      "node": "265",
+      "resource": "money",
+      "value": 100.0,
+      "edges": [
+        [
+          "268",
+          "reward"
+        ]
+      ]
+    },
+    {
+      "graph": "npc_refugee_moneylender",
+      "path_id": 150549,
+      "node": "301",
+      "resource": "money",
+      "value": 100.0,
+      "edges": [
+        [
+          "304",
+          "reward"
+        ]
+      ]
+    },
+    {
+      "graph": "npc_refugee_moneylender",
+      "path_id": 150549,
+      "node": "392",
+      "resource": "money",
+      "value": 100.0,
+      "edges": [
+        [
+          "395",
+          "price"
+        ]
+      ]
+    },
+    {
+      "graph": "npc_refugee_moneylender",
+      "path_id": 150549,
+      "node": "487",
+      "resource": "money",
+      "value": 100.0,
+      "edges": [
+        [
+          "490",
+          "price"
+        ]
+      ]
+    },
+    {
+      "graph": "npc_royal_box",
+      "path_id": 150551,
+      "node": "164",
+      "resource": "money",
+      "value": 0.1,
+      "edges": [
+        [
+          "149",
+          "price"
+        ]
+      ]
+    },
+    {
+      "graph": "npc_royal_box",
+      "path_id": 150551,
+      "node": "215",
+      "resource": "money",
+      "value": 50.0,
+      "edges": [
+        [
+          "209",
+          "price"
+        ]
+      ]
+    },
+    {
+      "graph": "npc_royal_box",
+      "path_id": 150551,
+      "node": "276",
+      "resource": "money",
+      "value": 1.75,
+      "edges": [
+        [
+          "279",
+          "price"
+        ]
+      ]
+    },
+    {
+      "graph": "npc_royal_box",
+      "path_id": 150551,
+      "node": "297",
+      "resource": "money",
+      "value": 3.0,
+      "edges": [
+        [
+          "291",
+          "price"
+        ]
+      ]
+    },
+    {
+      "graph": "npc_royal_box",
+      "path_id": 150551,
+      "node": "309",
+      "resource": "money",
+      "value": 1200.0,
+      "edges": [
+        [
+          "303",
+          "price"
+        ]
+      ]
+    },
+    {
+      "graph": "npc_royal_box",
+      "path_id": 150551,
+      "node": "345",
+      "resource": "money",
+      "value": 20.0,
+      "edges": [
+        [
+          "339",
+          "price"
+        ]
+      ]
+    },
+    {
+      "graph": "npc_royal_box",
+      "path_id": 150551,
+      "node": "402",
+      "resource": "money",
+      "value": 50.0,
+      "edges": [
+        [
+          "387",
+          "price"
+        ]
+      ]
+    },
+    {
+      "graph": "npc_royal_box",
+      "path_id": 150551,
+      "node": "534",
+      "resource": "money",
+      "value": 50.0,
+      "edges": [
+        [
+          "537",
+          "price"
+        ]
+      ]
+    },
+    {
+      "graph": "npc_tavern owner",
+      "path_id": 150556,
+      "node": "624",
+      "resource": "money",
+      "value": 30.0,
+      "edges": [
+        [
+          "627",
+          "price"
+        ]
+      ]
+    },
+    {
+      "graph": "npc_tavern owner",
+      "path_id": 150556,
+      "node": "822",
+      "resource": "money_grant",
+      "value": 50.0,
+      "edges": []
+    },
+    {
+      "graph": "npc_tavern owner",
+      "path_id": 150556,
+      "node": "991",
+      "resource": "money",
+      "value": 100.0,
+      "edges": [
+        [
+          "994",
+          "price"
+        ]
+      ]
+    },
+    {
+      "graph": "npc_teodoro",
+      "path_id": 150559,
+      "node": "1090",
+      "resource": "money_grant",
+      "value": 50.0,
+      "edges": []
+    },
+    {
+      "graph": "npc_teodoro",
+      "path_id": 150559,
+      "node": "1343",
+      "resource": "money_grant",
+      "value": 100.0,
+      "edges": []
+    }
+  ]
+}
