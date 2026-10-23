@@ -28,6 +28,8 @@ Native window/overlay coordination: UI_INPUT_TIME_AND_ENVIRONMENT.md records Bas
 
 ### UI / NGUI / input / timing / environment
 
+- [Requested height versus actual hidden-widget geometry](UI_INPUT_TIME_AND_ENVIRONMENT.md#ngui-requested-height-and-hidden-widget-observation--2026-10-23): native height setters respect virtual sprite minimums/anchors; grave red bar is hidden atzero. Exact requested height is not a valid universal assertion for an invisible widget. The particular Faith Probe0.1.0 failed bar conjunct was not separately logged and remains unobserved.
+
 - Native picker warning attribution in UI_INPUT_TIME_AND_ENVIRONMENT.md: InventoryPanelGUI.DoOpening creates bare separator widgets without assigning their layer; bounded .56 runtime identifies five layer0 separators against panel13, corrected by native CheckLayer. Initial image/text asset scans miss these generated widgets. No general layer patch or clean-game compatibility claim follows. Consumer-specific cleanup/acceptance stays in ResearchableAlchemyRecipes.
 
 

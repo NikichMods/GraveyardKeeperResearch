@@ -1,5 +1,13 @@
 # Graveyard Keeper 1.407 — UI, Input, Timing and Environment Internals
 
+## NGUI requested height and hidden-widget observation — 2026-10-23
+
+Status: **installed firstpass IL fact**, SHA-256 `9dc6def3b7715dd27eeb168ddc0af47e31c6f38d3fbee24bf592899392026498`. UIWidget.set_height first clamps the requested value to virtual minHeight, then may process anchors/aspect constraints or call SetDimensions. UIWidget's base minHeight is2; UIBasicSprite/UISprite overrides for sliced/advanced types can derive minimums from borders/padding and round to even pixels. Assigning height therefore does not universally guarantee that reading height returns the original request.
+
+Native GraveGUI.RedrawGraveInventory hides red_vertical_bar when red count is0 and still requests height7; positive counts request7+13*red. Observers of the displayed grave chart should require hidden state atzero and assess relevant geometry while visible, rather than treat invisible geometry as a displayed defect. This does not justify accepting a visible zero-red bar or arbitrary positive-red geometry.
+
+Consumer: Better Prayer Stations Faith Probe0.1.0 had correct rating/label6, correct total slot/wreath counts and unchanged raw/physical state, but its combined bar predicate failed atzero red. That artifact did not record height/visibility separately; which conjunct actually failed remains unobserved. Native height coercion establishes an invalid observer assumption, not the actual live bar minimum/dimensions or complete root cause of that particular run. Corrective observer and acceptance remain owned by the consumer's TEST_BUILD_LOG.md; no general UI patch is prescribed here.
+
 This document consolidates reusable host/runtime facts promoted from PrayerClarity, Gamepad Tooltip Position Fix, Meditation Speed, Rain & Wind Volume Controls, Keeper's Lantern, Crafting Planner, and Bite Countdown.
 
 ## Inventory picker separator layer warning — 2026-10-15
