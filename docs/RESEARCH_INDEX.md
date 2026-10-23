@@ -145,3 +145,5 @@ Do not create a private scratch repository by default. Use one only when a concr
 - [Bounded live quality-only bubble refresh acceptance](GRAVEYARD_RUNTIME.md#bounded-live-quality-only-bubble-refresh-acceptance--2026-10-23): native above-grave text now updates during real placement with user visual confirmation; actual selected-source replacement/confirmed station in-out movement observed. Floating stop alone is not a final external-move settlement barrier; broader lifecycle remains consumer-specific.
 
 - [Small construction cells versus WGO grid coordinates](GRAVEYARD_RUNTIME.md#small-construction-cells-versus-wgo-grid-coordinates--2026-10-23):32-unit BuildGrid cells versus96-unit WGO.grid_pos; placement offset and cell mapping are separate from footprint-center/edge alignment, which needs explicit verification.
+
+- [Placement-box footprint and construction callback](GRAVEYARD_RUNTIME.md#placement-box-footprint-and-construction-definition-callback-2026-10-23): layer23 native grave/station boxes,28.8-unit occupancy checks on32-unit centers and SetObject-to-OnAddNewWGO; static facts versus unaccepted live square-center projection.
