@@ -8,6 +8,8 @@ Native GraveGUI.RedrawGraveInventory hides red_vertical_bar when red count is0 a
 
 Consumer: Better Prayer Stations Faith Probe0.1.0 had correct rating/label6, correct total slot/wreath counts and unchanged raw/physical state, but its combined bar predicate failed atzero red. That artifact did not record height/visibility separately; which conjunct actually failed remains unobserved. Native height coercion establishes an invalid observer assumption, not the actual live bar minimum/dimensions or complete root cause of that particular run. Corrective observer and acceptance remain owned by the consumer's TEST_BUILD_LOG.md; no general UI patch is prescribed here.
 
+Subsequent **bounded runtime confirmation** through Faith Probe0.1.1: on the repeated zero-red condition the native widget is hidden, actual height18 and minHeight18. Positive-red observations are46/33/20 pixels for3/2/1 red. This confirms the height-coercion mechanism and invalidity of requiring hidden height7 in the tested condition; it does not retroactively supply0.1.0's unlogged field values or establish the same minimum for every widget. Private log SHA-256 `104be9513c25fc8d87212ef0ab2154137455d3710d37f33147ea49da8cf8c38d`; exact candidate/source identity and visual acceptance remain in the consumer TEST_BUILD_LOG.md.
+
 This document consolidates reusable host/runtime facts promoted from PrayerClarity, Gamepad Tooltip Position Fix, Meditation Speed, Rain & Wind Volume Controls, Keeper's Lantern, Crafting Planner, and Bite Countdown.
 
 ## Inventory picker separator layer warning — 2026-10-15
