@@ -4,7 +4,7 @@ This is the canonical entry point for reusable cross-project research.
 
 Native construction-window custom actions: `CRAFTING_INVENTORY_AND_TRADING.md`, section "Native construction-window custom actions —2026-10-24", records CraftGUI.custom_craft_interface availability/execution dispatch, transient additional_crafts, opening/cleanup boundaries and why native demolition/script-building are not generic virtual editors. Bounded static evidence; consumer UI/input/runtime acceptance remains open in BetterPrayerStations.
 
-The same custom-action seam now has bounded BetterPrayerStations Menu0.1.0 live corroboration through ordinary station entry; consumer card/header overflow and camera-dependent drawn-grid offset remain unresolved. Functional dispatch is distinguished from visual/editor acceptance.
+The same custom-action seam now has bounded BetterPrayerStations Menu0.1.0 live corroboration through ordinary station entry. The same canonical section records static grid texture/world-origin ownership and card/header layout consumers established during corrective0.1.1 work; installed visual/editor acceptance of that correction remains open in BetterPrayerStations. Functional dispatch is distinguished from visual/editor acceptance.
 
 Local installation/log collection across Graveyard Keeper mods follows [DevRules/CODEX_WORKFLOW.md — Local installed-runtime loop](https://github.com/NikichMods/DevRules/blob/main/CODEX_WORKFLOW.md#local-installed-runtime-loop): execute authorized DLL replacement and accessible log capture directly, preserving exact identity, previous payload and unrelated mods. This is an operating-workflow pointer; runtime findings and project acceptance remain in their owning evidence documents.
 
