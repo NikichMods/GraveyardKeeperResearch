@@ -14,6 +14,8 @@ BuildModeLogics has script-building callbacks, but UpdateWhileScriptBuilding ret
 
 Consumer: BetterPrayerStations `docs/BUILD_MENU_RESEARCH.md`; local bounded route report SHA256 `fa01ec0ac485f156e718f91dc9352ca77e070db439fc587653e901450ab6b194`,13 structural assertions. Menu rendering, mouse/gamepad behavior, global-controller restoration and consumer-specific virtual editing remain runtime acceptance tasks. No game payload, installed artifact or live UI claim is included.
 
+Bounded live corroboration: BetterPrayerStations Menu Probe0.1.0 now reaches the three transient native action cards through ordinary station interaction, with repeated custom purchase/place/remove callbacks and positive user functional assessment. Consumer TEST_BUILD_LOG owns exact identity/return. Native-card/header overflow and camera-dependent drawn-grid offset remain observed consumer defects; this corroborates the menu dispatch seam, not general layout, grid alignment, input cleanup or a finished virtual editor. No root cause is assigned from screenshots alone.
+
 ## CraftDefinition and builder recipe model
 
 ### Actual vendor tier commits versus temporary projections — 1.407
