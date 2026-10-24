@@ -1,10 +1,10 @@
 # Graveyard Keeper 1.407 Research Index
 
-Hidden placement geometry versus physics: GRAVEYARD_RUNTIME.md section "Hidden construction geometry versus physics queries —2026-10-25" records native chunk activation and active-only BuildGrid collider-cache limitations. Static host facts; the specific consumer post-load mismatch still needs runtime readiness observations in BetterPrayerStations Menu0.3.1.
+Hidden placement geometry versus physics: GRAVEYARD_RUNTIME.md section "Hidden construction geometry versus physics queries —2026-10-25" records native chunk activation and active-only BuildGrid collider-cache limitations. BetterPrayerStations Menu0.3.1 load/edit/save/reload now corroborates inactive post-load grave hierarchies and ready29-owner physics agreement after editor entry; historical0.3.0 failure itself lacked readiness instrumentation.
 
 This is the canonical entry point for reusable cross-project research.
 
-Native per-save player-root metadata: `GAME_INTERNALS.md`, section "Native per-save player-root parameter carrier —2026-10-25", records serialized GameSave._inventory ownership, PrepareForSave/RestoreSavedInventory boundaries and actual native GameSave binary fixtures for numeric metadata/signed-zero coordinates. Installed consumer persistence remains pending in BetterPrayerStations; current-save identity/readiness is a separate required boundary.
+Native per-save player-root metadata: `GAME_INTERNALS.md`, section "Native per-save player-root parameter carrier —2026-10-25", records serialized GameSave._inventory ownership, PrepareForSave/RestoreSavedInventory boundaries and actual native GameSave binary fixtures for numeric metadata/signed-zero coordinates. BetterPrayerStations Menu0.3.1 now has bounded load/edit/save/reload persistence acceptance in its TEST_BUILD_LOG; current-save identity/readiness remains a separate required boundary.
 
 Native construction-window custom actions: `CRAFTING_INVENTORY_AND_TRADING.md`, section "Native construction-window custom actions —2026-10-24", records CraftGUI.custom_craft_interface availability/execution dispatch, transient additional_crafts, opening/cleanup boundaries and why native demolition/script-building are not generic virtual editors. Bounded static evidence; consumer UI/input/runtime acceptance remains open in BetterPrayerStations.
 
