@@ -1,5 +1,11 @@
 # Graveyard objects and rating — GK 1.407
 
+## Hidden construction geometry versus physics queries —2026-10-25
+
+Static fact for GK1.407 Assembly-CSharp SHA256e72e4270e4b88dd0a87ca23c9cf1750aec4c4a0fedb40b6d2dae7902fc9c7fd8: ChunkedGameObject.UpdateVisibility calls WorldGameObject.PreDisable when hiding a WGO, then GameObject.SetActive(obj_visible). BuildGrid.IsCellBusy uses Physics2D.OverlapBoxAll and cannot independently validate an inactive object's retained placement geometry. A missing physics hit is not universally evidence of absent spatial membership. BuildGrid.WGOHasBuildCollider separately caches by unique_id after GetComponentsInChildren<Collider2D>() without includeInactive; SkipCollider consults this cache. Do not seed that cache during hidden-owner shape discovery or treat it as an authoritative global shape registry.
+
+Consumer BetterPrayerStations Menu0.3.0 recovered saved points but failed a post-load projected1/native0 audit. That log did not capture hierarchy/enabled/bounds state, so it does not prove which visibility/synchronization condition caused that particular query. Corrective Menu0.3.1 separates unavailable physics from measured zero and opts global geometry into explicit current-part layer23 discovery; installed confirmation remains in its owning TEST_BUILD_LOG. This does not establish arbitrary-shape support, every collider's availability or a need to activate chunks/force physics synchronization.
+
 Status: **bounded static evidence**, checked 2026-10-22. This document records host facts; the consuming mod's product mechanics belong to [Better Prayer Stations](https://github.com/NikichMods/BetterPrayerStations/blob/main/docs/DESIGN.md). [Candidate notes](ECONOMY_DESIGN_CANDIDATES.md) preserve historical exploration and unrelated side ideas.
 
 ## Input identity and method

@@ -1,5 +1,7 @@
 # Graveyard Keeper 1.407 Research Index
 
+Hidden placement geometry versus physics: GRAVEYARD_RUNTIME.md section "Hidden construction geometry versus physics queries —2026-10-25" records native chunk activation and active-only BuildGrid collider-cache limitations. Static host facts; the specific consumer post-load mismatch still needs runtime readiness observations in BetterPrayerStations Menu0.3.1.
+
 This is the canonical entry point for reusable cross-project research.
 
 Native per-save player-root metadata: `GAME_INTERNALS.md`, section "Native per-save player-root parameter carrier —2026-10-25", records serialized GameSave._inventory ownership, PrepareForSave/RestoreSavedInventory boundaries and actual native GameSave binary fixtures for numeric metadata/signed-zero coordinates. Installed consumer persistence remains pending in BetterPrayerStations; current-save identity/readiness is a separate required boundary.
