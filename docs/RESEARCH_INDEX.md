@@ -2,6 +2,8 @@
 
 This is the canonical entry point for reusable cross-project research.
 
+Native per-save player-root metadata: `GAME_INTERNALS.md`, section "Native per-save player-root parameter carrier —2026-10-25", records serialized GameSave._inventory ownership, PrepareForSave/RestoreSavedInventory boundaries and actual native GameSave binary fixtures for numeric metadata/signed-zero coordinates. Installed consumer persistence remains pending in BetterPrayerStations; current-save identity/readiness is a separate required boundary.
+
 Native construction-window custom actions: `CRAFTING_INVENTORY_AND_TRADING.md`, section "Native construction-window custom actions —2026-10-24", records CraftGUI.custom_craft_interface availability/execution dispatch, transient additional_crafts, opening/cleanup boundaries and why native demolition/script-building are not generic virtual editors. Bounded static evidence; consumer UI/input/runtime acceptance remains open in BetterPrayerStations.
 
 The same custom-action seam now has bounded BetterPrayerStations Menu0.1.0 live corroboration through ordinary station entry. The same canonical section records static grid texture/world-origin ownership and card/header layout consumers established during corrective0.1.1 work; installed visual/editor acceptance of that correction remains open in BetterPrayerStations. Functional dispatch is distinguished from visual/editor acceptance.

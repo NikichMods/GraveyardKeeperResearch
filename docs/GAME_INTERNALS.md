@@ -18,6 +18,14 @@ A cheap read-only ownership boundary on this verified path is: current `GameSave
 
 Evidence/consumer: [Day Wheel Quest Markers native boundary and accepted 1.1.16](https://github.com/NikichMods/DayWheelQuestMarkers/blob/main/docs/SCENE_READINESS_1.1.16.md), exact tested source `e9d9b86427a5155f91299676249d9636dae354ff`. Its read-only diagnostic proved all six cached weekday WorldObjects became destroyed when prepared before restoration. With the ownership gate, player-operated A -> A -> B -> A produced four canonical Ready states, prewarm after RestoreScene/GetSavedPlayerInventory and before loading hid, with zero plugin warnings/errors or final-binding recovery; cold bootstrap and cached reads both passed. [Exact diagnostic and test identities](https://github.com/NikichMods/DayWheelQuestMarkers/blob/main/docs/TEST_BUILD_LOG.md). Product marker rules and release ownership remain in that repository.
 
+## Native per-save player-root parameter carrier —2026-10-25
+
+**Target:** GK1.407 Assembly-CSharp SHA256 e72e4270e4b88dd0a87ca23c9cf1750aec4c4a0fedb40b6d2dae7902fc9c7fd8. **Status:** static save-path facts plus actual native binary fixtures; consumer installed persistence acceptance pending.
+
+GameSave._inventory is a private [SerializeField] Item. PrepareForSave assigns the live player.data reference to it; PrepareAfterLoad does not rewrite that inventory carrier. GetSavedPlayerInventory returns it, and WorldGameObject.RestoreSavedInventory directly assigns the restored Item to _data (current-save readiness caveats above still apply). Item.SetParam(string,float) delegates to GameRes.Set. This provides a native numeric metadata carrier in one save without adding an inventory item or requiring an external file; it does not itself prove every mod/schema/write policy safe.
+
+BetterPrayerStations Menu0.3.0 frozen source b14de7c24264ae2c0e4c355a50fc53a33d5cfd8c, research/MenuProbe/SavedBeamTests.cs, executes actual SmartSerializer<GameSave> roundtrips on synthetic roots: namespaced counts and ordered signed/zero-coordinate data survive, including native Item.RemoveZeroParams; unrelated root metadata/money and a nested inventory item's serialized bytes are retained. Separate restored roots remain independent. Fixture constructors avoid Unity Resources and no user save files are rewritten. Consumer schema/validation/transaction/cleanup are policy, not host facts; global ownership/limits and exact candidate status remain in BetterPrayerStations/docs/GLOBAL_BEAM_PERSISTENCE.md and TEST_BUILD_LOG.md. Native game save/restart/cross-save lifecycle acceptance must still be established in the installed candidate.
+
 ## BepInEx plugin metadata
 
 ### BepInPlugin version strings must be numeric/System.Version-parseable
