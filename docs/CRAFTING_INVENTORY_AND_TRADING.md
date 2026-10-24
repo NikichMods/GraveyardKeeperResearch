@@ -2,6 +2,18 @@
 
 This document consolidates reusable accepted facts promoted from Crafting Planner, Specialized Storage, Better Save Soul Rebalance, Food & Drink Rebalance, and Who Buys This?.
 
+## Native construction-window custom actions — 2026-10-24
+
+**Status: bounded static facts, not installed UI acceptance.** Exact Assembly-CSharp SHA256 `e72e4270e4b88dd0a87ca23c9cf1750aec4c4a0fedb40b6d2dae7902fc9c7fd8`. CraftGUI.custom_craft_interface is a CraftInterface hook: CraftItemGUI.CanCraft delegates availability and OnCraftPressed delegates execution when supplied. Earlier card/queue/context checks still exist. CraftGUI.OpenAsBuild clears this field; CraftGUI.Hide does not clear it, so a scoped custom session must manage assignment/cleanup at the correct opening/closing boundaries.
+
+CraftsInventory.GetObjectCraftsList appends additional_crafts after resolving saved/catalog IDs; BaseCraftGUI.CommonOpen still filters visibility and craft type. This permits transient ObjectCraftDefinition action-card inputs without necessarily registering global recipe IDs. Native CraftGUI.AddRemoveBuildingItem creates an output-less synthetic `_remove_` action with icon `i_b_remove`; that reserved ID is handled specially by BaseCraftGUI.OnCraft and is not a generic custom callback.
+
+Native removal is real demolition: EnterRemoveMode enumerates zone WGOs with has_removal_craft and marks them; DoRemove selects the WGO under the floating cursor and invokes MarkForRemoval. Native DoPlace spends needs and commits a real floating object, with additional bookkeeping. BuildGrid.RefreshGrid separately checks WorldZone.IsAvailableForBuild/subzone membership and IsCellBusy. These full operations are not a ready virtual-overlay editor; preserve zone access when adapting occupancy.
+
+BuildModeLogics has script-building callbacks, but UpdateWhileScriptBuilding returns _cd.needs to the player on cancel and clears zone/exits on apply. It requires a valid _cd and has native reopening/cleanup behavior. EnterScriptBuilding alone is not a complete reusable placement setup; names/callback presence do not prove a repeatable editor contract.
+
+Consumer: BetterPrayerStations `docs/BUILD_MENU_RESEARCH.md`; local bounded route report SHA256 `fa01ec0ac485f156e718f91dc9352ca77e070db439fc587653e901450ab6b194`,13 structural assertions. Menu rendering, mouse/gamepad behavior, global-controller restoration and consumer-specific virtual editing remain runtime acceptance tasks. No game payload, installed artifact or live UI claim is included.
+
 ## CraftDefinition and builder recipe model
 
 ### Actual vendor tier commits versus temporary projections — 1.407
