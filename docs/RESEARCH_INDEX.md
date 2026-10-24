@@ -152,6 +152,6 @@ Do not create a private scratch repository by default. Use one only when a concr
 
 - [Placement-box footprint and construction callback](GRAVEYARD_RUNTIME.md#placement-box-footprint-and-construction-definition-callback-2026-10-23): layer23 native grave/station boxes,28.8-unit occupancy checks on32-unit centers and SetObject-to-OnAddNewWGO; static facts versus unaccepted live square-center projection.
 
-  The same section records matching grave-state placement-box geometry and the readiness limitation of DoesIncludeGridPos/_cells for new spatial consumers; blessing-field membership remains a separate proposed product rule in BetterPrayerStations.
+  The same section records matching grave-state placement-box geometry, the readiness limitation of DoesIncludeGridPos/_cells, and bounded Menu0.2.0 live agreement with native physics for two occupied/two adjacent outside locations of one grave. Blessing-field product semantics and remaining acceptance belong to BetterPrayerStations.
 
 - [Station quality and zone consumers](GRAVEYARD_RUNTIME.md#station-quality-and-zone-consumer-seams-2026-10-23): native final quality/multipliers, zone member/event path and HUD/save/FlowCanvas readers; GetMyWorldZone is a physics query, distinct from cached _zone. Static facts; new passive probe awaits live acceptance.
